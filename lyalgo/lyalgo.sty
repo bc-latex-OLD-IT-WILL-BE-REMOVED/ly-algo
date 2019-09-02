@@ -1,42 +1,135 @@
-\usepackage{xpatch}
+% ------------------------------------------ %
+% -- Beautiful and easy to use algorithms -- %
+% ------------------------------------------ %
+
 \usepackage[french, vlined]{algorithm2e}
-%\usepackage{verbatim}
+
+
+% ------------------- %
+% -- Verbatim like -- %
+% ------------------- %
+
 \usepackage{alltt}
-\usepackage{chngcntr}
 
 
-% Usefull for multicolumns
-\newcommand{\algorule}{%
-    \vspace{-0.5em}\noindent\hfil%
-    {\color{hruleAlgoColor}\rule{0.5\textwidth}{\columnseprule}}%
-    \hfil%
+% ------------ %
+% -- Frames -- %
+% ------------ %
+
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+
+
+% --------------------- %
+% -- TeX programming -- %
+% --------------------- %
+
+\usepackage{ifthen}
+\usepackage{pgffor}
+
+
+% ---------------------------- %
+% -- Semantic math formulas -- %
+% ---------------------------- %
+
+\usepackage{lymath}
+
+
+% ------------------------- %
+% -- Captions - Settings -- %
+% ------------------------- %
+
+\renewcommand{\@algocf@capt@plain}{above}
+\renewcommand{\algocf@caption@plain}{\box\algocf@capbox\vskip\AlCapSkip}%
+
+\setlength{\AlCapSkip}{.1em}
+
+
+% -------------------------------- %
+% -- Algo or verbatim in frames -- %
+% -------------------------------- %
+
+\newenvironment{myverb}
+	{\small\alltt}
+	{\endalltt\normalsize}
+
+
+\newenvironment{myverb*}
+	{\begin{tcolorbox}[colback=white, breakable]\begin{myverb}}
+	{\end{myverb}\vspace{-1.25em}\end{tcolorbox}}
+
+
+\newenvironment{algo}
+	{
+			\begin{algorithm}[H]
+	}{
+			\end{algorithm}
+	}
+
+
+\newenvironment{algo*}
+	{\begin{tcolorbox}[colback=white, breakable]\begin{algo}}
+	{\end{algo}\vspace{-0.5em}\end{tcolorbox}}
+
+
+\newcommand\addalgoblank[1][]{
+   \ifthenelse{ \equal{#1}{} }
+      {\vspace{.2em}}
+      {
+      	\foreach \n in {0,...,#1}{
+			\vspace{.2em}
+		}
+		}
 }
-	
-% Language settings
-\SetKw{KwTo}{à}
+
+
+% ------------------------------ %
+% -- Addition semantic macros -- %
+% ------------------------------ %
+
+\newcommand\store{\leftarrow}
+\newcommand\putin{\rightarrow}
+
+\newcommand\range[3]{$#1 \store #2$ \KwTo $#3$}
+
+
+
+    
+
+% ------------------------- %
+% -- Language - Settings -- %
+% ------------------------- %
+
+% Comment
+
+\SetKwComment{Comment}{{\# }}{}
+
+% General 1
+
+\SetKwBlock{Actions}{Actions}{}
+\SetKwBlock{Begin}{Début}{}
+
+\SetKwInput{In}{Entrée}
+\SetKwInput{Out}{Sortie}
+\SetKwInput{Out}{Sortie}
+
+\SetKwInput{Data}{Donnée}
+\SetKwInput{Datas}{Données}
+
+\SetKwInput{Result}{Résultat}
+\SetKwInput{Results}{Résultats}
+
+% General 2
+
+\SetKw{KwTo}{jusqu'à}
 \SetKw{KwInList}{dans}
-\SetKw{KwLeftToRight}{parcourrue de gauche à droite}
+\SetKw{KwLeftToRight}{parcourue de gauche à droite}
 
 \SetKw{Return}{Renvoyer}
 \SetKw{Print}{Afficher}
 
-% Comment
-\SetKwComment{Cblock}%
-    {{\# }}{}
-\SetKwComment{Cline}%
-    {{\# }}{}
-
-% General
-\SetKwBlock{Begin}{Début}{}
-\SetKwInput{In}{Entrée}
-\SetKwInput{Out}{Sortie}
-\SetKwInput{Out}{Sortie}
-\SetKwInput{Data}{Donnée}
-\SetKwInput{Datas}{Données}
-\SetKwInput{Result}{Résultat}
-\SetKwInput{Results}{Résultats}
-
 % Loop
+
 \SetKwFor{For}%
     {Pour}{:}{}
 \SetKwFor{ForAll}%
@@ -49,38 +142,11 @@
     {Répéter}{{Jusqu'à Avoir}}
 
 % Test
+
 \SetKwIF{If}{ElseIf}{Else}%
     {Si}{:}{{Sinon Si}}{Sinon:}{}
 \SetKwSwitch{Switch}{Case}{Other}%
     {Suivant}{:}{Cas}{Autre:}{}
 
-% Tools for algorithms
-\newcounter{algocounter}
 
-% Source : http://tex.stackexchange.com/a/215622/6880
-%\counterwithin*{algocounter}{section} % Reset at each section !
 
-\newcommand{\algoname}{%
-	\addtocounter{algocounter}{1}%
-	{\small\textbf{\textsc{[Algo.\arabic{algocounter}]}}}%
-}
-
-\newenvironment{myverb}
-	{\small\hrule\vspace{-0.7em}\alltt}
-	{\endalltt\vspace{-1.6em}\hrule\normalsize}
-
-\newenvironment{algo}
-	{\small\hrule\algorithm[H]}
-	{\endalgorithm\hrule\normalsize}
-
-% Source : http://tex.stackexchange.com/a/76303/6880
-\xpretocmd{\algorithm}{\hsize=\linewidth}{}{}
-
-\makeatletter
-\newenvironment{listalgo}
-	{%
-		\par\noindent\hspace*{-\@totalleftmargin}%
-  		\minipage{\textwidth}\algorithm[H]%
-	}
-	{\endalgorithm\endminipage}
-\makeatother

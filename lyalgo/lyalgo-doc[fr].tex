@@ -24,6 +24,8 @@
 
 \usepackage{ifplatform}
 
+\usepackage{multicol}
+
 
 
 \usepackage{lyalgo}
@@ -63,5 +65,117 @@
 
 
 \section{Introduction}
+
+
+\begin{algo}
+	\caption{Le crible d'Eratosthène}
+
+    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
+    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
+    \BlankLine
+    \Actions{
+    \For{\range{i}{2}{N}}{
+        \If{$i$ n'est pas barré dans la liste $L$}{
+            $X \store 4$ soit $4 \putin X$  
+            \\
+            $x \eqtest 3$ ou $x \eqtest* 3$ 
+            \\
+            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$. \Comment*{TTTT}
+        }
+    }
+    \Return{la liste $P$ des nombres non barrés.}
+    \\
+    \Comment{TTTT}
+    }
+\end{algo} 
+\begin{algo*}
+	\caption{Le crible d'Eratosthène}
+
+    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
+    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
+    \BlankLine
+    \Actions{
+    \For{\range{i}{2}{N}}{
+        \If{$i$ n'est pas barré dans la liste $L$}{
+            $X \store 4$ soit $4 \putin X$  
+            \\
+            $x \eqtest 3$ ou $x \eqtest* 3$ 
+            \\
+            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$. \Comment*{TTTT}
+        }
+    }
+    \Return{la liste $P$ des nombres non barrés.}
+    \\
+    \Comment{TTTT}
+    }
+\end{algo*} 
+
+
+\section{Introduction}
+
+
+\begin{multicols}{2}	
+\begin{algo*}
+	\caption{Le crible d'Eratosthène}
+
+    \addalgoblank[4]
+    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
+    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
+    
+    \Actions{
+    \For{$i = 2$ \KwTo $N$}{
+        \If{$i$ n'est pas barré dans la liste $L$}{
+            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$.
+        }
+    }
+    \Return{la liste $P$ des nombres non barrés.}
+    }
+\end{algo*} 
+\begin{algo*}
+	\caption{Le crible d'Eratosthène}
+
+    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
+    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
+    \BlankLine
+    \Actions{
+    \For{$i = 2$ \KwTo $N$}{
+        \If{$i$ n'est pas barré dans la liste $L$}{
+            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$.
+        }
+    }
+    \Return{la liste $P$ des nombres non barrés.}
+    }
+\end{algo*} 
+
+\end{multicols}
+
+ok ?
+
+
+\begin{algo*}
+	\caption{Le crible d'Eratosthène}
+
+    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
+    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
+    \BlankLine
+    \Actions{
+    \For{$i = 2$ \KwTo $N$}{
+        \If{$i$ n'est pas barré dans la liste $L$}{
+            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$.
+        }
+    }
+    \Return{la liste $P$ des nombres non barrés.}
+    }
+\end{algo*} 
+
+ok ?
+
+\begin{myverb*}
+    a liste $L$ des naturels compris de $2$ à $N$.
+    la liste $P$ des nombres premiers compris entre $2$ et $N$.\end{myverb*} 
+
+\begin{myverb}
+    a liste $L$ des naturels compris de $2$ à $N$.
+    la liste $P$ des nombres premiers compris entre $2$ et $N$.\end{myverb} 
 
 \end{document}
