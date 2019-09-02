@@ -1,0 +1,86 @@
+\usepackage{xpatch}
+\usepackage[french, vlined]{algorithm2e}
+%\usepackage{verbatim}
+\usepackage{alltt}
+\usepackage{chngcntr}
+
+
+% Usefull for multicolumns
+\newcommand{\algorule}{%
+    \vspace{-0.5em}\noindent\hfil%
+    {\color{hruleAlgoColor}\rule{0.5\textwidth}{\columnseprule}}%
+    \hfil%
+}
+	
+% Language settings
+\SetKw{KwTo}{à}
+\SetKw{KwInList}{dans}
+\SetKw{KwLeftToRight}{parcourrue de gauche à droite}
+
+\SetKw{Return}{Renvoyer}
+\SetKw{Print}{Afficher}
+
+% Comment
+\SetKwComment{Cblock}%
+    {{\# }}{}
+\SetKwComment{Cline}%
+    {{\# }}{}
+
+% General
+\SetKwBlock{Begin}{Début}{}
+\SetKwInput{In}{Entrée}
+\SetKwInput{Out}{Sortie}
+\SetKwInput{Out}{Sortie}
+\SetKwInput{Data}{Donnée}
+\SetKwInput{Datas}{Données}
+\SetKwInput{Result}{Résultat}
+\SetKwInput{Results}{Résultats}
+
+% Loop
+\SetKwFor{For}%
+    {Pour}{:}{}
+\SetKwFor{ForAll}%
+    {{Pour Tout}}{:}{}
+\SetKwFor{ForEach}%
+    {{Pour Chaque}}{:}{}
+\SetKwFor{While}%
+    {{Tant Que}}{:}{}
+\SetKwRepeat{Repeat}%
+    {Répéter}{{Jusqu'à Avoir}}
+
+% Test
+\SetKwIF{If}{ElseIf}{Else}%
+    {Si}{:}{{Sinon Si}}{Sinon:}{}
+\SetKwSwitch{Switch}{Case}{Other}%
+    {Suivant}{:}{Cas}{Autre:}{}
+
+% Tools for algorithms
+\newcounter{algocounter}
+
+% Source : http://tex.stackexchange.com/a/215622/6880
+%\counterwithin*{algocounter}{section} % Reset at each section !
+
+\newcommand{\algoname}{%
+	\addtocounter{algocounter}{1}%
+	{\small\textbf{\textsc{[Algo.\arabic{algocounter}]}}}%
+}
+
+\newenvironment{myverb}
+	{\small\hrule\vspace{-0.7em}\alltt}
+	{\endalltt\vspace{-1.6em}\hrule\normalsize}
+
+\newenvironment{algo}
+	{\small\hrule\algorithm[H]}
+	{\endalgorithm\hrule\normalsize}
+
+% Source : http://tex.stackexchange.com/a/76303/6880
+\xpretocmd{\algorithm}{\hsize=\linewidth}{}{}
+
+\makeatletter
+\newenvironment{listalgo}
+	{%
+		\par\noindent\hspace*{-\@totalleftmargin}%
+  		\minipage{\textwidth}\algorithm[H]%
+	}
+	{\endalgorithm\endminipage}
+\makeatother
