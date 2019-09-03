@@ -50,9 +50,11 @@
 	{\endalltt\normalsize}
 
 
-\newenvironment{averb}[1][]{
+\newenvironment{averb}[2][1]{
+	\centering
 	\begin{tcolorbox}[
-		title        = #1,
+		width=#1\linewidth,
+		title        = #2,
 		fonttitle    = \bfseries\itshape\small,
 		coltitle     = black,
 		colbacktitle = black!10!white,
@@ -76,9 +78,11 @@
 	{\end{algorithm}}
 
 
-\newenvironment{algo}{
+\newenvironment{algo}[1][1]{
+	\centering
 	\begin{tcolorbox}[
-		colback = white, 
+		colback = white,
+		width=#1\linewidth,
 		breakable
 	]
 	\begin{algo*}
@@ -160,7 +164,8 @@
 \SetKw{And}{et}
 \SetKw{Or}{ou}
 
+\SetKwSwitch{Switch}{Case}{Other}%
+	{Suivant}{:}{Cas}{Autre}{:}
+
 \SetKwIF{If}{ElseIf}{Else}%
     {Si}{:}{{Sinon Si}}{{Sinon\,:}}{}
-\SetKwSwitch{Switch}{Case}{Other}%
-	{Suivant}{{:}}{Cas}{Autre}{{:}}

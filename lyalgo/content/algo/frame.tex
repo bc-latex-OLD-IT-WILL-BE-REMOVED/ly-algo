@@ -1,11 +1,61 @@
-La version non étoilée \verb+\begin{algo} ... \end{algo}+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes.
-
+La version non étoilée de l'environnement \verb+algo+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes.
 
 \begin{algo}
     \caption{Un truc bidon}
 
     \Data{$n \in \mathds{N}^\star$}
     \Result{$\displaystyle \sum_{i = 1}^{n} i$}
+
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo} 
+
+
+\medskip
+
+
+Le code utilisé pour obtenir le rendu ci-dessus est le suivant où sont utilisées certaines des macros additionnelles proposées par \verb+lyalgo+ \emph{(voir la section \ref{algo-extra})}.
+
+\begin{frame-gene}[Code \LaTeX]
+    \small
+    \begin{verbatim}
+\begin{algo}
+    \caption{Un truc bidon}
+
+    \Data{$n \in \mathds{N}^\star$}
+    \Result{$\displaystyle \sum_{i = 1}^{n} i$}
+
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo}
+	\end{verbatim}
+\end{frame-gene}
+
+
+\medskip
+
+
+L'environnement \verb+algo+ propose un argument optionnel pour indiquer la largeur relativement à celle des lignes.
+Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivante bien moins large de l'algorithme précédent.
+
+\begin{algo}[.45]
+    \caption{Un truc bidon}
+
+    \Data{$n \in \mathds{N}^\star$}
+    \Result{$\displaystyle \sum_{i = 1}^{n} i$}
+
     \Actions{
         $s \Store 0$
         \\
@@ -21,7 +71,6 @@ La version non étoilée \verb+\begin{algo} ... \end{algo}+ ajoute un cadre, com
 
 
 On peut utiliser un environnement \verb+multicols+ pour un effet sympa.
-
 
 \begin{multicols}{2}    
 \begin{algo}

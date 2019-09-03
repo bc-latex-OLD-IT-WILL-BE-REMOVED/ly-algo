@@ -28,9 +28,9 @@ La mise en forme correspondante est la suivante sans cadre autour.
 \medskip
 
 
-Il est en fait plus pratique de pouvoir taper quelque chose comme ci-dessous avec un cadre autour.
+Il est en fait plus pratique de pouvoir taper quelque chose comme ci-dessous avec un cadre autour où le titre est un argument obligatoire \emph{(voir plus bas comment ne pas avoir de titre)}.
 
-\begin{averb}[Une sortie console]
+\begin{averb}{Une sortie console}
   Prix1 = 14 euros
 + Prix2 = 30 euros
 -------------------
@@ -43,7 +43,7 @@ Le contenu précédent s'obtient via le code suivant.
 \begin{frame-gene}[Code \LaTeX]
 	\small
 	\begin{verbatim}
-\begin{averb}[Une sortie console]
+\begin{averb}{Une sortie console}
   Prix1 = 14 euros
 + Prix2 = 30 euros
 -------------------
@@ -53,9 +53,15 @@ Le contenu précédent s'obtient via le code suivant.
 \end{frame-gene}
 
 
-\medskip
+Finissons avec une version bien moins large et sans titre de la sortie console ci-dessus. Le principe est de donner un titre vide via \verb+{}+, c'est obligatoire, et en utilisant l'unique argument optionnel pour indiquer la largeur relativement à celle des lignes. En utilisant \verb+\begin{averb}[.275]{}+ au lieu \verb+\begin{averb}{Une sortie console}+, le code précédent nous donne ce qui suit.
 
-Notez bien que c'est la version étoilée de \verb+averb+ qui en fait le moins. Ce principe sera aussi suivi pour les algorithmes.
 
-\vfill
-\null
+\begin{averb}[.275]{}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{averb} 
+
+
+\paragraph{A retenir.} C'est la version étoilée de \verb+averb+ qui en fait le moins. Ce principe sera aussi suivi pour les algorithmes.
