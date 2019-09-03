@@ -1,3 +1,5 @@
 ==========
-2017-10-?????
+2019-09-03
 ==========
+
+**First version version::``0.0.0-beta`` of ¨lyalgo:** the aim of this tiny package is just to give basic and efficient formattings for algorithms.

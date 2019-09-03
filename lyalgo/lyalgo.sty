@@ -28,16 +28,12 @@
 \usepackage{pgffor}
 
 
-% ---------------------------- %
-% -- Semantic math formulas -- %
-% ---------------------------- %
-
-\usepackage{lymath}
-
-
 % ------------------------- %
 % -- Captions - Settings -- %
 % ------------------------- %
+
+% Source
+%	* https://tex.stackovernet.com/fr/q/66875#214011
 
 \renewcommand{\@algocf@capt@plain}{above}
 \renewcommand{\algocf@caption@plain}{\box\algocf@capbox\vskip\AlCapSkip}%
@@ -45,66 +41,83 @@
 \setlength{\AlCapSkip}{.1em}
 
 
-% -------------------------------- %
-% -- Algo or verbatim in frames -- %
-% -------------------------------- %
+% ------------------------ %
+% -- Verbatim in frames -- %
+% ------------------------ %
 
-\newenvironment{myverb}
+\newenvironment{averb*}
 	{\small\alltt}
 	{\endalltt\normalsize}
 
 
-\newenvironment{myverb*}
-	{\begin{tcolorbox}[colback=white, breakable]\begin{myverb}}
-	{\end{myverb}\vspace{-1.25em}\end{tcolorbox}}
+\newenvironment{averb}[1][]{
+	\begin{tcolorbox}[
+		title        = #1,
+		fonttitle    = \bfseries\itshape\small,
+		coltitle     = black,
+		colbacktitle = black!10!white,
+		colback      = white,
+		breakable,
+		center title]
+	\begin{averb*}
+}{
+	\end{averb*}
+	\vspace{-1.25em}
+	\end{tcolorbox}
+}
 
 
-\newenvironment{algo}
-	{
-			\begin{algorithm}[H]
-	}{
-			\end{algorithm}
-	}
-
+% -------------------- %
+% -- Algo in frames -- %
+% -------------------- %
 
 \newenvironment{algo*}
-	{\begin{tcolorbox}[colback=white, breakable]\begin{algo}}
-	{\end{algo}\vspace{-0.5em}\end{tcolorbox}}
+	{\begin{algorithm}[H]}
+	{\end{algorithm}}
+
+
+\newenvironment{algo}{
+	\begin{tcolorbox}[
+		colback = white, 
+		breakable
+	]
+	\begin{algo*}
+}{
+	\end{algo*}
+	\vspace{-0.5em}
+	\end{tcolorbox}
+}
 
 
 \newcommand\addalgoblank[1][]{
    \ifthenelse{ \equal{#1}{} }
-      {\vspace{.2em}}
-      {
-      	\foreach \n in {0,...,#1}{
-			\vspace{.2em}
-		}
-		}
+      	{\vspace{.2em}}
+      	{\foreach \n in {0,...,#1}{\vspace{.2em}}}
+}
+
+
+% -------------------------------- %
+% -- Additional semantic macros -- %
+% -------------------------------- %
+
+\newcommand\Store{\leftarrow}
+\newcommand\PutIn{\rightarrow}
+
+
+\newcommand\ForRange[4]{
+	\For{#1 \KwFrom #2 \KwTo #3}{#4}
 }
 
 
 % ------------------------------ %
-% -- Addition semantic macros -- %
+% -- Algo - Language Settings -- %
 % ------------------------------ %
 
-\newcommand\store{\leftarrow}
-\newcommand\putin{\rightarrow}
-
-\newcommand\range[3]{$#1 \store #2$ \KwTo $#3$}
-
-
-
-    
-
-% ------------------------- %
-% -- Language - Settings -- %
-% ------------------------- %
-
-% Comment
+%%%% Comment
 
 \SetKwComment{Comment}{{\# }}{}
 
-% General 1
+%%%% General 1
 
 \SetKwBlock{Actions}{Actions}{}
 \SetKwBlock{Begin}{Début}{}
@@ -119,16 +132,17 @@
 \SetKwInput{Result}{Résultat}
 \SetKwInput{Results}{Résultats}
 
-% General 2
+%%%% General 2
 
+\SetKw{KwFrom}{allant de}
 \SetKw{KwTo}{jusqu'à}
 \SetKw{KwInList}{dans}
-\SetKw{KwLeftToRight}{parcourue de gauche à droite}
+\SetKw{KwLeftToRight}{{parcourue de gauche à droite}}
 
 \SetKw{Return}{Renvoyer}
 \SetKw{Print}{Afficher}
 
-% Loop
+%%%% Loop
 
 \SetKwFor{For}%
     {Pour}{:}{}
@@ -141,12 +155,12 @@
 \SetKwRepeat{Repeat}%
     {Répéter}{{Jusqu'à Avoir}}
 
-% Test
+%%%% Test
+
+\SetKw{And}{et}
+\SetKw{Or}{ou}
 
 \SetKwIF{If}{ElseIf}{Else}%
-    {Si}{:}{{Sinon Si}}{Sinon:}{}
+    {Si}{:}{{Sinon Si}}{{Sinon\,:}}{}
 \SetKwSwitch{Switch}{Case}{Other}%
-    {Suivant}{:}{Cas}{Autre:}{}
-
-
-
+	{Suivant}{{:}}{Cas}{Autre}{{:}}

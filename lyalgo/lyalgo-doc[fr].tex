@@ -1,11 +1,11 @@
 %\documentclass[12pt,a4paper]{scrartcl}
 \documentclass[12pt,a4paper]{article}
 
-\makeatletter % Technical doc - START
-
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{ucs}
+
+
+\usepackage{dsfont}
 
 \usepackage[french]{babel,varioref}
 
@@ -23,10 +23,12 @@
 }
 
 \usepackage{ifplatform}
+\usepackage{import}
 
 \usepackage{multicol}
 
 
+% Our tiny package
 
 \usepackage{lyalgo}
 
@@ -36,17 +38,34 @@
 \setlength{\parindent}{0cm}
 
 
+\newenvironment{frame-gene}[1][]{
+	\begin{tcolorbox}[title=#1, colbacktitle=black!10!white, colback=white, coltitle=black, breakable,center title, fonttitle=\bfseries\itshape\small]
+}{
+	\end{tcolorbox}
+}
+
+
 
 \begin{document}
 
-\title{%	
-	Le package \texttt{lyalgo}:\\%
-	des formules plus sémantiques\\%
-	{\footnotesize Code source disponible sur \url{https://github.com/bc-latex/ly-algo}.}\\%
-{\footnotesize Version \texttt{0.3.0-beta} développée et testée sur \macosxname{}.}%
+\title{%
+	Le package \texttt{lyalgo}:
+	\\
+	taper facilement de jolis algorithmes
+	\\
+	{
+		\footnotesize Code source disponible 
+		sur \url{https://github.com/bc-latex/ly-algo}.%
+	}
+	\\
+	{
+		\footnotesize Version \texttt{0.0.0-beta}
+		développée et testée sur \macosxname{}.%
+	}
 }
+
 \author{Christophe BAL}
-\date{2019-09-02}
+\date{2019-09-03}
 
 \maketitle
 
@@ -64,118 +83,32 @@
 \newpage
 
 
-\section{Introduction}
 
-
-\begin{algo}
-	\caption{Le crible d'Eratosthène}
-
-    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
-    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
-    \BlankLine
-    \Actions{
-    \For{\range{i}{2}{N}}{
-        \If{$i$ n'est pas barré dans la liste $L$}{
-            $X \store 4$ soit $4 \putin X$  
-            \\
-            $x \eqtest 3$ ou $x \eqtest* 3$ 
-            \\
-            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$. \Comment*{TTTT}
-        }
-    }
-    \Return{la liste $P$ des nombres non barrés.}
-    \\
-    \Comment{TTTT}
-    }
-\end{algo} 
-\begin{algo*}
-	\caption{Le crible d'Eratosthène}
-
-    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
-    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
-    \BlankLine
-    \Actions{
-    \For{\range{i}{2}{N}}{
-        \If{$i$ n'est pas barré dans la liste $L$}{
-            $X \store 4$ soit $4 \putin X$  
-            \\
-            $x \eqtest 3$ ou $x \eqtest* 3$ 
-            \\
-            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$. \Comment*{TTTT}
-        }
-    }
-    \Return{la liste $P$ des nombres non barrés.}
-    \\
-    \Comment{TTTT}
-    }
-\end{algo*} 
+% ----------- %
 
 
 \section{Introduction}
 
-
-\begin{multicols}{2}	
-\begin{algo*}
-	\caption{Le crible d'Eratosthène}
-
-    \addalgoblank[4]
-    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
-    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
-    
-    \Actions{
-    \For{$i = 2$ \KwTo $N$}{
-        \If{$i$ n'est pas barré dans la liste $L$}{
-            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$.
-        }
-    }
-    \Return{la liste $P$ des nombres non barrés.}
-    }
-\end{algo*} 
-\begin{algo*}
-	\caption{Le crible d'Eratosthène}
-
-    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
-    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
-    \BlankLine
-    \Actions{
-    \For{$i = 2$ \KwTo $N$}{
-        \If{$i$ n'est pas barré dans la liste $L$}{
-            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$.
-        }
-    }
-    \Return{la liste $P$ des nombres non barrés.}
-    }
-\end{algo*} 
-
-\end{multicols}
-
-ok ?
+\subimport*{content/}{intro}
 
 
-\begin{algo*}
-	\caption{Le crible d'Eratosthène}
+% ----------- %
 
-    \Data{la liste $L$ des naturels compris de $2$ à $N$.}
-    \Result{la liste $P$ des nombres premiers compris entre $2$ et $N$.}
-    \BlankLine
-    \Actions{
-    \For{$i = 2$ \KwTo $N$}{
-        \If{$i$ n'est pas barré dans la liste $L$}{
-            Barrer dans la liste $L$ les mutltiples $ki$ où $k \geq 2$.
-        }
-    }
-    \Return{la liste $P$ des nombres non barrés.}
-    }
-\end{algo*} 
 
-ok ?
 
-\begin{myverb*}
-    a liste $L$ des naturels compris de $2$ à $N$.
-    la liste $P$ des nombres premiers compris entre $2$ et $N$.\end{myverb*} 
+% ----------- %
 
-\begin{myverb}
-    a liste $L$ des naturels compris de $2$ à $N$.
-    la liste $P$ des nombres premiers compris entre $2$ et $N$.\end{myverb} 
+
+\section{Écriture \texttt{verbatim}}
+
+\subimport*{content/}{verbatim}
+
+
+% ----------- %
+
+
+\section{Algorithmes}
+
+\subimport*{content/}{algo}
 
 \end{document}

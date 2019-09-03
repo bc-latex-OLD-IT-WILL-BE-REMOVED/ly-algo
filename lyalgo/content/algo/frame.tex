@@ -1,0 +1,57 @@
+La version non étoilée \verb+\begin{algo} ... \end{algo}+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes.
+
+
+\begin{algo}
+    \caption{Un truc bidon}
+
+    \Data{$n \in \mathds{N}^\star$}
+    \Result{$\displaystyle \sum_{i = 1}^{n} i$}
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo} 
+
+
+\medskip
+
+
+On peut utiliser un environnement \verb+multicols+ pour un effet sympa.
+
+
+\begin{multicols}{2}    
+\begin{algo}
+    \caption{Un truc bidon}
+
+    \Data{$n \in \mathds{N}^\star$}
+    \Result{$\displaystyle \sum_{i = 1}^{n} i$}
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo} 
+\begin{algo}
+    \caption{Un truc bidon}
+
+    \Data{$n \in \mathds{N}^\star$}
+    \Result{$\displaystyle \sum_{i = 1}^{n} i$}
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo}
+\end{multicols}
+
+

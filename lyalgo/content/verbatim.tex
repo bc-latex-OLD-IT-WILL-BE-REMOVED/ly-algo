@@ -1,0 +1,61 @@
+Voici un premier exemple de contenu verbatim où \verb+averb+ vient de \og alternative verbatim \fg. 
+
+\begin{frame-gene}[Code \LaTeX]
+	\small
+	\begin{verbatim}
+\begin{averb*}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{averb*} 
+	\end{verbatim}
+\end{frame-gene}
+
+
+La mise en forme correspondante est la suivante sans cadre autour.
+
+\begin{frame-gene}[Rendu réel]
+	\begin{averb*}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+	\end{averb*} 
+\end{frame-gene}
+
+
+\medskip
+
+
+Il est en fait plus pratique de pouvoir taper quelque chose comme ci-dessous avec un cadre autour.
+
+\begin{averb}[Une sortie console]
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{averb} 
+
+
+Le contenu précédent s'obtient via le code suivant.
+
+\begin{frame-gene}[Code \LaTeX]
+	\small
+	\begin{verbatim}
+\begin{averb}[Une sortie console]
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{averb} 
+	\end{verbatim} 
+\end{frame-gene}
+
+
+\medskip
+
+Notez bien que c'est la version étoilée de \verb+averb+ qui en fait le moins. Ce principe sera aussi suivi pour les algorithmes.
+
+\vfill
+\null
