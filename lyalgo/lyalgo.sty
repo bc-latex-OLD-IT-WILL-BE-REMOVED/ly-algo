@@ -53,7 +53,7 @@
 \newenvironment{averb}[2][1]{
 	\centering
 	\begin{tcolorbox}[
-		width=#1\linewidth,
+		width        = #1\linewidth,
 		title        = #2,
 		fonttitle    = \bfseries\itshape\small,
 		coltitle     = black,
@@ -104,12 +104,20 @@
 % -- Additional semantic macros -- %
 % -------------------------------- %
 
+\newcommand\EmptyList{[ \,\, ]}
+
 \newcommand\Store{\leftarrow}
 \newcommand\PutIn{\rightarrow}
 
 
-\newcommand\ForRange[4]{
+\newcommand\ForRange{\@ifstar{\@ForRange@star}{\@ForRange@no@star}}
+
+\newcommand\@ForRange@star[4]{
 	\For{#1 \KwFrom #2 \KwTo #3}{#4}
+}
+
+\newcommand\@ForRange@no@star[4]{
+	\For{#1 \KwComingFrom #2 \KwGoingTo #3}{#4}
 }
 
 
@@ -138,8 +146,12 @@
 
 %%%% General 2
 
-\SetKw{KwFrom}{allant de}
-\SetKw{KwTo}{jusqu'à}
+\SetKw{KwFrom}{de}
+\SetKw{KwTo}{à}
+
+\SetKw{KwComingFrom}{allant de}
+\SetKw{KwGoingTo}{jusqu'à}
+
 \SetKw{KwInList}{dans}
 \SetKw{KwLeftToRight}{{parcourue de gauche à droite}}
 

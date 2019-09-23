@@ -59,7 +59,7 @@ Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivan
     \Actions{
         $s \Store 0$
         \\
-        \ForRange{$i$}{$1$}{$n$}{
+        \ForRange*{$i$}{$1$}{$n$}{
             $s \Store s + i$
         }
         \Return{$s$}
@@ -81,12 +81,14 @@ On peut utiliser un environnement \verb+multicols+ pour un effet sympa.
     \Actions{
         $s \Store 0$
         \\
-        \ForRange{$i$}{$1$}{$n$}{
+        \ForRange*{$i$}{$1$}{$n$}{
             $s \Store s + i$
         }
         \Return{$s$}
     }
-\end{algo} 
+\end{algo}
+
+
 \begin{algo}
     \caption{Un truc bidon}
 

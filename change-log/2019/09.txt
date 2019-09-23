@@ -1,0 +1,19 @@
+==========
+2019-09-23
+==========
+
+**Additional macros:** here are the new commands.
+
+    1) For affectations, there are `\Store` and `\PutIn$`.
+
+    2) For loop, a funny play on words, there are `ForRange` and `ForRange*`.
+
+    3) For lists, there is `\EmptyList`.
+
+
+
+==========
+2019-09-03
+==========
+
+**First version version::``0.0.0-beta`` of ¨lyalgo:** the aim of this tiny package is just to give basic and efficient formattings for algorithms.
