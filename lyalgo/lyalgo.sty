@@ -1,39 +1,50 @@
-% ------------------------------------------ %
-% -- Beautiful and easy to use algorithms -- %
-% ------------------------------------------ %
+% ------------------- %
+% -- Packages used -- %
+% ------------------- %
+
+% Beautiful and easy to use algorithms
 
 \usepackage[french, vlined]{algorithm2e}
 
 
-% ------------------- %
-% -- Verbatim like -- %
-% ------------------- %
+% Verbatim like
 
 \usepackage{alltt}
 
 
-% ------------ %
-% -- Frames -- %
-% ------------ %
+% Frames
 
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable}
 
 
-% --------------------- %
-% -- TeX programming -- %
-% --------------------- %
+% Flow charts via TiKz
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, calc, positioning}
+
+
+% TeX programming
 
 \usepackage{ifthen}
 \usepackage{pgffor}
 
 
-% ------------------------- %
-% -- Captions - Settings -- %
-% ------------------------- %
+
+% -------------------------------------- %
+% -- Settings and additional features -- %
+% -------------------------------------- %
+
+% TiKz - Flow charts styles ???????????????
+
+
+
+
+% algorithm2e - Captions 
 
 % Source
 %	* https://tex.stackovernet.com/fr/q/66875#214011
+%	* https://tex.stackexchange.com/a/510498/6880
 
 \renewcommand{\@algocf@capt@plain}{above}
 \renewcommand{\algocf@caption@plain}{\box\algocf@capbox\vskip\AlCapSkip}%
@@ -41,9 +52,16 @@
 \setlength{\AlCapSkip}{.1em}
 
 
-% ------------------------ %
-% -- Verbatim in frames -- %
-% ------------------------ %
+\newcommand\algojustcaption{
+	\begingroup
+		\SetAlgoCaptionSeparator{}% no separator, default colon
+		\SetAlCapNameSty{}% no caption text
+		\caption{}
+	\endgroup
+}
+
+
+% Verbatim - Frames
 
 \newenvironment{averb*}
 	{\small\alltt}
@@ -69,9 +87,7 @@
 }
 
 
-% -------------------- %
-% -- Algo in frames -- %
-% -------------------- %
+% Algo - Frames
 
 \newenvironment{algo*}
 	{\begin{algorithm}[H]}
@@ -100,9 +116,7 @@
 }
 
 
-% -------------------------------- %
-% -- Additional semantic macros -- %
-% -------------------------------- %
+% Algo - Additional semantic macros 
 
 \newcommand\EmptyList{[ \,\, ]}
 
@@ -121,9 +135,7 @@
 }
 
 
-% ------------------------------ %
-% -- Algo - Language Settings -- %
-% ------------------------------ %
+% Algo - Language Settings
 
 %%%% Comment
 

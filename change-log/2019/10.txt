@@ -1,0 +1,5 @@
+==========
+2019-10-01
+==========
+
+**Empty caption for algorithms:** the macro ``\algojustcaption`` allows to have a minimalistic caption (the use does not work)+

@@ -1,0 +1,32 @@
+Dans l'exemple ci-dessous on voit un problème à gauche où l'on a utilisé \verb+\caption{}+ avec un argument vide pour la macro \verb+\caption+.
+Si vous avec besoin juste de numéroter votre algorithme comme ci-dessous à droite, utiliser à la place \verb+\algojustcaption+.
+
+
+\begin{multicols}{2}    
+\begin{algo}
+    \caption{}
+
+    \Datas{Un titre vide ci-dessus !}
+    \Result{\dots}
+    \Actions{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+
+\begin{algo}
+    \algojustcaption
+
+    \Datas{\dots}
+    \Result{\dots}
+    \Actions{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+\end{multicols}
+
+
