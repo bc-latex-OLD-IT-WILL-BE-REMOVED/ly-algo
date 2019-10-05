@@ -2,7 +2,7 @@
 
 Le package \verb+algorithm2e+ utilise, et abuse
 \footnote{
-	Ce type de convention est un peu pénible à l'usage. 
+	Ce type de convention est un peu pénible à l'usage.
 },
 de la notation en bosses de chameau comme par exemple \verb+\uIf+ et \verb+\Return+ au lieu de \verb+\uif+ et \verb+\return+.
 Par cohérence, les nouvelles macros ajoutées par \verb+lyalgo+ utilisent aussi cette convention même si l'auteur aurait préféré proposer \verb+\putin+ et \verb+\forrange+ au lieu de \verb+\PutIn+ et \verb+\ForRange+ par exemple.
@@ -14,6 +14,136 @@ Par cohérence, les nouvelles macros ajoutées par \verb+lyalgo+ utilisent aussi
 \subsubsection{Affectations}
 
 Les affectations $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \verb+$3 \PutIn x$+ respectivement où sont utilisées les macros de type mathématique \verb+\Store+ et \verb+\PutIn+.
+
+
+% ----------- %
+
+
+\subsubsection{Listes}
+
+\paragraph{Opérations de base.}\phantom{XX}\smallskip
+
+Voici les premières macros pour travailler avec des listes c'est à dire des tableaux de taille modifiable.
+Les indices des listes sont supposés commencer à un.
+
+\begin{enumerate}
+	\item \textit{Liste vide.}
+
+		  \verb+$\EmptyList$+ imprime une liste vide $\EmptyList$.
+
+
+	\item \textit{Liste en compréhension.}
+
+		  \verb+$\List{4 ; 7; 7 ; -1}$+ produit $\List{4 ; 7; 7 ; -1}$.
+
+
+	\item \textit{Le $k$\ieme{} élément d'une liste.}
+
+		  \verb+\ListElt+ permet de taper des choses comme $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListElt{L}{1} = 4$.
+
+
+	\item \textit{La sous-liste des éléments jusqu'à celui à la position $k$.}
+
+		  \verb+\ListUntil+ permet de taper des choses comme $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListUntil{L}{2} = \List{4 ; 7}$.
+
+
+	\item \textit{La sous-liste des éléments à partir de celui à la position $k$.}
+
+		  \verb+\ListFrom+ permet de taper des choses comme $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListFrom{L}{2} = \List{7 ; 7 ; -1}$.
+
+
+	\item \textit{Taille ou longueur d'une liste.}
+
+		  La macro \verb+$\Len$+ est du type fonction et elle permet d'obtenir $L = \List{4 ; 7; 7 ; -1} \Rightarrow \Len(L) = 4$ en tapant \verb+$L = \List{4 ; 7; 7 ; -1} \Rightarrow+ \verb+\Len(L) = 4$+.
+\end{enumerate}
+
+
+
+\paragraph{Modifier une liste -- Versions textuelles.}\phantom{XX}\smallskip
+
+\begin{enumerate}
+	\item \textit{Ajout d'un nouvel élément à droite.}
+
+	      En tapant \verb+\Append{L}{5}+, on obtient \myquote{\Append{L}{5}}
+	      \footnote{
+		       Le verbe anglais \myquote{append} signifie \myquote{ajouter}.
+		  }.
+
+
+	\item \textit{Ajout d'un nouvel élément à gauche.}
+
+	      En tapant \verb+\Prepend{L}{5}+, on obtient \myquote{\Prepend{L}{5}}
+	      \footnote{
+		       Le verbe anglais \myquote{prepend} signifie \myquote{préfixer}.
+		  }.
+
+
+	\item \textit{Extraction d'un élément.}
+
+	      En tapant \verb+\PopAt{L}{2}+, on obtient \myquote{\PopAt{L}{2}} avec un calcul automatique ici.
+\end{enumerate}
+
+
+
+\paragraph{Modifier une liste -- Versions POO}
+\footnote{
+	\myquote{POO} est l'acronyme de \myquote{Programmation Orientée Objet}.
+}\textbf{.}\phantom{XX}\smallskip
+
+Les versions étoilées des macros précédentes fournissent une autre mise en forme à la fois concise et aisée à comprendre
+\footnote{
+	L'opérateur point \POOpoint{} est défini dans la macro \texttt{\textbackslash{}POOpoint}.
+}.
+
+\begin{enumerate}
+	\item \textit{Ajout d'un nouvel élément à droite.}
+
+	      \verb+\Append*{L}{5}+ fournit \Append*{L}{5}.
+
+
+	\item \textit{Ajout d'un nouvel élément à gauche.}
+
+	      \verb+\Prepend*{L}{5}+ fournit \Prepend*{L}{5}.
+
+
+	\item \textit{Extraction d'un élément.}
+
+	      \verb+\PopAt*{L}{2}+ fournit \PopAt*{L}{2}.
+\end{enumerate}
+
+
+
+\paragraph{Modifier une liste -- Versions symboliques.}\phantom{XX}\smallskip
+
+Des versions doublement étoilées permettent d'obtenir des notations symboliques qui sont très efficaces lorsque l'on rédige les algorithmes à la main
+\footnote{
+	L'opérateur $\AddList$ est défini dans la macro \texttt{\textbackslash{}AddList}.
+}.
+
+\begin{enumerate}
+	\item \textit{Ajout d'un nouvel élément à droite.}
+
+	      \verb+\Append**{L}{5}+ donne \Append**{L}{5}
+
+
+	\item \textit{Ajout d'un nouvel élément à gauche.}
+
+	      \verb+\Prepend**{L}{5}+ donne \Prepend**{L}{5}.
+
+
+	\item \textit{Extraction d'un élément.}
+
+	      \verb+\PopAt**{L}{2}+ donne \PopAt**{L}{2} avec ici un calcul fait automatiquement.
+
+	      Ceci étant indiqué, il faut savoir que \verb+\PopAt**{L}{k - 1}+ donnera le truc assez moche suivant : \PopAt**{L}{k-1}.
+	      Dans ce cas, on tapera \verb+\PopAt**[k]{L}{k - 1}+ où le 1\ier{} argument optionnel sert à obtenir \PopAt**[k]{L}{k - 1} qui est parfait.
+
+	      On retiendra que \verb+\PopAt**[a]{L}{b}+ produit \PopAt**[a]{L}{b} avec une inversion des arguments $a$ et $b$.
+
+	      \smallskip
+
+	      \emph{\textbf{Attention !} On notera que contrairement aux versions \emph{\texttt{\textbackslash{}PopAt}} et \emph{\texttt{\textbackslash{}PopAt*}}, l'écriture symbolique agit juste sur la liste. Si besoin, avec \emph{\texttt{\textbackslash{}PopAt**}} il faudra donc indiquer au préalable où stocker l'élément extrait via $\dots \Store \ListElt{L}{k}$.}
+\end{enumerate}
 
 
 % ----------- %
@@ -49,7 +179,7 @@ Pour une version sans ambiguïté possible, on utilisera \verb+\ForRange{$a$}{$0
 \medskip
 
 
-Pour en finir avec les boucles, il est facile d'obtenir l'écriture plus symbolique ci-dessous via \verb+\For+ qui est proposé par le package \verb+algorithm2e+ : il suffit de taper \verb+\For{$a \in 0\,..\,12$}+.
+Pour en finir avec les boucles, il est facile d'obtenir l'écriture plus symbolique ci-dessous via \verb+\For+ qui est proposé par le package \verb+algorithm2e+ : il suffit de taper \verb+\For{$a \in 0\,..\,12$}{...}+.
 
 \begin{algo}[.55]
     \For{$a \in 0\,..\,12$}{
@@ -58,12 +188,3 @@ Pour en finir avec les boucles, il est facile d'obtenir l'écriture plus symboli
         \phantom{\dots}\vspace{-.75em}
     }
 \end{algo}
-
-
-
-% ----------- %
-
-
-\subsubsection{Listes}
-
-Via \verb+$\EmptyList$+, on obti12ra une liste vide $\EmptyList$.

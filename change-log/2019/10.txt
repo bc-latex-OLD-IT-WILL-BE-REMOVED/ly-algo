@@ -1,5 +1,26 @@
 ==========
+2019-10-05
+==========
+
+**Tools to work with lists have been added:** here are all the new features.
+
+    1) The macro ``\List`` is for writing lists by giving their content.
+
+    2) `\ListElt` prints symbolically the k-th elements of a named list.
+
+    3) ``\ListUntil`` and ``\ListFrom`` are to indicated some special sub lists extracted from a list.
+
+    4) The macro `\Len` is a math function to use to indicate the length of  a list.
+
+    5) ``\Append``, ``\Append*`` and ``\Append**`` can be used to indicate that an element is appended to a list.
+
+    6) ``\Prepend``, ``\Prepend*`` and ``\Prepend**`` can be used to indicate that an element is prepended to a list.
+
+    7) ``\PopAt``, ``\PopAt*`` and ``\PopAt**`` can be used to indicate that the k-th element is popped from a list.
+
+
+==========
 2019-10-01
 ==========
 
-**Empty caption for algorithms:** the macro ``\algojustcaption`` allows to have a minimalistic caption (the use does not work)+
+**Empty caption for algorithms:** the macro ``\algovoidcaption`` allows to have a minimalistic caption without a name (the default behavior of ``\caption{}`` is not good).

@@ -2,7 +2,7 @@
 2019-09-29
 ==========
 
-**Documentation:** additional example showing the use of ``\For`` such as to have a symbolic version used in computer science.
+**Documentation:** an additional example showing the use of ``\For`` such as to have a symbolic version used in computer science.
 
 
 ==========

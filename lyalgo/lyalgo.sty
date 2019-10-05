@@ -7,6 +7,12 @@
 \usepackage[french, vlined]{algorithm2e}
 
 
+% Pour les nouvelles fonctions mathméatiques
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
 % Verbatim like
 
 \usepackage{alltt}
@@ -23,11 +29,17 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes, arrows, calc, positioning}
 
-
 % TeX programming
 
+\usepackage{fp}
 \usepackage{ifthen}
 \usepackage{pgffor}
+
+
+
+
+
+
 
 
 
@@ -37,10 +49,67 @@
 
 % TiKz - Flow charts styles ???????????????
 
+\tikzset{
+	decision/.style={
+		diamond,
+		draw,
+%		fill=green!20,
+		text width=5.5em,
+		text badly centered,
+		node distance=2.5cm,
+		inner sep=0pt
+	},
+	block/.style={
+		rectangle,
+		draw,
+		fill=blue!20,
+		text width=5.5em,
+		text centered,
+		node distance=2.5cm,
+		rounded corners,
+		minimum height=2em
+	},
+	loop/.style={
+		rectangle,
+		draw,
+		fill=green!20,
+    	text width=5.5em,
+		text centered,
+		node distance=2.5cm,
+		rounded corners,
+		minimum height=2em
+	},
+	line/.style={
+		draw,
+		-latex'
+	},
+	cloud/.style={
+		draw,
+		ellipse,
+		fill=red!20,
+		node distance=2.5cm,
+    	text width=6.5em,
+		text centered,
+		minimum height=2em
+	}
+}
 
 
 
-% algorithm2e - Captions 
+
+
+
+
+
+
+
+
+
+
+
+
+
+% algorithm2e - Captions
 
 % Source
 %	* https://tex.stackovernet.com/fr/q/66875#214011
@@ -52,12 +121,10 @@
 \setlength{\AlCapSkip}{.1em}
 
 
-\newcommand\algojustcaption{
-	\begingroup
-		\SetAlgoCaptionSeparator{}% no separator, default colon
-		\SetAlCapNameSty{}% no caption text
-		\caption{}
-	\endgroup
+\newcommand\algovoidcaption{
+	\SetAlgoCaptionSeparator{}	% no separator, default colon
+	\SetAlCapNameSty{}			% no caption text
+	\caption{}
 }
 
 
@@ -116,9 +183,70 @@
 }
 
 
-% Algo - Additional semantic macros 
+% Algo - Additional semantic macros - Lists
 
-\newcommand\EmptyList{[ \,\, ]}
+\newcommand\List[1]{\left[ \, #1 \, \right]}
+\newcommand\EmptyList{\List{\,\,}}
+
+\newcommand\ListElt[2]{#1\List{#2}}
+\newcommand\ListUntil[2]{#1\List{..\,#2}}
+\newcommand\ListFrom[2]{#1\List{#2\,..}}
+
+\DeclareMathOperator{\Len}{taille}
+\newcommand\POOpoint{\,\textbf{.}\,}
+
+
+\newcommand\AddList{\mathbin{\boxplus}}
+
+
+\newcommand\Append{\@ifstar{\@Append@star}{\@Append@no@star}}
+
+\newcommand\@Append@no@star[2]{Ajouter #2 après la fin de la liste #1.}
+
+\newcommand\@Append@star{\@ifstar{\@Append@star@star}{\@Append@single@star}}
+
+\newcommand\@Append@single@star[2]{#1\POOpoint{}append(#2)}
+\newcommand\@Append@star@star[2]{$\text{#1} \Store \text{#1} \AddList \List{#2}$}
+
+
+\newcommand\Prepend{\@ifstar{\@Prepend@star}{\@Prepend@no@star}}
+
+\newcommand\@Prepend@no@star[2]{Ajouter #2 avant le début de la liste #1.}
+
+\newcommand\@Prepend@star{\@ifstar{\@Prepend@star@star}{\@Prepend@single@star}}
+
+\newcommand\@Prepend@single@star[2]{#1\POOpoint{}prepend(#2)}
+
+\newcommand\@Prepend@star@star[2]{$\text{#1} \Store \List{#2} \AddList \text{#1}$}
+
+
+\newcommand\PopAt{\@ifstar{\@PopAt@star}{\@PopAt@no@star}}
+
+\newcommand\@PopAt@no@star[2]{Élément la position #2 dans la liste #1, cet élément étant retiré de la liste.}
+
+\newcommand\@PopAt@star{\@ifstar{\@PopAt@star@star}{\@PopAt@single@star}}
+
+\newcommand\@PopAt@single@star[2]{#1\POOpoint{}pop(#2)}
+
+% Source.
+%	* https://tex.stackexchange.com/a/50131/6880
+\newcommand\@add@one[2]{%
+	\setbox0=\hbox{#2\unskip}\ifdim\wd0=0pt%
+		 \if\relax\detokenize\expandafter{\romannumeral-0#1}\relax%
+			\FPeval\plusone{round(add(#1,1):0)}%
+			\plusone%
+		\else%
+			#1 + 1%
+		\fi%
+	\else%
+		#2%
+	\fi%
+}
+
+\newcommand\@PopAt@star@star[3][]{$\text{#2} \Store \ListUntil{#2}{#3} \AddList \ListFrom{#2}{\@add@one{#3}{#1}}$}
+
+
+% Algo - Additional semantic macros - General
 
 \newcommand\Store{\leftarrow}
 \newcommand\PutIn{\rightarrow}

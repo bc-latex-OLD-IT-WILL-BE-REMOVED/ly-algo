@@ -1,69 +1,8 @@
-\subsubsection{Convention en bosses de chameau}
+\subsection{Un exemple introductif}
 
-Le package \verb+algorithm2e+ utilise, et abuse
-\footnote{
-	Ce type de convention est un peu pénible à l'usage. 
-},
-de la notation en bosses de chameau comme par exemple \verb+\uIf+ et \verb+\Return+ au lieu de \verb+\uif+ et \verb+\return+.
-Par cohérence, les nouvelles macros ajoutées par \verb+lyalgo+ utilisent aussi cette convention même si l'auteur aurait préféré proposer \verb+\putin+ et \verb+\forrange+ au lieu de \verb+\PutIn+ et \verb+\ForRange+ par exemple.
+\subimport*{flowchart/}{howto}
 
 
 % ----------- %
 
 
-\subsubsection{Affectations}
-
-Les affectations $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \verb+$3 \PutIn x$+ respectivement où sont utilisées les macros de type mathématique \verb+\Store+ et \verb+\PutIn+.
-
-
-% ----------- %
-
-
-\subsubsection{Boucles}
-
-Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*{$a$}{$0$}{$12$}{...}+ pour obtenir ce qui suit.
-
-\begin{algo}[.55]
-    \ForRange*{$a$}{$0$}{$12$}{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
-
-
-\medskip
-
-
-Pour une version sans ambiguïté possible, on utilisera \verb+\ForRange{$a$}{$0$}{$12$}{...}+ afin d'obtenir la rédaction plus longue suivante.
-
-\begin{algo}[.55]
-    \ForRange{$a$}{$0$}{$12$}{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
-
-
-\medskip
-
-
-Pour en finir avec les boucles, il est facile d'obtenir l'écriture plus symbolique ci-dessous via \verb+\For+ qui est proposé par le package \verb+algorithm2e+ : il suffit de taper \verb+\For{$a \in 0\,..\,12$}+.
-
-\begin{algo}[.55]
-    \For{$a \in 0\,..\,12$}{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
-
-
-
-% ----------- %
-
-
-\subsubsection{Listes}
-
-Via \verb+$\EmptyList$+, on obti12ra une liste vide $\EmptyList$.
