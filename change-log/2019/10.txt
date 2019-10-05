@@ -10,13 +10,17 @@
 
     3) ``\ListUntil`` and ``\ListFrom`` are to indicated some special sub lists extracted from a list.
 
-    4) The macro `\Len` is a math function to use to indicate the length of  a list.
+    4) The macro `\AddList` is a math binary operator for the concatenation of lists.
 
-    5) ``\Append``, ``\Append*`` and ``\Append**`` can be used to indicate that an element is appended to a list.
+    5) The macro `\Len` is a math function to use to indicate the length of  a list.
 
-    6) ``\Prepend``, ``\Prepend*`` and ``\Prepend**`` can be used to indicate that an element is prepended to a list.
+    6) ``\Append``, ``\Append*`` and ``\Append**`` can be used to indicate that an element is appended to a list.
 
-    7) ``\PopAt``, ``\PopAt*`` and ``\PopAt**`` can be used to indicate that the k-th element is popped from a list.
+    7) ``\Prepend``, ``\Prepend*`` and ``\Prepend**`` can be used to indicate that an element is prepended to a list.
+
+    9) ``\PopAt``, ``\PopAt*`` and ``\PopAt**`` can be used to indicate that the k-th element is popped from a list.
+
+    9) ``\KeepL``, ``\KeepR`` and ``\KeepLR`` can be used to indicate that the first, last or "between" elements are popped from a list.
 
 
 ==========

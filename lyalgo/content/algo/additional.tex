@@ -21,35 +21,44 @@ Les affectations $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \
 
 \subsubsection{Listes}
 
+\paragraph{AVERTISSEMENT -- Premier indice.}\phantom{XX}\smallskip
+
+Pour le package, les indices des listes commencent toujours à un.
+
+
 \paragraph{Opérations de base.}\phantom{XX}\smallskip
 
 Voici les premières macros pour travailler avec des listes c'est à dire des tableaux de taille modifiable.
-Les indices des listes sont supposés commencer à un.
 
 \begin{enumerate}
 	\item \textit{Liste vide.}
 
-		  \verb+\EmptyList+ en mode math. imprime une liste vide $\EmptyList$.
+		  \verb+\EmptyList+ imprime une liste vide $\EmptyList$.
 
 
 	\item \textit{Liste en compréhension.}
 
-		  \verb+\List{4 ; 7; 7 ; -1}+ en mode math. produit $\List{4 ; 7; 7 ; -1}$.
+		  \verb+\List{4 ; 7; 7 ; -1}+ produit $\List{4 ; 7; 7 ; -1}$.
 
 
 	\item \textit{Le $k$\ieme{} élément d'une liste.}
 
-		  \verb+\ListElt{L}{1}+ en mode math. permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListElt{L}{1} = 4$.
+		  \verb+\ListElt{L}{1}+ permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListElt{L}{1} = 4$.
 
 
 	\item \textit{La sous-liste des éléments jusqu'à celui à la position $k$.}
 
-		  \verb+\ListUntil{L}{2}+ en mode math. permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListUntil{L}{2} = \List{4 ; 7}$.
+		  \verb+\ListUntil{L}{2}+ permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListUntil{L}{2} = \List{4 ; 7}$.
 
 
 	\item \textit{La sous-liste des éléments à partir de celui à la position $k$.}
 
-		  \verb+\ListFrom{L}{2}+ en mode math. permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListFrom{L}{2} = \List{7 ; 7 ; -1}$.
+		  \verb+\ListFrom{L}{2}+ permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListFrom{L}{2} = \List{7 ; 7 ; -1}$.
+
+
+	\item \textit{Concaténer deux listes.}
+
+		  \verb+\AddList+ est un opérateur binaire permettant d'indiquer la concaténation de deux listes comme dans $\List{1 ; 2 ; 3} \AddList \List{-4 ; -5} = \List{1 ; 2 ; 3 ; -4 ; -5}$.
 
 
 	\item \textit{Taille ou longueur d'une liste.}
@@ -64,7 +73,7 @@ Les indices des listes sont supposés commencer à un.
 \begin{enumerate}
 	\item \textit{Ajout d'un nouvel élément à droite.}
 
-	      En tapant \verb+\Append{L}{5}+, on obtient \myquote{\Append{L}{5}}
+	      \verb+\Append{L}{5}+ produit \myquote{\Append{L}{5}}
 	      \footnote{
 		       Le verbe anglais \myquote{append} signifie \myquote{ajouter}.
 		  }.
@@ -72,7 +81,7 @@ Les indices des listes sont supposés commencer à un.
 
 	\item \textit{Ajout d'un nouvel élément à gauche.}
 
-	      En tapant \verb+\Prepend{L}{5}+, qui est en mode texte, on obtient \myquote{\Prepend{L}{5}}
+	      \verb+\Prepend{L}{5}+ produit \myquote{\Prepend{L}{5}}
 	      \footnote{
 		       Le verbe anglais \myquote{prepend} signifie \myquote{préfixer}.
 		  }.
@@ -80,7 +89,7 @@ Les indices des listes sont supposés commencer à un.
 
 	\item \textit{Extraction d'un élément.}
 
-	      En tapant \verb+\PopAt{L}{2}+, qui est en mode texte, on obtient \myquote{\PopAt{L}{2}}.
+	      \verb+\PopAt{L}{3}+ produit \myquote{\PopAt{L}{3}}.
 \end{enumerate}
 
 
@@ -98,17 +107,17 @@ Les versions étoilées des macros précédentes fournissent une autre mise en f
 \begin{enumerate}
 	\item \textit{Ajout d'un nouvel élément à droite.}
 
-	      \verb+\Append*{L}{5}+, qui est en mode texte, fournit \Append*{L}{5}.
+	      \verb+\Append*{L}{5}+ fournit \Append*{L}{5}.
 
 
 	\item \textit{Ajout d'un nouvel élément à gauche.}
 
-	      \verb+\Prepend*{L}{5}+, qui est en mode texte, fournit \Prepend*{L}{5}.
+	      \verb+\Prepend*{L}{5}+ fournit \Prepend*{L}{5}.
 
 
 	\item \textit{Extraction d'un élément.}
 
-	      \verb+\PopAt*{L}{2}+, qui est en mode texte, fournit \PopAt*{L}{2}.
+	      \verb+\PopAt*{L}{3}+ fournit \PopAt*{L}{3}.
 \end{enumerate}
 
 
@@ -123,26 +132,41 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 \begin{enumerate}
 	\item \textit{Ajout d'un nouvel élément à droite.}
 
-	      \verb+\Append**{L}{5}+, qui est en mode texte, donne \Append**{L}{5}.
+	      \verb+\Append**{L}{5}+ donne \Append**{L}{5}.
 
 
 	\item \textit{Ajout d'un nouvel élément à gauche.}
 
-	      \verb+\Prepend**{L}{5}+, qui est en mode texte, donne \Prepend**{L}{5}.
+	      \verb+\Prepend**{L}{5}+ donne \Prepend**{L}{5}.
 
 
-	\item \textit{Extraction d'un élément.}
+	\item \textit{Extraction d'un élément -- Version peuso-automatique.}
 
-	      \verb+\PopAt**{L}{2}+, qui est en mode texte, donne \PopAt**{L}{2} avec ici un calcul fait automatiquement.
-
-	      Ceci étant indiqué, il faut savoir que \verb+\PopAt**{L}{k - 1}+ donnera le truc assez moche suivant : \PopAt**{L}{k-1}.
-	      Dans ce cas, on tapera \verb+\PopAt**[k]{L}{k - 1}+ où le 1\ier{} argument optionnel sert à obtenir \PopAt**[k]{L}{k - 1} qui est parfait.
-
-	      On retiendra que \verb+\PopAt**[a]{L}{b}+ produit \PopAt**[a]{L}{b} avec une inversion des arguments $a$ et $b$.
+	      \verb+\PopAt**{L}{3}+ donne \PopAt**{L}{3} avec un calcul fait automatiquement par la macro.
+	      Bien entendu \verb+\PopAt**{L}{1}+ produit \PopAt**{L}{1} au lieu de $L \Store \ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à un.
+	      
+	      Il est autorisé de taper \verb+\PopAt**{L}{k}+ pour obtenir \PopAt**{L}{k}. Par contre, \verb+\PopAt**{L}{k-1}+ aboutit au truc très moche \PopAt**{L}{k-1}. 
+	      Les deux items suivants expliquent comment gérer à la main les cas problématiques.
 
 	      \smallskip
 
 	      \emph{\textbf{Attention !} On notera que contrairement aux versions \emph{\texttt{\textbackslash{}PopAt}} et \emph{\texttt{\textbackslash{}PopAt*}}, l'écriture symbolique agit juste sur la liste. Si besoin, avec \emph{\texttt{\textbackslash{}PopAt**}} il faudra donc indiquer au préalable où stocker l'élément extrait via $\dots \Store \ListElt{L}{k}$.}
+
+
+	\item \textit{Extraction d'éléments consécutifs.}
+
+	      Lorsque les calculs automatiques ne sont pas faisables, on devra tout indiquer comme dans \verb@\KeepLR{L}{k - 2}{k + 1}@ afin d'avoir \KeepLR{L}{k - 2}{k + 1} qui est parfait
+	      \footnote{
+	      	Le nom de la macro vient de \myquote{keep left and right} soit \myquote{garder à droite et à gauche}.
+		  }.
+
+
+	\item \textit{Extractions juste à droite, ou juste à gauche.}
+
+	      \verb+\KeepL{L}{k}+ permet d'afficher \KeepL{L}{k} et \verb+\KeepR{L}{k}+ permet quant à lui d'écrire \KeepR{L}{k}
+	      \footnote{
+	      	Les noms des macros viennent de \myquote{keep left} et \myquote{keep right} soit \myquote{garder à gauche} et \myquote{garder à droite}.
+		  }.
 \end{enumerate}
 
 
