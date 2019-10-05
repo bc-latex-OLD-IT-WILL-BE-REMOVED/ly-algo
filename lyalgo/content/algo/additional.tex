@@ -29,32 +29,32 @@ Les indices des listes sont supposés commencer à un.
 \begin{enumerate}
 	\item \textit{Liste vide.}
 
-		  \verb+$\EmptyList$+ imprime une liste vide $\EmptyList$.
+		  \verb+\EmptyList+ en mode math. imprime une liste vide $\EmptyList$.
 
 
 	\item \textit{Liste en compréhension.}
 
-		  \verb+$\List{4 ; 7; 7 ; -1}$+ produit $\List{4 ; 7; 7 ; -1}$.
+		  \verb+\List{4 ; 7; 7 ; -1}+ en mode math. produit $\List{4 ; 7; 7 ; -1}$.
 
 
 	\item \textit{Le $k$\ieme{} élément d'une liste.}
 
-		  \verb+\ListElt+ permet de taper des choses comme $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListElt{L}{1} = 4$.
+		  \verb+\ListElt{L}{1}+ en mode math. permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListElt{L}{1} = 4$.
 
 
 	\item \textit{La sous-liste des éléments jusqu'à celui à la position $k$.}
 
-		  \verb+\ListUntil+ permet de taper des choses comme $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListUntil{L}{2} = \List{4 ; 7}$.
+		  \verb+\ListUntil{L}{2}+ en mode math. permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListUntil{L}{2} = \List{4 ; 7}$.
 
 
 	\item \textit{La sous-liste des éléments à partir de celui à la position $k$.}
 
-		  \verb+\ListFrom+ permet de taper des choses comme $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListFrom{L}{2} = \List{7 ; 7 ; -1}$.
+		  \verb+\ListFrom{L}{2}+ en mode math. permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListFrom{L}{2} = \List{7 ; 7 ; -1}$.
 
 
 	\item \textit{Taille ou longueur d'une liste.}
 
-		  La macro \verb+$\Len$+ est du type fonction et elle permet d'obtenir $L = \List{4 ; 7; 7 ; -1} \Rightarrow \Len(L) = 4$ en tapant \verb+$L = \List{4 ; 7; 7 ; -1} \Rightarrow+ \verb+\Len(L) = 4$+.
+		  La macro \verb+\Len+ est du type fonction et elle permet d'obtenir $L = \List{4 ; 7; 7 ; -1} \Rightarrow \Len(L) = 4$.
 \end{enumerate}
 
 
@@ -72,7 +72,7 @@ Les indices des listes sont supposés commencer à un.
 
 	\item \textit{Ajout d'un nouvel élément à gauche.}
 
-	      En tapant \verb+\Prepend{L}{5}+, on obtient \myquote{\Prepend{L}{5}}
+	      En tapant \verb+\Prepend{L}{5}+, qui est en mode texte, on obtient \myquote{\Prepend{L}{5}}
 	      \footnote{
 		       Le verbe anglais \myquote{prepend} signifie \myquote{préfixer}.
 		  }.
@@ -80,7 +80,7 @@ Les indices des listes sont supposés commencer à un.
 
 	\item \textit{Extraction d'un élément.}
 
-	      En tapant \verb+\PopAt{L}{2}+, on obtient \myquote{\PopAt{L}{2}} avec un calcul automatique ici.
+	      En tapant \verb+\PopAt{L}{2}+, qui est en mode texte, on obtient \myquote{\PopAt{L}{2}}.
 \end{enumerate}
 
 
@@ -98,17 +98,17 @@ Les versions étoilées des macros précédentes fournissent une autre mise en f
 \begin{enumerate}
 	\item \textit{Ajout d'un nouvel élément à droite.}
 
-	      \verb+\Append*{L}{5}+ fournit \Append*{L}{5}.
+	      \verb+\Append*{L}{5}+, qui est en mode texte, fournit \Append*{L}{5}.
 
 
 	\item \textit{Ajout d'un nouvel élément à gauche.}
 
-	      \verb+\Prepend*{L}{5}+ fournit \Prepend*{L}{5}.
+	      \verb+\Prepend*{L}{5}+, qui est en mode texte, fournit \Prepend*{L}{5}.
 
 
 	\item \textit{Extraction d'un élément.}
 
-	      \verb+\PopAt*{L}{2}+ fournit \PopAt*{L}{2}.
+	      \verb+\PopAt*{L}{2}+, qui est en mode texte, fournit \PopAt*{L}{2}.
 \end{enumerate}
 
 
@@ -123,17 +123,17 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 \begin{enumerate}
 	\item \textit{Ajout d'un nouvel élément à droite.}
 
-	      \verb+\Append**{L}{5}+ donne \Append**{L}{5}
+	      \verb+\Append**{L}{5}+, qui est en mode texte, donne \Append**{L}{5}.
 
 
 	\item \textit{Ajout d'un nouvel élément à gauche.}
 
-	      \verb+\Prepend**{L}{5}+ donne \Prepend**{L}{5}.
+	      \verb+\Prepend**{L}{5}+, qui est en mode texte, donne \Prepend**{L}{5}.
 
 
 	\item \textit{Extraction d'un élément.}
 
-	      \verb+\PopAt**{L}{2}+ donne \PopAt**{L}{2} avec ici un calcul fait automatiquement.
+	      \verb+\PopAt**{L}{2}+, qui est en mode texte, donne \PopAt**{L}{2} avec ici un calcul fait automatiquement.
 
 	      Ceci étant indiqué, il faut savoir que \verb+\PopAt**{L}{k - 1}+ donnera le truc assez moche suivant : \PopAt**{L}{k-1}.
 	      Dans ce cas, on tapera \verb+\PopAt**[k]{L}{k - 1}+ où le 1\ier{} argument optionnel sert à obtenir \PopAt**[k]{L}{k - 1} qui est parfait.
@@ -151,10 +151,10 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 
 \subsubsection{Boucles}
 
-Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*{$a$}{$0$}{$12$}{...}+ pour obtenir ce qui suit.
+Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*{a}{0}{12}{...}+ pour obtenir ce qui suit.
 
 \begin{algo}[.55]
-    \ForRange*{$a$}{$0$}{$12$}{
+    \ForRange*{a}{0}{12}{
         \dots\phantom{X}
         \\
         \phantom{\dots}\vspace{-.75em}
@@ -165,10 +165,10 @@ Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*{$
 \medskip
 
 
-Pour une version sans ambiguïté possible, on utilisera \verb+\ForRange{$a$}{$0$}{$12$}{...}+ afin d'obtenir la rédaction plus longue suivante.
+Pour une version sans ambiguïté possible, on utilisera \verb+\ForRange{a}{0}{12}{...}+ afin d'obtenir la rédaction plus longue suivante.
 
 \begin{algo}[.55]
-    \ForRange{$a$}{$0$}{$12$}{
+    \ForRange{a}{0}{12}{
         \dots\phantom{X}
         \\
         \phantom{\dots}\vspace{-.75em}
