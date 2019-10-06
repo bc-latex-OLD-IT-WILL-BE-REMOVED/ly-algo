@@ -205,7 +205,7 @@
 
 \newcommand\@Append@star{\@ifstar{\@Append@star@star}{\@Append@single@star}}
 
-\newcommand\@Append@single@star[2]{$#1$\POOpoint{}append($#2$)}
+\newcommand\@Append@single@star[2]{$#1$\POOpoint{}ajouter-droite($#2$)}
 \newcommand\@Append@star@star[2]{$#1 \Store #1 \AddList \List{#2}$}
 
 
@@ -215,7 +215,7 @@
 
 \newcommand\@Prepend@star{\@ifstar{\@Prepend@star@star}{\@Prepend@single@star}}
 
-\newcommand\@Prepend@single@star[2]{$#1$\POOpoint{}prepend($#2$)}
+\newcommand\@Prepend@single@star[2]{$#1$\POOpoint{}ajouter-gauche($#2$)}
 
 \newcommand\@Prepend@star@star[2]{$#1 \Store \List{#2} \AddList #1$}
 
@@ -226,7 +226,7 @@
 
 \newcommand\@PopAt@star{\@ifstar{\@PopAt@star@star}{\@PopAt@single@star}}
 
-\newcommand\@PopAt@single@star[2]{$#1$\POOpoint{}pop($#2$)}
+\newcommand\@PopAt@single@star[2]{$#1$\POOpoint{}extraire($#2$)}
 
 
 \newcommand\@add@one[2]{%
