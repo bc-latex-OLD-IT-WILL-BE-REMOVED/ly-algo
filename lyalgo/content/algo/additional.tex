@@ -21,9 +21,10 @@ Les affectations $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \
 
 \subsubsection{Listes}
 
-\paragraph{AVERTISSEMENT -- Premier indice.}\phantom{XX}\smallskip
 
-Pour le package, les indices des listes commencent toujours à un.
+\begin{frame-gene}[AVERTISSEMENT -- Premier indice]
+	Pour le package, les indices des listes commencent toujours à un. 
+\end{frame-gene}
 
 
 \paragraph{Opérations de base.}\phantom{XX}\smallskip
@@ -38,22 +39,22 @@ Voici les premières macros pour travailler avec des listes c'est à dire des ta
 
 	\item \textit{Liste en compréhension.}
 
-		  \verb+\List{4 ; 7; 7 ; -1}+ produit $\List{4 ; 7; 7 ; -1}$.
+		  \verb+\List{4 ; 7 ; 7 ; -1}+ produit $\List{4 ; 7 ; 7 ; -1}$.
 
 
 	\item \textit{Le $k$\ieme{} élément d'une liste.}
 
-		  \verb+\ListElt{L}{1}+ permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListElt{L}{1} = 4$.
+		  \verb+\ListElt{L}{1}+ permet de taper $L = \List{4 ; 7 ; 7 ; -1} \Rightarrow \ListElt{L}{1} = 4$.
 
 
 	\item \textit{La sous-liste des éléments jusqu'à celui à la position $k$.}
 
-		  \verb+\ListUntil{L}{2}+ permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListUntil{L}{2} = \List{4 ; 7}$.
+		  \verb+\ListUntil{L}{2}+ permet de taper $L = \List{4 ; 7 ; 7 ; -1} \Rightarrow \ListUntil{L}{2} = \List{4 ; 7}$.
 
 
 	\item \textit{La sous-liste des éléments à partir de celui à la position $k$.}
 
-		  \verb+\ListFrom{L}{2}+ permet de taper $L = \List{4 ; 7; 7 ; -1} \Rightarrow \ListFrom{L}{2} = \List{7 ; 7 ; -1}$.
+		  \verb+\ListFrom{L}{2}+ permet de taper $L = \List{4 ; 7 ; 7 ; -1} \Rightarrow \ListFrom{L}{2} = \List{7 ; 7 ; -1}$.
 
 
 	\item \textit{Concaténer deux listes.}
@@ -63,7 +64,7 @@ Voici les premières macros pour travailler avec des listes c'est à dire des ta
 
 	\item \textit{Taille ou longueur d'une liste.}
 
-		  La macro \verb+\Len+ est du type fonction et elle permet d'obtenir $L = \List{4 ; 7; 7 ; -1} \Rightarrow \Len(L) = 4$.
+		  La macro \verb+\Len+ est du type fonction et elle permet d'obtenir $L = \List{4 ; 7 ; 7 ; -1} \Rightarrow \Len(L) = 4$.
 \end{enumerate}
 
 
@@ -146,7 +147,7 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 	      Bien entendu \verb+\PopAt**{L}{1}+ produit \PopAt**{L}{1} au lieu de $L \Store \ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à un.
 	      
 	      Il est autorisé de taper \verb+\PopAt**{L}{k}+ pour obtenir \PopAt**{L}{k}. Par contre, \verb+\PopAt**{L}{k-1}+ aboutit au truc très moche \PopAt**{L}{k-1}. 
-	      Les deux items suivants expliquent comment gérer à la main les cas problématiques.
+	      Les items suivants expliquent comment gérer à la main les cas problématiques via des macros plus généralistes.
 
 	      \smallskip
 
