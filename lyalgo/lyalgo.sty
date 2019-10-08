@@ -43,66 +43,67 @@
 
 
 
+
 % -------------------------------------- %
 % -- Settings and additional features -- %
 % -------------------------------------- %
 
 % TiKz - Flow charts styles ???????????????
-
-\tikzset{
-	decision/.style={
-		diamond,
-		draw,
+%
+%\tikzset{
+%	decision/.style={
+%		diamond,
+%		draw,
 %		fill=green!20,
-		text width=5.5em,
-		text badly centered,
-		node distance=2.5cm,
-		inner sep=0pt
-	},
-	block/.style={
-		rectangle,
-		draw,
-		fill=blue!20,
-		text width=5.5em,
-		text centered,
-		node distance=2.5cm,
-		rounded corners,
-		minimum height=2em
-	},
-	loop/.style={
-		rectangle,
-		draw,
-		fill=green!20,
-    	text width=5.5em,
-		text centered,
-		node distance=2.5cm,
-		rounded corners,
-		minimum height=2em
-	},
-	line/.style={
-		draw,
-		-latex'
-	},
-	cloud/.style={
-		draw,
-		ellipse,
-		fill=red!20,
-		node distance=2.5cm,
-    	text width=6.5em,
-		text centered,
-		minimum height=2em
-	}
-}
-
-
-
-
-
-
-
-
-
-
+%		text width=5.5em,
+%		text badly centered,
+%		node distance=2.5cm,
+%		inner sep=0pt
+%	},
+%	block/.style={
+%		rectangle,
+%		draw,
+%		fill=blue!20,
+%		text width=5.5em,
+%		text centered,
+%		node distance=2.5cm,
+%		rounded corners,
+%		minimum height=2em
+%	},
+%	loop/.style={
+%		rectangle,
+%		draw,
+%		fill=green!20,
+%    	text width=5.5em,
+%		text centered,
+%		node distance=2.5cm,
+%		rounded corners,
+%		minimum height=2em
+%	},
+%	line/.style={
+%		draw,
+%		-latex'
+%	},
+%	cloud/.style={
+%		draw,
+%		ellipse,
+%		fill=red!20,
+%		node distance=2.5cm,
+%    	text width=6.5em,
+%		text centered,
+%		minimum height=2em
+%	}
+%}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
 
 
 
@@ -130,12 +131,12 @@
 
 % Verbatim - Frames
 
-\newenvironment{averb*}
+\newenvironment{pseudoverb*}
 	{\small\alltt}
 	{\endalltt\normalsize}
 
 
-\newenvironment{averb}[2][1]{
+\newenvironment{pseudoverb}[2][1]{
 	\centering
 	\begin{tcolorbox}[
 		width        = #1\linewidth,
@@ -146,9 +147,9 @@
 		colback      = white,
 		breakable,
 		center title]
-	\begin{averb*}
+	\begin{pseudoverb*}
 }{
-	\end{averb*}
+	\end{pseudoverb*}
 	\vspace{-1.25em}
 	\end{tcolorbox}
 }

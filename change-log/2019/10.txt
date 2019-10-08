@@ -1,4 +1,18 @@
 ==========
+2019-10-08
+==========
+
+**Wrong names for ``averb``:** the environments ``averb`` and ``averb*`` have been renamed ``pseudoverb`` and ``pseudoverb*`` because this environments allow to use ¨latex macros.
+
+
+==========
+2019-10-06
+==========
+
+**For the lists:** the POO uses french texts like all the commands for the algorithms.
+
+
+==========
 2019-10-05
 ==========
 
