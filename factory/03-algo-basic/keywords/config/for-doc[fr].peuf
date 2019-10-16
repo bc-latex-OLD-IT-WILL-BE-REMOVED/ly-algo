@@ -1,0 +1,11 @@
+titles::
+    input = Entrée / Sortie
+    block = Bloc principal
+
+    for    = Boucles
+    repeat = Boucles
+
+    switch = Tests
+    ifelif = Tests
+
+    word = Diverses commandes

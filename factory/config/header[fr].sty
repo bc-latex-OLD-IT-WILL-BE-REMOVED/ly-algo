@@ -1,0 +1,67 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{dsfont}
+
+\usepackage[french]{babel,varioref}
+
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{enumitem}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{ifplatform}
+\usepackage{import}
+
+\usepackage{multicol}
+
+\usepackage{tcolorbox}
+
+\usepackage{amsthm}
+
+\usepackage{ifplatform}
+
+\usepackage{cbdevtool}
+\usepackage{lymath}
+
+% MISC
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remarque}
+
+
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
+\setlength{\parindent}{0cm}
+
+\newenvironment{frame-gene}[1][]{
+	\begin{tcolorbox}[
+		title        = #1, 
+		colbacktitle = black!10!white, 
+		colback      = white, 
+		coltitle     = black,
+		fonttitle    = \bfseries\itshape\small, 
+		breakable,
+		center title]
+}{
+	\end{tcolorbox}
+}
+
+\newcommand\myquote[1]{{\itshape \og #1 \fg}}
+
+\newcommand\squaremacro{$x^2$}

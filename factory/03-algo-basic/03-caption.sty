@@ -1,0 +1,24 @@
+% == PACKAGES USED == %
+
+\usepackage[french, vlined]{algorithm2e}
+
+
+% == DEFINITIONS == %
+
+% Algo - Captions
+
+% Source
+%	* https://tex.stackovernet.com/fr/q/66875#214011
+%	* https://tex.stackexchange.com/a/510498/6880
+
+\renewcommand{\@algocf@capt@plain}{above}
+\renewcommand{\algocf@caption@plain}{\box\algocf@capbox\vskip\AlCapSkip}%
+
+\setlength{\AlCapSkip}{.1em}
+
+
+\newcommand\algovoidcaption{
+	\SetAlgoCaptionSeparator{}	% no separator, default colon
+	\SetAlCapNameSty{}			% no caption text
+	\caption{}
+}

@@ -1,0 +1,64 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
+	\input{../03-algo-basic/02-frame.sty}
+
+	\usepackage{04-loop}
+\makeatother
+
+
+\newcommand\KwFrom{de}
+\newcommand\KwComingFrom{partant de}
+
+\renewcommand\KwTo{à}
+\newcommand\KwGoingTo{et allant à}
+
+
+
+\begin{document}
+
+%\section{Des outils pour les algorithmes} \label{algo-extra}
+
+\subsection{Boucles}
+
+Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*{a}{0}{12}{...}+ pour obtenir ce qui suit.
+
+\begin{algo}[.55]
+    \ForRange*{a}{0}{12}{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+
+\medskip
+
+
+Pour une version sans ambiguïté possible, on utilisera \verb+\ForRange{a}{0}{12}{...}+ afin d'obtenir la rédaction plus longue suivante.
+
+\begin{algo}[.55]
+    \ForRange{a}{0}{12}{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+
+\medskip
+
+
+Pour en finir avec les boucles, il est facile d'obtenir l'écriture symbolique ci-dessous via \verb+\For+ qui est proposé par le package \verb+algorithm2e+ : il suffit de taper \verb+\For{$a \in \CSinterval{0}{12}$}{...}+ où la macro \verb+\CSinterval+ est proposée par le package \verb+lymath+.
+
+\begin{algo}[.55]
+    \For{$a \in 0\,..\,12$}{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+\end{document}

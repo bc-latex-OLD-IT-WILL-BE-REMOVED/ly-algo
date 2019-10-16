@@ -1,0 +1,13 @@
+word::
+    And = et
+    Or  = ou
+
+ifelif::
+    If     = Si
+    ElseIf = Sinon Si
+    Else   = Sinon
+
+switch::
+    Switch = Suivant
+    Case   = Cas
+    Other  = Autre

@@ -1,0 +1,23 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
+\makeatother
+
+
+\begin{document}
+
+\section{Des outils additionnels pour les algorithmes} \label{algo-extra}
+
+\subsection{Convention en bosses de chameau}
+
+Le package \verb+algorithm2e+ utilise, et abuse
+\footnote{
+	Ce type de convention est un peu pénible à l'usage.
+},
+de la notation en bosses de chameau comme par exemple avec \verb+\uIf+ et \verb+\Return+ au lieu de \verb+\uif+ et \verb+\return+.
+Par souci de cohérence, les nouvelles macros ajoutées par \verb+lyalgo+ en lien avec les algorithmes utilisent aussi cette convention même si l'auteur aurait préféré proposer \verb+\putin+ et \verb+\forrange+ à la place de \verb+\PutIn+ et \verb+\ForRange+ par exemple.
+
+\end{document}
+

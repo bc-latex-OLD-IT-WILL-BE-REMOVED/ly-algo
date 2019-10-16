@@ -1,0 +1,194 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+\makeatother
+
+
+\begin{document}
+
+\newpage
+
+\section{Historique}
+
+Nous ne donnons ici qu'un très bref historique de \verb+lymath+ côté utilisateur principalement.
+Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+lymath+ sur \verb+github+.
+
+\begin{description}[leftmargin=1em]
+    \setlength\itemsep{1em}
+
+
+% --------------- %
+
+    \item[2019-10-14] Nouvelle version sous-mineure \verb+0.6.2-beta+.
+    \begin{itemize}
+        \item En algèbre, il y a eu les renommages ci-dessous qui avaient été oubliés.
+        \begin{itemize}
+        	\item \verb+\polyset+ est devenu \verb+\setpoly+.
+
+        	\item \verb+\polyfracsetp+ est devenu \verb+\setpolyfrac+.
+
+        	\item \verb+\serieset+ est devenu \verb+\setserie+.
+
+        	\item \verb+\seriefracset+ est devenu \verb+\setseriefrac+.
+
+        	\item \verb+\polylaurentset+ est devenu \verb+\setpolylaurent+.
+
+        	\item \verb+\serielaurentset+ est devenu \verb+\setserielaurent+.
+        \end{itemize}
+    \end{itemize} 
+
+
+% --------------- %
+
+    \item[2019-10-13] Nouvelle version sous-mineure \verb+0.6.1-beta+.
+    \begin{itemize}
+        \item En logique, la macro \verb+\explain+ possède maintenant un argument optionnel pour indiquer l'espacement avant le symbole. Les macros obsolètes \verb+\explain*+ et \verb+\textexplainspacebefore+ ont été supprimées.
+
+        \item En probabilité, voici ce qui a évolué.
+        \begin{itemize}
+        	\item Les macros \verb+\probacond+ et \verb+\probacond*+ n'ont plus d'argument optionnel. Pour obtenir l'écriture fractionnaire, il faut utiliser \verb+\probacond**+ ou \verb+\dprobacond**+.
+
+        	\item Les environnements \verb+probatree+ et \verb+probatree*+ ont trois nouvelles clés.
+			      La clé \verb+frame+ permet d'encadrer un sous-arbre, et les clés \verb+apweight+ et \verb+bpweight+ permettent d'écrire des poids dessus/dessous une branche.
+        \end{itemize}
+    
+        \item Pour les ensembles, il y a eu les renommages suivants par souci de cohérence.
+        \begin{itemize}
+        	\item \verb+\algeset+ est devenu \verb+\setalge+.
+        	\item \verb+\geoset+ est devenu \verb+\setgeo+.
+        	\item \verb+\geneset+ est devenu \verb+\setgene+.
+        	\item \verb+\probaset+ est devenu \verb+\setproba+.
+        	\item \verb+\specialset+ est devenu \verb+\setspecial+.
+        \end{itemize}
+    \end{itemize}  
+    
+
+% --------------- %
+
+    \item[2019-10-10] Nouvelle version mineure \verb+0.6.0-beta+.
+    \begin{itemize}
+        \item Des nouveaux outils spécifiques aux probabilités.
+        \begin{itemize}
+            \item Les macros \verb+\probacond+ et \verb+\probacond*+ servent à écrire des probabilités conditionnelles.
+
+            \item Les environnements \verb+probatree+ et \verb+probatree*+ simplifient la production d'arbres probabilistes pondérés ou non.
+        \end{itemize}
+
+        \item En géométrie, la macro \verb+\notparallel+ a été rajoutée.
+
+        \item Un nouveau type d'intervalle pour l'informatique théorique via la macro \verb+\CSinterval+ afin d'obtenir quelque chose comme \verb+a..b+.
+
+        \item En logique, il y a deux nouvelles macros sémantiques \verb+\neqid+ et \verb+\eqchoice+.
+    \end{itemize}
+
+
+% --------------- %
+
+    \item[2019-09-27] Nouvelle version mineure \verb+0.5.0-beta+.
+    \begin{itemize}
+        \item Ajout des macros \verb+\dsum+ et \verb+\dprod+ qui sont vis à vis de \verb+\sum+ et \verb+\prod+ des équivalents de \verb+\dfrac+ pour \verb+\frac+.
+
+        \item En arithmétique, ajout des opérateurs \verb+\divides+, \verb+\notdivides+ et \verb+\modulo+.
+
+        \item En géométrie, une nouvelle macro et un opérateur modifié.
+        \begin{itemize}
+            \item \verb+\pts+ permet d'indiquer plusieurs points.
+
+            \item \verb+\parallel+ utilise des obliques pour symboliser le parallélisme au lieu de barres verticales.
+        \end{itemize}
+
+        \item En logique, il y a les nouveautés suivantes.
+        \begin{itemize}
+            \item La version doublement étoilée \verb+\eqdef**+ donne une deuxième écriture symbolique d'un symbole égal de type définition \emph{(cette notation vient du langage B)}.
+
+            \item Ajout de \verb+\liesimp+ comme alias de \verb+\Longleftarrow+.
+
+            \item Les macros \verb+\vimplies+, \verb+\viff+ et \verb+\vliesimp+ sont des versions verticales de \verb+\implies+, \verb+\iff+ et \verb+\liesimp+.
+
+            \item Comme pour les égalités, il existe les macros \verb+\impliestest+, \verb+\iffhyp+ ... etc.
+        \end{itemize}
+    \end{itemize}
+
+% --------------- %
+
+    \item[2019-09-06]  Nouvelle version mineure \verb+0.4.0-beta+.
+    \begin{itemize}
+        \item Dans \emph{\og Logique et fondements \fg}, différents types de signes d'inéquation et de non égalité pour des cas de test, d'hypothèse faite et de condition à vérifier.
+
+        \item Intégration du package \verb+tkz-tab+ pour rédiger des tableaux de variations et de signes.
+
+        \item Intégration du package \verb+nicematrix+ pour écrire des matrices.
+    \end{itemize}
+
+% --------------- %
+
+    \item[2019-07-23] Nouvelle version mineure \verb+0.3.0-beta+.
+    \begin{itemize}
+        \item Une nouvelle section \emph{\og Logique et fondements \fg} a été ajoutée.
+        \begin{itemize}
+            \item Trois types de signes $=$ décorés sont proposés : voir les macros \verb+\eqdef+ , \verb+\eqid+ et \verb+\eqtest+.
+
+            \item Via la macro \verb+\explain+, il devient facile d'expliquer des étapes de raisonnement ou des calculs.
+        \end{itemize}
+
+        \item Pour les ensembles, la macro \verb+\fieldset+ a été renommé \verb+\algeset+ et la macro \verb+\PP+ permet d'indiquer l'ensemble des nombres premiers.
+
+        \item En géométrie, il y a quelques nouveautés.
+        \begin{itemize}
+            \item La macro \verb+\hangleorient+ permet l'écriture d'angles orientés avec un chapeau en plus.
+
+            \item Les macros \verb+\vangleorient+ et \verb+\vhangleorient+ évite d'avoir à utiliser \verb+\vect+ lorsque l'on a juste des vecturs simples nommés et non coefficientés.
+
+            \item De même pour les macros \verb+\vdotprod+, \verb+\vadotprod+ et \verb+\vcroosprod+.
+        \end{itemize}
+
+        \item Ajout de \verb+\lymathsubsep+ qui définit le séparateur des arguments de second niveau.
+    \end{itemize}
+
+% --------------- %
+
+    \item[2019-02-21] Nouvelle version mineure \verb+0.2.0-beta+.
+    \begin{itemize}
+        \item L'usage de \verb+//+ pour les macros-commandes avec un nombre quelconque d'arguments a été remplacé par celui de \verb+|+.
+
+        \item En géométrie, il y a diverses nouveautés.
+        \begin{itemize}
+            \item Ajout de l'écriture de coordonnées, de produits scalaires et de produits vectoriels.
+
+            \item \verb+\axis+ a été correctement traduit en \verb+\axes+.
+
+            \item Les macros \verb+\gpaxis+ et \verb+\gpvaxis+ deviennent \verb+\paxes+ et \verb+\pvaxes+ pour être cohérent avec \verb+\pt+ qui a remplacé l'ancien \verb+\gpt+.
+        \end{itemize}
+
+        \item En analyse, ajout de la macro commande étoilée \verb+\derpow*+ pour la gestion automatique des primes d'une dérivée.
+
+        \item Une nouvelle section "algèbre" propose des macros pour écrire des ensembles de polynômes, de fractions polynomiales, de séries formelles, de fractions de séries formelles, et aussi de polynômes et de séries formelles de Laurent.
+
+        \item Redéfinition de \verb+\frac+ et \verb+\dfrac+ pour obtenir des traits de fraction un peu plus longs.
+
+        \item Ajout de \verb+\lymathsep+ qui définit le séparateur d'arguments.
+    \end{itemize}
+
+% --------------- %
+
+    \item[2017-11-01] Nouvelle version mineure \verb+0.1.0-beta+ : pour les ensembles, les fonctions et la géométrie, il y a eu des changements et l'ajout de nouveaux outils.
+
+% --------------- %
+
+    \item[2017-10-21] Historique court de \verb+lymath+ ajouté au présent document.
+
+% --------------- %
+
+    \item[2017-10-18] Nouvelle version "patchée" \verb+0.0.2-beta+ : de nouveaux outils pour le calcul différentiel.
+
+% --------------- %
+
+    \item[2017-10-06] Nouvelle version "patchée" \verb+0.0.1-beta+ : de nouveaux outils pour l'arithmétique, la géométrie, le calcul intégral et le calcul différentiel.
+
+% --------------- %
+
+    \item[2017-10-02] Première version \verb+0.0.0-beta+ du package.
+\end{description}
+
+\end{document}

@@ -1,0 +1,12 @@
+word::
+    From = from
+    To   = to
+
+    ComingFrom = coming from
+    GoingTo    = going to
+
+    InList = in
+    LToR   = covered from left to right
+    LToRm  =
+    RToL   = covered from right to left
+    RToLm  =

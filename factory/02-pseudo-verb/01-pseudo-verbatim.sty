@@ -1,0 +1,30 @@
+% == PACKAGES USED == %
+
+
+\usepackage{alltt}
+
+
+% == DEFINITIONS == %
+
+\newenvironment{pseudoverb*}
+	{\small\alltt}
+	{\endalltt\normalsize}
+
+
+\newenvironment{pseudoverb}[2][1]{
+	\centering
+	\begin{tcolorbox}[
+		width        = #1\linewidth,
+		title        = #2,
+		fonttitle    = \bfseries\itshape\small,
+		coltitle     = black,
+		colbacktitle = black!10!white,
+		colback      = white,
+		breakable,
+		center title]
+	\begin{pseudoverb*}
+}{
+	\end{pseudoverb*}
+	\vspace{-1.25em}
+	\end{tcolorbox}
+}

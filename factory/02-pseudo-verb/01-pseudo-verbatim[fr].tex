@@ -1,0 +1,96 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+	\input{../config/header[fr].sty}
+	\input{../01-misc/00-common-tools.sty}
+	
+	\usepackage{01-pseudo-verbatim}
+\makeatother
+
+
+
+\begin{document}
+
+\section{Écriture \texttt{pseudo-verbatim}}
+
+En complément à l'environnement \verb+verbatim+ est proposé l'environnement \verb+pseudoverb+, pour \og pseudo verbatim \fg, qui permet d'écrire du contenu presque verbatim : ci-après, la macro \verb+\squaremacro+ définie par \verb+\newcommand\squaremacro{$x^2$}+ est interprétée mais pas la formule de mathématiques. 
+
+\begin{frame-gene}[Code \LaTeX]
+	\small
+	\begin{verbatim}
+\begin{pseudoverb*}
+  Prix1 = 14 euros 
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+
+========
+Remarque
+========
+Attention car les macros comme \squaremacro{} sont interprétées mais pas les formules
+de maths comme $x^2$ !
+\end{pseudoverb*} 
+	\end{verbatim}
+\end{frame-gene}
+
+
+La mise en forme correspondante est la suivante sans cadre autour.
+
+\begin{frame-gene}[Rendu réel\\ATTENTION ! Le cadre ne fait pas partie de la mise en forme.]
+	\begin{pseudoverb*}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+
+========
+Remarque
+========
+Attention car les macros comme \squaremacro{} sont interprétées mais pas les formules
+de maths comme $x^2$ !
+	\end{pseudoverb*} 
+\end{frame-gene}
+
+
+\medskip
+
+
+Il est en fait plus pratique de pouvoir taper quelque chose comme ci-dessous avec un cadre autour où le titre est un argument obligatoire \emph{(voir plus bas comment ne pas avoir de titre)}.
+
+\begin{pseudoverb}{Une sortie console}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{pseudoverb} 
+
+
+Le contenu précédent s'obtient via le code suivant.
+
+\begin{frame-gene}[Code \LaTeX]
+	\small
+	\begin{verbatim}
+\begin{pseudoverb}{Une sortie console}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{pseudoverb} 
+	\end{verbatim} 
+\end{frame-gene}
+
+
+Finissons avec une version bien moins large et sans titre de la sortie console ci-dessus. Le principe est de donner un titre vide via \verb+{}+, c'est obligatoire, et en utilisant l'unique argument optionnel pour indiquer la largeur relativement à celle des lignes. En utilisant \verb+\begin{pseudoverb}[.275]{}+ au lieu \verb+\begin{pseudoverb}{Une sortie console}+, le code précédent nous donne ce qui suit.
+
+
+\begin{pseudoverb}[.275]{}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{pseudoverb} 
+
+
+\paragraph{A retenir.} C'est la version étoilée de \verb+pseudoverb+ qui en fait le moins. Ce principe sera aussi suivi pour les algorithmes.
+
+\end{document}

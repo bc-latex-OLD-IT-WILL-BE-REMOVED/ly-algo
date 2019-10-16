@@ -1,0 +1,34 @@
+% == PACKAGES USED == %
+
+\usepackage[french, vlined]{algorithm2e}
+
+
+% == DEFINITIONS == %
+
+% Algo - Frames
+
+\newenvironment{algo*}
+	{\begin{algorithm}[H]}
+	{\end{algorithm}}
+
+
+\newenvironment{algo}[1][1]{
+	\centering
+	\begin{tcolorbox}[
+		colback = white,
+		width=#1\linewidth,
+		breakable
+	]
+	\begin{algo*}
+}{
+	\end{algo*}
+	\vspace{-0.5em}
+	\end{tcolorbox}
+}
+
+
+\newcommand\addalgoblank[1][]{
+   \ifthenelse{ \equal{#1}{} }
+      	{\vspace{.2em}}
+      	{\foreach \n in {0,...,#1}{\vspace{.2em}}}
+}

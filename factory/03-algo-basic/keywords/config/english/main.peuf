@@ -1,0 +1,22 @@
+block::
+    Actions = Actions
+    Begin   =
+
+input::
+    In   = Input
+    Ins  =
+    Out  = Output
+    Outs =
+
+    Data    =
+    Datas   =
+    Result  =
+    Results =
+
+    InState  = Initial State
+    OutState = Final State
+
+    PreCond   = Precondition
+    PreConds  =
+    PostCond  = Postcondition
+    PostConds =

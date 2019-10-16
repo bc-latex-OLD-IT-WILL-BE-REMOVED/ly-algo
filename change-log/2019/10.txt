@@ -1,4 +1,11 @@
 ==========
+2019-10-??
+==========
+
+**Internal changes:** a factory has been built as it is done with ``lymath``.
+
+
+==========
 2019-10-16
 ==========
 

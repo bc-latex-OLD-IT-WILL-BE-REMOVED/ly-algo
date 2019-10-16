@@ -1,0 +1,13 @@
+word::
+    And = and
+    Or  = or
+
+ifelif::
+    If     =
+    ElseIf = Else If
+    Else   =
+
+switch::
+    Switch =
+    Case   =
+    Other  =

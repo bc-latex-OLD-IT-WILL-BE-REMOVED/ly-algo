@@ -1,0 +1,21 @@
+% == PACKAGES USED == %
+
+\usepackage{amsmath}
+
+
+% == DEFINITIONS == %
+
+% Algo - Additional semantic macros - General
+
+
+\newcommand\ForRange{\@ifstar{\@ForRange@star}{\@ForRange@no@star}}
+
+\newcommand\@ForRange@star[4]{
+	\For{\text{$#1$} \KwFrom \text{$#2$} \KwTo \text{$#3$}}{#4}
+}
+
+\newcommand\@ForRange@no@star[4]{
+	\For{\text{$#1$} \KwComingFrom \text{$#2$} \KwGoingTo \text{$#3$}}{#4}
+}
+
+
