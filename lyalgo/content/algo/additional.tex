@@ -1,11 +1,6 @@
 \subsubsection{Convention en bosses de chameau}
 
-Le package \verb+algorithm2e+ utilise, et abuse
-\footnote{
-	Ce type de convention est un peu pénible à l'usage.
-},
-de la notation en bosses de chameau comme par exemple \verb+\uIf+ et \verb+\Return+ au lieu de \verb+\uif+ et \verb+\return+.
-Par cohérence, les nouvelles macros ajoutées par \verb+lyalgo+ utilisent aussi cette convention même si l'auteur aurait préféré proposer \verb+\putin+ et \verb+\forrange+ au lieu de \verb+\PutIn+ et \verb+\ForRange+ par exemple.
+\subimport*{additional/}{camelcase}
 
 
 % ----------- %
@@ -13,7 +8,7 @@ Par cohérence, les nouvelles macros ajoutées par \verb+lyalgo+ utilisent aussi
 
 \subsubsection{Affectations}
 
-Les affectations $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \verb+$3 \PutIn x$+ respectivement où sont utilisées les macros de type mathématique \verb+\Store+ et \verb+\PutIn+.
+\subimport*{additional/}{affectation}
 
 
 % ----------- %
@@ -21,154 +16,7 @@ Les affectations $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \
 
 \subsubsection{Listes}
 
-
-\begin{frame-gene}[AVERTISSEMENT -- Premier indice]
-	Pour le package, les indices des listes commencent toujours à un. 
-\end{frame-gene}
-
-
-\paragraph{Opérations de base.}\phantom{XX}\smallskip
-
-Voici les premières macros pour travailler avec des listes c'est à dire des tableaux de taille modifiable.
-
-\begin{enumerate}
-	\item \textit{Liste vide.}
-
-		  \verb+\EmptyList+ imprime une liste vide $\EmptyList$.
-
-
-	\item \textit{Liste en compréhension.}
-
-		  \verb+\List{4 ; 7 ; 7 ; -1}+ produit $\List{4 ; 7 ; 7 ; -1}$.
-
-
-	\item \textit{Le $k$\ieme{} élément d'une liste.}
-
-		  \verb+\ListElt{L}{1}+ produit $\ListElt{L}{1}$.
-
-
-	\item \textit{La sous-liste des éléments jusqu'à celui à la position $k$.}
-
-		  \verb+\ListUntil{L}{2}+ produit $\ListUntil{L}{2}$.
-
-
-	\item \textit{La sous-liste des éléments à partir de celui à la position $k$.}
-
-		  \verb+\ListFrom{L}{2}+ produit $\ListFrom{L}{2}$.
-
-
-	\item \textit{Concaténer deux listes.}
-
-		  \verb+\AddList+ est l'opérateur binaire $\AddList$ qui permet d'indiquer la concaténation de deux listes.
-
-
-	\item \textit{Taille ou longueur d'une liste.}
-
-		  La macro \verb+\Len(L)+ produit $\Len(L)$.
-\end{enumerate}
-
-
-
-\paragraph{Modifier une liste -- Versions textuelles.}\phantom{XX}\smallskip
-
-\begin{enumerate}
-	\item \textit{Ajout d'un nouvel élément à droite.}
-
-	      \verb+\Append{L}{5}+ produit \myquote{\Append{L}{5}}
-	      \footnote{
-		       Le verbe anglais \myquote{append} signifie \myquote{ajouter}.
-		  }.
-
-
-	\item \textit{Ajout d'un nouvel élément à gauche.}
-
-	      \verb+\Prepend{L}{5}+ produit \myquote{\Prepend{L}{5}}
-	      \footnote{
-		       Le verbe anglais \myquote{prepend} signifie \myquote{préfixer}.
-		  }.
-
-
-	\item \textit{Extraction d'un élément.}
-
-	      \verb+\PopAt{L}{3}+ produit \myquote{\PopAt{L}{3}}.
-\end{enumerate}
-
-
-
-\paragraph{Modifier une liste -- Versions POO}
-\footnote{
-	\myquote{POO} est l'acronyme de \myquote{Programmation Orientée Objet}.
-}\textbf{.}\phantom{XX}\smallskip
-
-Les versions étoilées des macros précédentes fournissent une autre mise en forme à la fois concise et aisée à comprendre
-\footnote{
-	L'opérateur point \POOpoint{} est défini dans la macro \texttt{\textbackslash{}POOpoint}.
-}.
-
-\begin{enumerate}
-	\item \textit{Ajout d'un nouvel élément à droite.}
-
-	      \verb+\Append*{L}{5}+ fournit \Append*{L}{5}.
-
-
-	\item \textit{Ajout d'un nouvel élément à gauche.}
-
-	      \verb+\Prepend*{L}{5}+ fournit \Prepend*{L}{5}.
-
-
-	\item \textit{Extraction d'un élément.}
-
-	      \verb+\PopAt*{L}{3}+ fournit \PopAt*{L}{3}.
-\end{enumerate}
-
-
-
-\paragraph{Modifier une liste -- Versions symboliques.}\phantom{XX}\smallskip
-
-Des versions doublement étoilées permettent d'obtenir des notations symboliques qui sont très efficaces lorsque l'on rédige les algorithmes à la main
-\footnote{
-	L'opérateur $\AddList$ est défini dans la macro \texttt{\textbackslash{}AddList}.
-}.
-
-\begin{enumerate}
-	\item \textit{Ajout d'un nouvel élément à droite.}
-
-	      \verb+\Append**{L}{5}+ donne \Append**{L}{5}.
-
-
-	\item \textit{Ajout d'un nouvel élément à gauche.}
-
-	      \verb+\Prepend**{L}{5}+ donne \Prepend**{L}{5}.
-
-
-	\item \textit{Extraction d'un élément -- Version peuso-automatique.}
-
-	      \verb+\PopAt**{L}{3}+ donne \PopAt**{L}{3} avec un calcul fait automatiquement par la macro.
-	      Bien entendu \verb+\PopAt**{L}{1}+ produit \PopAt**{L}{1} au lieu de $L \Store \ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à un.
-	      
-	      Il est autorisé de taper \verb+\PopAt**{L}{k}+ pour obtenir \PopAt**{L}{k}. Par contre, \verb+\PopAt**{L}{k-1}+ aboutit au truc très moche \PopAt**{L}{k-1}. 
-	      Les items suivants expliquent comment gérer à la main les cas problématiques via des macros plus généralistes.
-
-	      \smallskip
-
-	      \emph{\textbf{Attention !} On notera que contrairement aux versions \emph{\texttt{\textbackslash{}PopAt}} et \emph{\texttt{\textbackslash{}PopAt*}}, l'écriture symbolique agit juste sur la liste. Si besoin, avec \emph{\texttt{\textbackslash{}PopAt**}} il faudra donc indiquer au préalable où stocker l'élément extrait via $\dots \Store \ListElt{L}{k}$.}
-
-
-	\item \textit{Extraction d'éléments consécutifs.}
-
-	      Lorsque les calculs automatiques ne sont pas faisables, on devra tout indiquer comme dans \verb@\KeepLR{L}{k - 2}{k + 1}@ afin d'avoir \KeepLR{L}{k - 2}{k + 1} qui est parfait
-	      \footnote{
-	      	Le nom de la macro vient de \myquote{keep left and right} soit \myquote{garder à droite et à gauche}.
-		  }.
-
-
-	\item \textit{Extractions juste à droite, ou juste à gauche.}
-
-	      \verb+\KeepL{L}{k}+ permet d'afficher \KeepL{L}{k} et \verb+\KeepR{L}{k}+ permet quant à lui d'écrire \KeepR{L}{k}
-	      \footnote{
-	      	Les noms des macros viennent de \myquote{keep left} et \myquote{keep right} soit \myquote{garder à gauche} et \myquote{garder à droite}.
-		  }.
-\end{enumerate}
+\subimport*{additional/}{list}
 
 
 % ----------- %
@@ -176,40 +24,4 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 
 \subsubsection{Boucles}
 
-Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*{a}{0}{12}{...}+ pour obtenir ce qui suit.
-
-\begin{algo}[.55]
-    \ForRange*{a}{0}{12}{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
-
-
-\medskip
-
-
-Pour une version sans ambiguïté possible, on utilisera \verb+\ForRange{a}{0}{12}{...}+ afin d'obtenir la rédaction plus longue suivante.
-
-\begin{algo}[.55]
-    \ForRange{a}{0}{12}{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
-
-
-\medskip
-
-
-Pour en finir avec les boucles, il est facile d'obtenir l'écriture plus symbolique ci-dessous via \verb+\For+ qui est proposé par le package \verb+algorithm2e+ : il suffit de taper \verb+\For{$a \in 0\,..\,12$}{...}+.
-
-\begin{algo}[.55]
-    \For{$a \in 0\,..\,12$}{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
+\subimport*{additional/}{loop}

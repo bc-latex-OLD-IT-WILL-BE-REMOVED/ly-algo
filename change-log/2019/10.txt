@@ -1,4 +1,15 @@
 ==========
+2019-10-16
+==========
+
+**New keywords for algorithms.**
+
+    1) ``\InState`` and ``\OutState`` allow to work with realworld interactions with algorithms.
+
+    2) ``\PreCond`` and ``\PostCond`` is for formal proof of algorithms.
+
+
+==========
 2019-10-08
 ==========
 
