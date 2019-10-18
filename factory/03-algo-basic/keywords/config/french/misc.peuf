@@ -5,7 +5,7 @@ word::
     ComingFrom = allant de
     GoingTo    = jusqu'à
 
-    InList = dans
+    InThis = dans
     LToR   = parcourue de gauche à droite
     LToRm  = parcouru de gauche à droite
     RToL   = parcourue de droite à gauche

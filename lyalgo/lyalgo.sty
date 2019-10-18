@@ -2,7 +2,7 @@
 % -- PACKAGES REQUIRED -- %
 % ----------------------- %
 
-\RequirePackage[french,vlined]{algorithm2e}
+\RequirePackage[vlined,french]{algorithm2e}
 \RequirePackage{alltt}
 \RequirePackage{amsmath}
 \RequirePackage{tcolorbox}
@@ -127,6 +127,17 @@
 % ---------- %
 % -- LIST -- %
 % ---------- %
+
+% Algo - Loops with lists
+
+\newcommand\ForInList[3]{
+	\For{$#1$ \InThis $#2$ \LToR}{#3}
+}
+
+\newcommand\ForInListRev[3]{
+	\For{$#1$ \InThis $#2$ \RToL}{#3}
+}
+
 
 % Algo - Additional semantic macros - Lists
 

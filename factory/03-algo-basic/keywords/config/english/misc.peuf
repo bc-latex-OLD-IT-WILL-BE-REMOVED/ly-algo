@@ -5,7 +5,7 @@ word::
     ComingFrom = coming from
     GoingTo    = going to
 
-    InList = in
+    InThis = in
     LToR   = covered from left to right
     LToRm  =
     RToL   = covered from right to left

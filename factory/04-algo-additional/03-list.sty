@@ -1,10 +1,21 @@
 % == PACKAGES USED == %
 
 \usepackage{xint}
-
+\usepackage{amsmath}
 
 
 % == DEFINITIONS == %
+
+% Algo - Loops with lists
+
+\newcommand\ForInList[3]{
+	\For{$#1$ \InThis $#2$ \LToR}{#3}
+}
+
+\newcommand\ForInListRev[3]{
+	\For{$#1$ \InThis $#2$ \RToL}{#3}
+}
+
 
 % Algo - Additional semantic macros - Lists
 

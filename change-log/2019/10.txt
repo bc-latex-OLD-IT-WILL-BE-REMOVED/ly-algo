@@ -2,7 +2,13 @@
 2019-10-18
 ==========
 
-**Internal changes:** a factory has been built as it is done with ``lymath``.
+**Textual versions of main block instructions:** this is to facilitate the writing of ¨docs.
+
+
+**New keywords for algorithms:** the macros ``\ForInList`` and ``\ForInListRev`` have been added to write loops over lists.
+
+
+**Internal changes:** a factory has been built to work like with ``lymath``.
 
 
 ==========

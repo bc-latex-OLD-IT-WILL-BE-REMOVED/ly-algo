@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+from collections import defaultdict
 import re
 
 from mistool.os_use import PPath
@@ -16,7 +17,8 @@ KEYWORDS_FINAL_DIR = THIS_DIR.parent.parent / "lyalgo" / "keywords"
 KEYWORDS_DIR       = THIS_DIR / "keywords"
 LANG_PEUF_DIR      = KEYWORDS_DIR / "config"
 
-DECO = " "*4
+DECO   = " "*4
+DECO_2 = DECO*2
 
 ALL_LANGS = [
     ppath.name
@@ -28,6 +30,8 @@ DEFAULT_LANG = "english"
 
 ALL_MACROS = set()
 
+ALL_TRANS = defaultdict(dict)
+
 
 # --------------- #
 # -- CONSTANTS -- #
@@ -35,21 +39,21 @@ ALL_MACROS = set()
 
 LATEX_N_OUPUT_TEMP = r"""
 \begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
+    \centering
+    \begin{frame-gene}[Code \LaTeX]
 \begin{verbatim}
 \begin{algo}
 <latexcode>
 \end{algo}
 \end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
+    \end{frame-gene}
+    \vfill\null
+    \columnbreak
+    \textit{Mise en forme correspondante.}
 \begin{algo}
 <latexcode>
 \end{algo}
-\vfill\null
+    \vfill\null
 \end{multicols}
 """
 
@@ -184,6 +188,8 @@ def texify(kind, trans):
 
 
 def build_tex_trans(lang):
+    global ALL_TRANS
+
     tex_trans = []
 
     for peufpath in (
@@ -197,28 +203,88 @@ def build_tex_trans(lang):
                 trans      = normalize(trans)
                 tex_trans += texify(kind, trans)
 
+                ALL_TRANS[lang].update(trans)
+
     return tex_trans
+
+
+
+
 
 
 # ------------------------- #
 # -- LANG SPECIFICATIONS -- #
 # ------------------------- #
 
-for onelang in ALL_LANGS:
-    tex_trans = build_tex_trans(onelang)
-    tex_trans = [
-        l if l.startswith("%") else DECO + l
-        for l in tex_trans[1:]
-    ]
-    tex_trans = "\n".join(tex_trans)
+TEX_TRANS = {}
 
+for lang in ALL_LANGS:
+    TEX_TRANS[lang] = build_tex_trans(lang)
+    TEX_TRANS[lang] = [
+        l if l.startswith("%") else DECO + l
+        for l in TEX_TRANS[lang][1:]
+    ]
+    TEX_TRANS[lang] = "\n".join(TEX_TRANS[lang])
+
+
+# -------------------- #
+# -- TEXTUAL MACROS -- #
+# -------------------- #
+
+stytxtmacros = defaultdict(list)
+latexmacros  = defaultdict(list)
+
+for lang in ALL_TRANS:
+    for prefix in ["TT", "AL"]:
+        for control, extras in {
+            "If"    : ["Else"],
+            "For"   : [],
+            "While" : [],
+            "Repeat": ["Until"],
+            "Switch": ["Case"],
+        }.items():
+            macroname = f"{prefix}{control.lower()}"
+
+            if lang == "english":
+                latexmacros[prefix].append(macroname)
+
+            macrotxt  = [ ALL_TRANS[lang][control] ]
+            macrotxt += [
+                ALL_TRANS[lang][e]
+                for e in extras
+            ]
+
+            macrotxt = "-".join(macrotxt)
+
+            if prefix == "TT":
+                formatter = "texttt"
+                macrotxt = macrotxt.upper()
+
+            else:
+                formatter = "textbf"
+
+            stytxtmacros[lang].append(
+                f"\\newcommand\\{macroname}{{\\{formatter}{{{macrotxt}}}}}"
+            )
+
+    stytxtmacros[lang] = DECO + "\n    ".join(stytxtmacros[lang])
+
+
+# -------------------- #
+# -- BUILD LANG STY -- #
+# -------------------- #
+
+for lang, tex_trans in TEX_TRANS.items():
     with open(
-        file     = KEYWORDS_DIR / f"{onelang}.sty",
+        file     = KEYWORDS_DIR / f"{lang}.sty",
         mode     = 'w',
         encoding = 'utf-8'
     ) as texlang:
         texlang.write(f"""
-\\newcommand\\uselang{onelang}{{
+\\newcommand\\uselang{lang}{{
+% Textual versions
+{stytxtmacros[lang]}
+
 {tex_trans}
 }}
         """.lstrip())
@@ -268,6 +334,51 @@ with open(
     encoding = 'utf-8'
 ) as docfile:
     lang_sty = docfile.read()
+
+
+# ------------------------------------ #
+# -- TEXT USEFUL MACROS - STY + DOC -- #
+# ------------------------------------ #
+
+text_start, _, text_end = between(
+    text = template_tex,
+    seps = [
+        "% == Main tools - START == %\n",
+        "\n% == Main tools - END == %"
+    ],
+    keepseps = True
+)
+
+
+texcode = []
+
+for prefix, kind in [
+    ("TT", "True Type"),
+    ("AL", "algorithme"),
+]:
+    texcode += [
+        f"""
+\\begin{{center}}
+	Liste des commandes de type \myquote{{{kind}}}.
+\\end{{center}}
+
+\\begin{{enumerate}}
+        """.rstrip()
+    ]
+
+    for macroname in latexmacros[prefix]:
+        texcode.append(
+            f"{DECO}\\item \\verb+\\{macroname}+ "
+            f"donne \\{macroname}."
+        )
+
+    texcode.append(
+        "\\end{enumerate}"
+    )
+
+texcode = "\n".join(texcode)
+
+template_tex = text_start + texcode + text_end
 
 
 # ------------------ #
@@ -430,7 +541,6 @@ f"""\\subsubsection{{{peuftitles[kind]}}}
     )
 
 texdoc = "\n".join(texdoc)
-
 
 template_tex = text_start + texdoc + text_end
 

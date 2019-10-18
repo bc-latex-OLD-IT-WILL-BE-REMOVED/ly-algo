@@ -3,10 +3,16 @@
 \makeatletter
 	\input{../config/header[fr].sty}
 	\input{../01-misc/00-common-tools.sty}
+	\usepackage{../03-algo-basic/02-frame}
 	\usepackage{02-affectation}
 	
 	\usepackage{03-list}
 \makeatother
+
+
+\newcommand\InThis{dans}
+\newcommand\LToR{parcourue de gauche à droite}
+\newcommand\RToL{parcourue de droite à gauche}
 
 
 \begin{document}
@@ -63,7 +69,7 @@ Voici les premières macros pour travailler avec des listes c'est à dire des ta
 
 
 
-\subsubsection{Modifier une liste -- Versions textuelles.}
+\subsubsection{Modifier une liste -- Versions textuelles}
 
 \begin{enumerate}
 	\item \textit{Ajout d'un nouvel élément à droite.}
@@ -119,7 +125,7 @@ avec une syntaxe de type POO
 
 
 
-\subsubsection{Modifier une liste -- Versions symboliques.}
+\subsubsection{Modifier une liste -- Versions symboliques}
 
 Des versions doublement étoilées permettent d'obtenir des notations symboliques qui sont très efficaces lorsque l'on rédige les algorithmes à la main
 \footnote{
@@ -166,6 +172,58 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 	      	Les noms des macros viennent de \myquote{keep left} et \myquote{keep right} soit \myquote{garder à gauche} et \myquote{garder à droite}.
 		  }.
 \end{enumerate}
+
+
+
+\subsubsection{Parcourir une liste}
+
+Les macros \verb+\ForInList+ et \verb+\ForInListRev+ facilitent la rédaction de boucle sur une liste parcourue de façon déterministe.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \ForInList{e}{L}{
+    Instruction 1
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \ForInList{e}{L}{
+    Instruction 1
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \ForInListRev{e}{L}{
+    Instruction 1
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \ForInListRev{e}{L}{
+    Instruction 1
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
 
 \end{document}
 
