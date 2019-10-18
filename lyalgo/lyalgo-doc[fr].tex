@@ -1,0 +1,1121 @@
+%\documentclass[12pt,a4paper]{scrartcl}
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter % Technical doc - START
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{dsfont}
+
+\usepackage[french]{babel,varioref}
+
+\usepackage[top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{enumitem}
+
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{ifplatform}
+\usepackage{import}
+
+\usepackage{multicol}
+
+\usepackage{tcolorbox}
+
+\usepackage{amsthm}
+
+\usepackage{ifplatform}
+
+\usepackage{cbdevtool}
+\usepackage{lymath}
+
+% MISC
+
+\setlength{\parindent}{0cm}
+\setlist{noitemsep}
+
+
+\theoremstyle{definition}
+\newtheorem*{remark}{Remarque}
+
+
+\usepackage[raggedright]{titlesec}
+
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
+\setlength{\parindent}{0cm}
+
+\newenvironment{frame-gene}[1][]{
+	\begin{tcolorbox}[
+		title        = #1, 
+		colbacktitle = black!10!white, 
+		colback      = white, 
+		coltitle     = black,
+		fonttitle    = \bfseries\itshape\small, 
+		breakable,
+		center title]
+}{
+	\end{tcolorbox}
+}
+
+\newcommand\myquote[1]{{\itshape \og #1 \fg}}
+
+\newcommand\squaremacro{$x^2$}
+
+\makeatother % Technical doc - END
+
+
+\usepackage{lyalgo}
+
+
+\begin{document}
+
+\renewcommand\labelitemi{\raisebox{0.125em}{\tiny\textbullet}}
+\renewcommand{\labelitemii}{---}
+
+\title{%
+	Le package \texttt{lyalgo}:
+	\\
+	taper facilement de jolis algorithmes
+	\\
+	{
+		\footnotesize Code source disponible
+		sur \url{https://github.com/bc-latex/ly-algo}.%
+	}
+	\\
+	{
+		\footnotesize Version \texttt{0.0.0-beta}
+		développée et testée sur \macosxname{}.%
+	}
+}
+
+\author{Christophe BAL}
+\date{2019-10-16}
+
+\maketitle
+
+
+\vspace{2em}
+
+\hrule
+
+\tableofcontents
+
+\vspace{1.5em}
+
+\hrule
+
+\newpage
+
+
+
+\section{Introduction}
+
+Le but de ce package est d'avoir facilement des algorithmes
+\footnote{
+	Le gros du travail est fait par \texttt{algorithm2e}.
+}
+ainsi que des contenus \verb+verbatim+ un peu flexibles
+\footnote{
+	Tout, ou presque, est géré par \texttt{alltt}.
+}.
+Les algorithmes mis en forme ne sont pas des flottants, par choix, et ils utilisent une mise en forme proche de la syntaxe \verb+Python+.
+
+
+
+
+\section{\texttt{lymath}, un package qui vous veut du bien}
+
+Le package \verb+lymath+ est un bon complément à \verb+lyalgo+ : voir à l'adresse \url{https://github.com/bc-latex/ly-math}. 
+Il est utilisé par cette documentation pour simplifier la saisie des formules.
+
+
+
+
+\section{Écriture \texttt{pseudo-verbatim}}
+
+En complément à l'environnement \verb+verbatim+ est proposé l'environnement \verb+pseudoverb+, pour \og pseudo verbatim \fg, qui permet d'écrire du contenu presque verbatim : ci-après, la macro \verb+\squaremacro+ définie par \verb+\newcommand\squaremacro{$x^2$}+ est interprétée mais pas la formule mathématique. 
+
+\begin{frame-gene}[Code \LaTeX]
+	\small
+	\begin{verbatim}
+\begin{pseudoverb*}
+  Prix1 = 14 euros 
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+
+========
+Remarque
+========
+Attention car les macros comme \squaremacro{} sont interprétées mais pas les formules
+de maths comme $x^2$ !
+\end{pseudoverb*} 
+	\end{verbatim}
+\end{frame-gene}
+
+
+La mise en forme correspondante est la suivante sans cadre autour.
+
+\begin{frame-gene}[Rendu réel\\ATTENTION ! Le cadre ne fait pas partie de la mise en forme.]
+	\begin{pseudoverb*}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+
+========
+Remarque
+========
+Attention car les macros comme \squaremacro{} sont interprétées mais pas les formules
+de maths comme $x^2$ !
+	\end{pseudoverb*} 
+\end{frame-gene}
+
+
+\medskip
+
+
+Il est en fait plus pratique de pouvoir taper quelque chose comme ci-dessous avec un cadre autour où le titre est un argument obligatoire \emph{(voir plus bas comment ne pas avoir de titre)}.
+
+\begin{pseudoverb}{Une sortie console}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{pseudoverb} 
+
+
+Le contenu précédent s'obtient via le code suivant.
+
+\begin{frame-gene}[Code \LaTeX]
+	\small
+	\begin{verbatim}
+\begin{pseudoverb}{Une sortie console}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{pseudoverb} 
+	\end{verbatim} 
+\end{frame-gene}
+
+
+Finissons avec une version bien moins large et sans titre de la sortie console ci-dessus. Le principe est de donner un titre vide via \verb+{}+, \textbf{c'est obligatoire}, et en utilisant l'unique argument optionnel pour indiquer la largeur relativement à celle des lignes.
+En utilisant juste \verb+\begin{pseudoverb}[.275]{}+ au lieu de \verb+\begin{pseudoverb}{Une sortie console}+, le code précédent nous donne ce qui suit.
+
+
+\begin{pseudoverb}[.275]{}
+  Prix1 = 14 euros
++ Prix2 = 30 euros
+-------------------
+  Total = 44 euros
+\end{pseudoverb} 
+
+
+\bigskip
+
+
+\begin{frame-gene}[À RETENIR]
+	\centering\itshape
+	C'est la version étoilée de \verb+pseudoverb+ qui en fait le moins.
+	
+	Ce principe sera aussi suivi pour les algorithmes. 
+\end{frame-gene}
+
+
+
+
+\section{Algorithmes en langage naturel}
+
+\subsection{Comment taper les algorithmes}
+
+Le package \verb+algorithm2e+ permet de taper des algorithmes avec une syntaxe simple. La mise en forme par défaut de \verb+algorithm2e+ utilise des flottants, chose qui peut poser des problèmes pour de longs algorithmes ou, plus gênant, pour des algorithmes en bas de page. Dans \verb+lyalgo+, il a été fait le choix de ne pas utiliser de flottants, un choix lié à l'utilisation faite de \verb+lyalgo+ par l'auteur pour rédiger des cours de niveau lycée. 
+
+
+\medskip
+
+Dans la section suivante, nous verrons comment encadrer les algorithmes. Pour l'instant, voyons juste comment taper l'algorithme suivant où tous les mots clés sont en français. Indiquons au passage l'affichage du titre de l'algorithme en haut et non en bas comme cela est proposé par défaut.
+
+
+\bigskip
+
+
+\begin{algo*}
+    \caption{Suite de Collatz $(u_k)$ -- Conjecture de Syracuse}
+
+    \Data{$n \in \NN$}
+    \Result{le premier indice $i \in \ZintervalC{0}{10^5}$ tel que $u_i = 1$ ou $(-1)$ en cas d'échec}
+
+    \addalgoblank    % Pour aérer un peu la mise en forme.
+
+    \Actions{
+        $i, imax \Store 0, 10^5$
+        \\
+        $u \Store n$
+        \\
+        $continuer \Store \top$
+        \\
+        \While{$continuer = \top \And i \leq imax$}{
+            \uIf{$u = 1$}{
+                \Comment{C'est gagné !}
+                $continuer \Store \bot$
+            } \Else {
+                \Comment{Calcul du terme suivant}
+                \uIf{$u \equiv 0 \,\, [2]$}{
+                    $u \Store u / 2$
+                    \Comment*{Quotient de la division euclidienne.}
+                } \Else {
+                    $u \Store 3u + 1$
+                }
+                $i \Store i + 1$
+            }
+        }
+        \If{$i > imax$}{
+            $i \Store (-1)$
+        }
+        \Return{$i$}
+    }
+\end{algo*}
+
+
+\bigskip
+
+
+La rédaction d'un tel algorithme est facile car il suffit de taper le code suivant proche de ce que pourrait proposer un langage classique de programmation. Le code utilise certaines des macros additionnelles proposées par \verb+lyalgo+ \emph{(voir la section \ref{algo-extra})} ainsi que la macro \verb+\ZintervalC+ du package \verb+lymath+. Nous donnons juste après le squelette de la syntaxe propre à \verb+algorithm2e+.
+
+
+\begin{frame-gene}[Code \LaTeX]
+    \small
+\begin{verbatim}
+\begin{algo*}
+    \caption{Suite de Collatz $(u_k)$ -- Conjecture de Syracuse}
+
+    \Data{$n \in \NN$}
+    \Result{le premier indice $i \in \ZintervalC{0}{10^5}$ tel que $u_i = 1$ ou $(-1)$
+            en cas d'échec}
+
+    \addalgoblank    % Pour aérer un peu la mise en forme.
+
+    \Actions{
+        $i, imax \Store 0, 10^5$
+        \\
+        $u \Store n$
+        \\
+        $continuer \Store \top$
+        \\
+        \While{$continuer = \top$ \And $i \leq imax$}{
+            \uIf{$u = 1$}{
+                \Comment{C'est gagné !}
+                $continuer \Store \bot$
+            } \Else {
+                \Comment{Calcul du terme suivant}
+                \uIf{$u \equiv 0 \,\, [2]$}{
+                    $u \Store u / 2$
+                    \Comment*{Quotient de la division euclidienne.}
+                } \Else {
+                    $u \Store 3u + 1$
+                }
+                $i \Store i + 1$
+            }
+        }
+        \If{$i > imax$}{
+            $i \Store (-1)$
+        }
+        \Return{$i$}
+    }
+\end{algo*}
+\end{verbatim}
+\end{frame-gene}
+
+
+Le squelette du code précédent est le suivant. 
+
+
+\begin{frame-gene}[Squelette du code \texttt{algorithm2e}]
+    \small
+\begin{verbatim}
+\caption{...}
+
+\Data{...}
+\Result{...}
+
+\Actions{
+    ...
+    \While{...}{
+        \uIf{...}{
+            ...
+        } \Else {
+            ...
+            \uIf{...}{
+                ...
+            } \Else {
+                ...
+            }
+            ...
+        }
+    }
+    \If{...}{
+        ...
+    }
+    \Return{...}
+}
+\end{verbatim}
+\end{frame-gene}
+
+
+
+
+%\section{Algorithmes en langage naturel}
+
+\subsection{Numérotation des algorithmes}
+
+
+Avant de continuer les présentations, il faut savoir que les algorithmes sont numérotés globalement à l'ensemble du document. C'est plus simple et efficace pour une lecture sur papier.
+
+
+
+
+%\section{Algorithmes en language naturel}
+
+\subsection{Des algorithmes encadrés}
+
+La version non étoilée de l'environnement \verb+algo+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes.
+
+\begin{algo}
+    \caption{Un truc bidon}
+
+    \Data{$n \in \NNs$}
+    \addalgoblank
+    \Result{$\dsum_{i = 1}^{n} i$}
+
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo} 
+
+
+\medskip
+
+
+Le code utilisé pour obtenir le rendu précédent est le suivant où sont utilisées certaines des macros additionnelles proposées par \verb+lyalgo+ \emph{(voir la section \ref{algo-extra})} où les macros \verb+\NNs+ et \verb+\dsum+ viennent du package \verb+lymath+.
+
+\begin{frame-gene}[Code \LaTeX]
+    \small
+    \begin{verbatim}
+\begin{algo}
+    \caption{Un truc bidon}
+    \Data{$n \in \NNs$}
+    \addalgoblank
+    \Result{$\dsum_{i = 1}^{n} i$}
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo}
+	\end{verbatim}
+\end{frame-gene}
+
+
+\medskip
+
+
+L'environnement \verb+algo+ propose un argument optionnel pour indiquer la largeur relativement à celle des lignes.
+Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivante bien moins large de l'algorithme précédent.
+
+\begin{algo}[.45]
+    \caption{Un truc bidon}
+
+    \Data{$n \in \NNs$}
+    \addalgoblank
+    \Result{$\dsum_{i = 1}^{n} i$}
+
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange*{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo} 
+
+
+\medskip
+
+
+On peut utiliser un environnement \verb+multicols+ pour un effet sympa.
+
+\begin{multicols}{2}    
+\begin{algo}
+    \caption{Un truc bidon}
+
+    \Data{$n \in \NNs$}
+    \addalgoblank
+    \Result{$\dsum_{i = 1}^{n} i$}
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange*{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo}
+
+
+\begin{algo}
+    \caption{Un truc bidon}
+
+    \Data{$n \in \NNs$}
+    \addalgoblank
+    \Result{$\dsum_{i = 1}^{n} i$}
+    \Actions{
+        $s \Store 0$
+        \\
+        \ForRange{$i$}{$1$}{$n$}{
+            $s \Store s + i$
+        }
+        \Return{$s$}
+    }
+\end{algo}
+\end{multicols}
+
+
+
+
+%\section{Algorithmes en langage naturel}
+
+\subsection{Un titre minimaliste}
+
+Dans l'exemple ci-dessous on voit un problème à gauche où l'on a utilisé \verb+\caption{}+ avec un argument vide pour la macro \verb+\caption+.
+Si vous avec besoin juste de numéroter votre algorithme comme ci-dessous à droite, utiliser à la place \verb+\algovoidcaption+.
+
+
+\begin{multicols}{2}    
+\begin{algo}
+    \caption{}
+
+    \Datas{Un titre vide ci-dessus !}
+    \Result{\dots}
+    \Actions{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+
+\begin{algo}
+    \algovoidcaption
+
+    \Datas{\dots}
+    \Result{\dots}
+    \Actions{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+\end{multicols}
+
+
+
+
+%\section{Algorithmes en langage naturel}
+
+\subsection{Un premier ensemble de macros additionnelles ou francisées}
+
+
+\begin{frame-gene}[À SAVOIR -- Le préfixe \texttt{u}]
+	\centering\itshape
+	Certains macros peuvent être préfixées par un \verb+u+ pour \myquote{unclosed} qui signifie \myquote{non fermé}.
+	
+	Ceci sert à ne pas refermer un bloc via un trait horizontal.
+\end{frame-gene}
+
+
+% == All extra words - START == %
+\subsubsection{Entrée / Sortie}
+
+Nous donnons ci-dessous les versions au singulier de tous les mots disponibles de type \myquote{entrée / sortie}.
+Excepté pour \verb+\InState+ et \verb+\OutState+, toutes les autres macros ont une version pour le pluriel obtenu en rajoutant un \verb+s+ à la fin du nom de la macro.
+Par exemple, le pluriel de \verb+\In+ s'obtient via \verb+\Ins+.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \In{donnée 1}
+  \Out{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \In{donnée 1}
+  \Out{donnée 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Data{donnée 1}
+  \Result{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Data{donnée 1}
+  \Result{donnée 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \InState{donnée 1}
+  \OutState{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \InState{donnée 1}
+  \OutState{donnée 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \PreCond{donnée 1}
+  \PostCond{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \PreCond{donnée 1}
+  \PostCond{donnée 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Bloc principal}
+
+Voici comment indiquer le bloc principal d'instructions avec deux textes au choix pour le moment.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Actions{Instruction 1}
+  \Begin{Instruction 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Actions{Instruction 1}
+  \Begin{Instruction 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Boucles \texttt{POUR} et \texttt{TANT QUE}}
+
+Voici les boucles de type \verb+POUR+ et \verb+TANT QUE+ proposées par le package.
+
+\newpage
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \For{$i \in uneliste$}{
+    Instruction 1
+  }
+  \ForAll{$i \in uneliste$}{
+    Instruction 2
+  }
+  \ForEach{$i \in uneliste$}{
+    Instruction 3
+  }
+  \While{$i \in uneliste$}{
+    Instruction 4
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \For{$i \in uneliste$}{
+    Instruction 1
+  }
+  \ForAll{$i \in uneliste$}{
+    Instruction 2
+  }
+  \ForEach{$i \in uneliste$}{
+    Instruction 3
+  }
+  \While{$i \in uneliste$}{
+    Instruction 4
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Boucles \texttt{RÉPÉTER JUSQU'À}}
+
+Voici comment rédiger une boucle du type \verb+RÉPÉTER JUSQU'À+.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Repeat{$i \in uneliste$}{
+    Instruction 
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Repeat{$i \in uneliste$}{
+    Instruction 
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Disjonction de cas \texttt{SELON QUE}}
+
+La syntaxe pour les blocs conditionnels du type \verb+SELON QUE+ ne pose pas de difficultés de rédaction.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Switch{$i$}{
+    \uCase{$i = 0$}{Instruction 1}
+    \uCase{$i = 1$}{Instruction 2}
+    \Case{$i = 2$}{Instruction 3}
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Switch{$i$}{
+    \uCase{$i = 0$}{Instruction 1}
+    \uCase{$i = 1$}{Instruction 2}
+    \Case{$i = 2$}{Instruction 3}
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Tests conditionnelles \texttt{SI / SINON SI / SINON}}
+
+Les blocs conditionnels \verb+SI / SINON SI / SINON+ se rédigent très naturellement.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \uIf{$i = 0$}{
+    Instruction 1
+  }
+  \uElseIf{$i = 1$}{
+    Instruction 2
+  }
+  \Else{
+    Instruction 3
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \uIf{$i = 0$}{
+    Instruction 1
+  }
+  \uElseIf{$i = 1$}{
+    Instruction 2
+  }
+  \Else{
+    Instruction 3
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Diverses commandes}
+
+Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions maculines des textes proposés.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  A \And B \Or C
+  \\ \Return RÉSULTAT
+  \\ \Ask "Quelque chose"
+  \\ \Print "Quelque chose"
+  \\ $k$ \From $1$ \To $n$
+  \\ $k$ \ComingFrom $1$ \GoingTo $n$
+  \\ $e$ \InList $L$
+  \\ $L$ \LToR
+  \\ $L$ \LToRm
+  \\ $L$ \RToL
+  \\ $L$ \RToLm
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  A \And B \Or C
+  \\ \Return RÉSULTAT
+  \\ \Ask "Quelque chose"
+  \\ \Print "Quelque chose"
+  \\ $k$ \From $1$ \To $n$
+  \\ $k$ \ComingFrom $1$ \GoingTo $n$
+  \\ $e$ \InList $L$
+  \\ $L$ \LToR
+  \\ $L$ \LToRm
+  \\ $L$ \RToL
+  \\ $L$ \RToLm
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+% == All extra words - END == %
+
+
+
+
+\section{Des outils additionnels pour les algorithmes} \label{algo-extra}
+
+\subsection{Convention en bosses de chameau}
+
+Le package \verb+algorithm2e+ utilise, et abuse
+\footnote{
+	Ce type de convention est un peu pénible à l'usage.
+},
+de la notation en bosses de chameau comme par exemple avec \verb+\uIf+ et \verb+\Return+ au lieu de \verb+\uif+ et \verb+\return+.
+Par souci de cohérence, les nouvelles macros ajoutées par \verb+lyalgo+ en lien avec les algorithmes utilisent aussi cette convention même si l'auteur aurait préféré proposer \verb+\putin+ et \verb+\forrange+ à la place de \verb+\PutIn+ et \verb+\ForRange+ par exemple.
+
+
+
+
+%\section{Des outils pour les algorithmes} \label{algo-extra}
+
+\subsection{Affectations}
+
+Les affectations $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \verb+$3 \PutIn x$+ respectivement où chacune des macros \verb+\Store+ et \verb+\PutIn+ est de type mathématique.
+
+
+
+
+%\section{Des outils pour les algorithmes} \label{algo-extra}
+
+\subsection{Listes}
+
+\begin{frame-gene}[AVERTISSEMENT -- Premier indice]
+	\centering\itshape
+	Pour le package, les indices des listes commencent toujours à un. 
+\end{frame-gene}
+
+
+\subsubsection{Opérations de base.}
+
+Voici les premières macros pour travailler avec des listes c'est à dire des tableaux de taille modifiable.
+
+\begin{enumerate}
+	\item \textit{Liste vide.}
+
+		  \verb+\EmptyList+ imprime une liste vide $\EmptyList$.
+
+
+	\item \textit{Liste en extension.}
+
+		  \verb+\List{4 ; 7 ; 7 ; -1}+ produit $\List{4 ; 7 ; 7 ; -1}$.
+
+
+	\item \textit{Le $k$\ieme{} élément d'une liste.}
+
+		  \verb+\ListElt{L}{1}+ produit $\ListElt{L}{1}$.
+
+
+	\item \textit{La sous-liste des éléments jusqu'à celui à la position $k$.}
+
+		  \verb+\ListUntil{L}{2}+ produit $\ListUntil{L}{2}$.
+
+
+	\item \textit{La sous-liste des éléments à partir de celui à la position $k$.}
+
+		  \verb+\ListFrom{L}{2}+ produit $\ListFrom{L}{2}$.
+
+
+	\item \textit{Concaténer deux listes.}
+
+		  \verb+\AddList+ est l'opérateur binaire $\AddList$ qui permet d'indiquer la concaténation de deux listes.
+
+
+	\item \textit{Taille ou longueur d'une liste.}
+
+		  La macro \verb+\Len(L)+ produit $\Len(L)$.
+\end{enumerate}
+
+
+
+\subsubsection{Modifier une liste -- Versions textuelles.}
+
+\begin{enumerate}
+	\item \textit{Ajout d'un nouvel élément à droite.}
+
+	      \verb+\Append{L}{5}+ produit \myquote{\Append{L}{5}}
+	      \footnote{
+		       Le verbe anglais \myquote{append} signifie \myquote{ajouter}.
+		  }.
+
+
+	\item \textit{Ajout d'un nouvel élément à gauche.}
+
+	      \verb+\Prepend{L}{5}+ produit \myquote{\Prepend{L}{5}}
+	      \footnote{
+		       Le verbe anglais \myquote{prepend} signifie \myquote{préfixer}.
+		  }.
+
+
+	\item \textit{Extraction d'un élément.}
+
+	      \verb+\PopAt{L}{3}+ produit \myquote{\PopAt{L}{3}}.
+\end{enumerate}
+
+
+
+\subsubsection{Modifier une liste -- Versions POO}
+
+Les versions étoilées des macros précédentes fournissent une autre mise en forme à la fois concise et aisée à comprendre
+\footnote{
+	L'opérateur point \POOpoint{} est défini dans la macro \texttt{\textbackslash{}POOpoint}.
+}
+avec une syntaxe de type POO
+\footnote{
+	\myquote{POO} est l'acronyme de \myquote{Programmation Orientée Objet}.
+}.
+
+
+\begin{enumerate}
+	\item \textit{Ajout d'un nouvel élément à droite.}
+
+	      \verb+\Append*{L}{5}+ fournit \Append*{L}{5}.
+
+
+	\item \textit{Ajout d'un nouvel élément à gauche.}
+
+	      \verb+\Prepend*{L}{5}+ fournit \Prepend*{L}{5}.
+
+
+	\item \textit{Extraction d'un élément.}
+
+	      \verb+\PopAt*{L}{3}+ fournit \PopAt*{L}{3}.
+\end{enumerate}
+
+
+
+\subsubsection{Modifier une liste -- Versions symboliques.}
+
+Des versions doublement étoilées permettent d'obtenir des notations symboliques qui sont très efficaces lorsque l'on rédige les algorithmes à la main
+\footnote{
+	L'opérateur $\AddList$ est défini dans la macro \texttt{\textbackslash{}AddList}.
+}.
+
+\begin{enumerate}
+	\item \textit{Ajout d'un nouvel élément à droite.}
+
+	      \verb+\Append**{L}{5}+ donne \Append**{L}{5}.
+
+
+	\item \textit{Ajout d'un nouvel élément à gauche.}
+
+	      \verb+\Prepend**{L}{5}+ donne \Prepend**{L}{5}.
+
+
+	\item \textit{Extraction d'un élément -- Version pseudo-automatique.}
+
+	      \verb+\PopAt**{L}{3}+ donne \PopAt**{L}{3} avec un calcul fait automatiquement par la macro.
+	      Bien entendu \verb+\PopAt**{L}{1}+ produit \PopAt**{L}{1} au lieu de $L \Store \ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à un.
+	      
+	      Il est autorisé de taper \verb+\PopAt**{L}{k}+ pour obtenir \PopAt**{L}{k}. Par contre, \verb+\PopAt**{L}{k-1}+ aboutit au truc très moche \PopAt**{L}{k-1}. 
+	      Les items suivants expliquent comment gérer à la main les cas problématiques via des macros plus généralistes.
+
+	      \smallskip
+
+	      \emph{\textbf{Attention !} On notera que contrairement aux versions \emph{\texttt{\textbackslash{}PopAt}} et \emph{\texttt{\textbackslash{}PopAt*}}, l'écriture symbolique agit juste sur la liste d'un point de vue algorithmique. Si besoin, avec \emph{\texttt{\textbackslash{}PopAt**}} il faudra donc indiquer au préalable où stocker l'élément extrait via $\dots \Store \ListElt{L}{k}$.}
+
+
+	\item \textit{Extraction d'éléments consécutifs.}
+
+	      Lorsque les calculs automatiques ne sont pas faisables, on devra tout indiquer comme dans \verb+\KeepLR{L}{k - 2}{k}+
+	      \footnote{
+	      	Le nom de la macro vient de \myquote{keep left and right} soit \myquote{garder à droite et à gauche}.
+		  }
+		  afin d'avoir \KeepLR{L}{k - 2}{k} qui est bien mieux que ce que nous avions obtenu ci-dessus : \PopAt**{L}{k-1}.
+
+
+	\item \textit{Extractions juste à droite, ou juste à gauche.}
+
+	      \verb+\KeepL{L}{k}+ permet d'afficher \KeepL{L}{k} et \verb+\KeepR{L}{k}+ permet quant à lui d'écrire \KeepR{L}{k}
+	      \footnote{
+	      	Les noms des macros viennent de \myquote{keep left} et \myquote{keep right} soit \myquote{garder à gauche} et \myquote{garder à droite}.
+		  }.
+\end{enumerate}
+
+
+
+
+%\section{Des outils pour les algorithmes} \label{algo-extra}
+
+\subsection{Boucles}
+
+Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*{a}{0}{12}{...}+ pour obtenir ce qui suit.
+
+\begin{algo}[.55]
+    \ForRange*{a}{0}{12}{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+
+\medskip
+
+
+Pour une version sans ambiguïté possible, on utilisera \verb+\ForRange{a}{0}{12}{...}+ afin d'obtenir la rédaction plus longue suivante.
+
+\begin{algo}[.55]
+    \ForRange{a}{0}{12}{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+
+\medskip
+
+
+Pour en finir avec les boucles, il est facile d'obtenir l'écriture symbolique ci-dessous via \verb+\For+ qui est proposé par le package \verb+algorithm2e+ : il suffit de taper \verb+\For{$a \in \CSinterval{0}{12}$}{...}+ où la macro \verb+\CSinterval+ est proposée par le package \verb+lymath+.
+
+\begin{algo}[.55]
+    \For{$a \in 0\,..\,12$}{
+        \dots\phantom{X}
+        \\
+        \phantom{\dots}\vspace{-.75em}
+    }
+\end{algo}
+
+
+
+
+\newpage
+
+\section{Historique}
+
+Nous ne donnons ici qu'un très bref historique de \verb+lyalgo+ côté utilisateur principalement.
+Tous les changements sont disponibles uniquement en anglais dans le dossier \verb+change-log+ : voir le code source de \verb+lyalgo+ sur \verb+github+.
+
+\begin{description}[leftmargin=1em]
+    \setlength\itemsep{1em}
+
+
+% --------------- %
+
+    \item[2019-10-18] Le documentation a enfin son journal des changements principaux.
+
+
+% --------------- %
+
+    \item[2019-09-03] Première version \verb+0.0.0-beta+ du package.
+\end{description}
+
+
+
+\end{document}

@@ -2,10 +2,42 @@ titles::
     input = Entrée / Sortie
     block = Bloc principal
 
-    for    = Boucles
-    repeat = Boucles
+    for    = Boucles \texttt{POUR} et \texttt{TANT QUE}
+    repeat = Boucles \texttt{RÉPÉTER JUSQU'À}
 
-    switch = Tests
-    ifelif = Tests
+    switch = Disjonction de cas \texttt{SELON QUE}
+    ifelif = Tests conditionnelles \texttt{SI / SINON SI / SINON}
 
     word = Diverses commandes
+
+
+input::
+    Nous donnons ci-dessous les versions au singulier de tous les mots disponibles de type \myquote{entrée / sortie}.
+    Excepté pour \verb+\InState+ et \verb+\OutState+, toutes les autres macros ont une version pour le pluriel obtenu en rajoutant un \verb+s+ à la fin du nom de la macro.
+    Par exemple, le pluriel de \verb+\In+ s'obtient via \verb+\Ins+.
+
+
+block::
+    Voici comment indiquer le bloc principal d'instructions avec deux textes au choix pour le moment.
+
+
+for::
+    Voici les boucles de type \verb+POUR+ et \verb+TANT QUE+ proposées par le package.
+
+    \newpage
+
+
+repeat::
+    Voici comment rédiger une boucle du type \verb+RÉPÉTER JUSQU'À+.
+
+
+ifelif::
+    Les blocs conditionnels \verb+SI / SINON SI / SINON+ se rédigent très naturellement.
+
+
+switch::
+    La syntaxe pour les blocs conditionnels du type \verb+SELON QUE+ ne pose pas de difficultés de rédaction.
+
+
+word::
+    Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions maculines des textes proposés.

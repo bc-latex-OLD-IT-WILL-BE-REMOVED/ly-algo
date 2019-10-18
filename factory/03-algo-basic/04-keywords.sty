@@ -1,10 +1,17 @@
 % == PACKAGES USED == %
 
+\usepackage[french, vlined]{algorithm2e}
+
 
 % == DEFINITIONS == %
 
+\SetKwComment{Comment}{{\# }}{}
+
+\input{keywords/french.sty}
+\input{keywords/english.sty}
+%
 \@ifpackagewith{babel}{french}{
-    \input{keywords/french.sty}
+   \uselangfrench{}
 }{
-    \input{keywords/english.sty}
+%    \uselangenglish{}
 }

@@ -3,6 +3,7 @@
 \makeatletter
 	\input{../config/header[fr].sty}
 	\input{../01-misc/00-common-tools.sty}
+	\input{02-frame.sty}
 
 	\usepackage{04-keywords}
 \makeatother
@@ -13,43 +14,326 @@
 
 %\section{Algorithmes en langage naturel}
 
-\subsection{Ensemble des macros additionnelles}
+\subsection{Un premier ensemble de macros additionnelles ou francisées}
+
+
+\begin{frame-gene}[À SAVOIR -- Le préfixe \texttt{u}]
+	\centering\itshape
+	Certains macros peuvent être préfixées par un \verb+u+ pour \myquote{unclosed} qui signifie \myquote{non fermé}.
+	
+	Ceci sert à ne pas refermer un bloc via un trait horizontal.
+\end{frame-gene}
+
 
 % == All extra words - START == %
 \subsubsection{Entrée / Sortie}
 
+Nous donnons ci-dessous les versions au singulier de tous les mots disponibles de type \myquote{entrée / sortie}.
+Excepté pour \verb+\InState+ et \verb+\OutState+, toutes les autres macros ont une version pour le pluriel obtenu en rajoutant un \verb+s+ à la fin du nom de la macro.
+Par exemple, le pluriel de \verb+\In+ s'obtient via \verb+\Ins+.
+
+
 \begin{multicols}{2}
-['In', 'Ins', 'Out', 'Outs', 'Data', 'Datas', 'Result', 'Results', 'InState', 'OutState', 'PreCond', 'PreConds', 'PostCond', 'PostConds']
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \In{donnée 1}
+  \Out{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \In{donnée 1}
+  \Out{donnée 2}
+\end{algo}
 \vfill\null
 \end{multicols}
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Data{donnée 1}
+  \Result{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Data{donnée 1}
+  \Result{donnée 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \InState{donnée 1}
+  \OutState{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \InState{donnée 1}
+  \OutState{donnée 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \PreCond{donnée 1}
+  \PostCond{donnée 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \PreCond{donnée 1}
+  \PostCond{donnée 2}
+\end{algo}
+\vfill\null
+\end{multicols}
+
 
 \subsubsection{Bloc principal}
 
+Voici comment indiquer le bloc principal d'instructions avec deux textes au choix pour le moment.
+
+
 \begin{multicols}{2}
-['Actions', 'Begin']
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Actions{Instruction 1}
+  \Begin{Instruction 2}
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Actions{Instruction 1}
+  \Begin{Instruction 2}
+\end{algo}
 \vfill\null
 \end{multicols}
 
-\subsubsection{Boucles}
+
+\subsubsection{Boucles \texttt{POUR} et \texttt{TANT QUE}}
+
+Voici les boucles de type \verb+POUR+ et \verb+TANT QUE+ proposées par le package.
+
+\newpage
+
 
 \begin{multicols}{2}
-['For', 'ForAll', 'ForEach', 'While', 'Repeat']
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \For{$i \in uneliste$}{
+    Instruction 1
+  }
+  \ForAll{$i \in uneliste$}{
+    Instruction 2
+  }
+  \ForEach{$i \in uneliste$}{
+    Instruction 3
+  }
+  \While{$i \in uneliste$}{
+    Instruction 4
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \For{$i \in uneliste$}{
+    Instruction 1
+  }
+  \ForAll{$i \in uneliste$}{
+    Instruction 2
+  }
+  \ForEach{$i \in uneliste$}{
+    Instruction 3
+  }
+  \While{$i \in uneliste$}{
+    Instruction 4
+  }
+\end{algo}
 \vfill\null
 \end{multicols}
 
-\subsubsection{Tests}
+
+\subsubsection{Boucles \texttt{RÉPÉTER JUSQU'À}}
+
+Voici comment rédiger une boucle du type \verb+RÉPÉTER JUSQU'À+.
+
 
 \begin{multicols}{2}
-['If', 'Switch']
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Repeat{$i \in uneliste$}{
+    Instruction 
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Repeat{$i \in uneliste$}{
+    Instruction 
+  }
+\end{algo}
 \vfill\null
 \end{multicols}
+
+
+\subsubsection{Disjonction de cas \texttt{SELON QUE}}
+
+La syntaxe pour les blocs conditionnels du type \verb+SELON QUE+ ne pose pas de difficultés de rédaction.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \Switch{$i$}{
+    \uCase{$i = 0$}{Instruction 1}
+    \uCase{$i = 1$}{Instruction 2}
+    \Case{$i = 2$}{Instruction 3}
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \Switch{$i$}{
+    \uCase{$i = 0$}{Instruction 1}
+    \uCase{$i = 1$}{Instruction 2}
+    \Case{$i = 2$}{Instruction 3}
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
+
+
+\subsubsection{Tests conditionnelles \texttt{SI / SINON SI / SINON}}
+
+Les blocs conditionnels \verb+SI / SINON SI / SINON+ se rédigent très naturellement.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  \uIf{$i = 0$}{
+    Instruction 1
+  }
+  \uElseIf{$i = 1$}{
+    Instruction 2
+  }
+  \Else{
+    Instruction 3
+  }
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  \uIf{$i = 0$}{
+    Instruction 1
+  }
+  \uElseIf{$i = 1$}{
+    Instruction 2
+  }
+  \Else{
+    Instruction 3
+  }
+\end{algo}
+\vfill\null
+\end{multicols}
+
 
 \subsubsection{Diverses commandes}
 
+Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions maculines des textes proposés.
+
+
 \begin{multicols}{2}
-['And', 'Or', 'Return', 'Ask', 'Print', 'From', 'To', 'ComingFrom', 'GoingTo', 'InList', 'LToR', 'LToRm', 'RToL', 'RToLm']
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+  A \And B \Or C
+  \\ \Return RÉSULTAT
+  \\ \Ask "Quelque chose"
+  \\ \Print "Quelque chose"
+  \\ $k$ \From $1$ \To $n$
+  \\ $k$ \ComingFrom $1$ \GoingTo $n$
+  \\ $e$ \InList $L$
+  \\ $L$ \LToR
+  \\ $L$ \LToRm
+  \\ $L$ \RToL
+  \\ $L$ \RToLm
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+  A \And B \Or C
+  \\ \Return RÉSULTAT
+  \\ \Ask "Quelque chose"
+  \\ \Print "Quelque chose"
+  \\ $k$ \From $1$ \To $n$
+  \\ $k$ \ComingFrom $1$ \GoingTo $n$
+  \\ $e$ \InList $L$
+  \\ $L$ \LToR
+  \\ $L$ \LToRm
+  \\ $L$ \RToL
+  \\ $L$ \RToLm
+\end{algo}
 \vfill\null
 \end{multicols}
+
 
 % == All extra words - END == %
 

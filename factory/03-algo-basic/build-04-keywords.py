@@ -29,6 +29,39 @@ DEFAULT_LANG = "english"
 ALL_MACROS = set()
 
 
+# --------------- #
+# -- CONSTANTS -- #
+# --------------- #
+
+LATEX_N_OUPUT_TEMP = r"""
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algo}
+<latexcode>
+\end{algo}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\begin{algo}
+<latexcode>
+\end{algo}
+\vfill\null
+\end{multicols}
+"""
+
+for old, new in {
+    "{": '{{',
+    "}": '}}',
+    "<": '{',
+    ">": '}',
+}.items():
+    LATEX_N_OUPUT_TEMP = LATEX_N_OUPUT_TEMP.replace(old, new)
+
+
 # ----------- #
 # -- TOOLS -- #
 # ----------- #
@@ -83,7 +116,13 @@ def macrodef(kind):
     if kind == "word":
         kind = ""
 
-    return f"\\SetKw{kind.title()}"
+    elif kind == "ifelif":
+        kind = "IF"
+
+    else:
+        kind = kind.title()
+
+    return f"\\SetKw{kind}"
 
 
 def rawgather(macroname, trans, suffix = ""):
@@ -107,8 +146,12 @@ def texify(kind, trans):
     macroname = f"{macrodef(kind)}"
 
 # \SetKw{Text}{Traduction}
-    if kind in ["block", "input", "word"]:
+    if kind in ["input", "word"]:
         tex_trans += rawgather(macroname, trans)
+
+# \SetKwBlock{Text}{Traduction}
+    elif kind == "block":
+        tex_trans += rawgather(macroname, trans, suffix = "{}")
 
 # \SetKwFor{For}{Pour}{:}{}
     elif kind == "for":
@@ -120,18 +163,18 @@ def texify(kind, trans):
             f"{macroname}{{Repeat}}{{{trans['Repeat']}}}{{{trans['Until']}}}"
         )
 
-# \SetKwIF{If}{ElseIf}{Else}{Si}{:}{{Sinon Si}}{{Sinon}}{:}
+# \SetKwIF{If}{ElseIf}{Else}{Si}{:}{{Sinon Si}}{{Sinon}}{}
     elif kind == "ifelif":
         tex_trans.append(
             f"{macroname}{{If}}{{ElseIf}}{{Else}}{{{trans['If']}}}{{:}}"
-            f"{{{trans['ElseIf']}}}{{{trans['Else']}}}{{:}}"
+            f"{{{trans['ElseIf']}}}{{{trans['Else']}}}{{}}"
         )
 
-# \SetKwSwitch{Switch}{Case}{Other}{Selon}{:}{Cas}{Autre}{:}
+# \SetKwSwitch{Switch}{Case}{Other}{Selon}{:}{Cas}{Autre}{}
     elif kind == "switch":
         tex_trans.append(
             f"{macroname}{{Switch}}{{Case}}{{Other}}{{{trans['Switch']}}}{{:}}"
-            f"{{{trans['Case']}}}{{{trans['Other']}}}{{:}}"
+            f"{{{trans['Case']}}}{{{trans['Other']}}}{{}}"
         )
 
     else:
@@ -208,9 +251,15 @@ with open(
 
 with ReadBlock(
     content = KEYWORDS_DIR / "config" / "for-doc[fr].peuf",
-    mode    = 'keyval:: ='
+    mode    = {
+        'verbatim'  : ":default:",
+        'keyval:: =': "titles",
+    }
 ) as data:
-    titles = data.mydict("std mini")["titles"]
+    docinfos = data.mydict("std mini")
+
+    peuftitles = docinfos["titles"]
+    del docinfos["titles"]
 
 
 with open(
@@ -246,33 +295,137 @@ for oneline in lang_sty.split("\n"):
 
     elif oneline.startswith("%"):
         kind = oneline[1:].strip().lower()
-        kind = titles[kind]
 
         if kind not in allmacros:
             allmacros[kind] = []
 
-textitles = []
-
-for kind in titles:
-    newtitle = titles[kind]
-
-    if newtitle not in textitles:
-        textitles.append(newtitle)
-
 
 texdoc = []
 
-for title in textitles:
-    macros = allmacros[title]
-    # macros.sort()
+for kind in peuftitles:
+    macros = allmacros[kind]
+
+    explanations = "\n".join(docinfos[kind])
+
+    latexcode = []
+
+    if kind == "input":
+        lastmacro = ""
+        noplurial = []
+
+        for onemacro in macros:
+            if noplurial \
+            and onemacro.startswith(noplurial[-1]):
+                continue
+
+            noplurial.append(onemacro)
+
+        for i, word in enumerate(noplurial[::2]):
+            nextword = noplurial[2*i+1]
+
+            latexcode.append(
+                LATEX_N_OUPUT_TEMP.format(
+                    latexcode = f"  \\{word}{{donnée 1}}\n" \
+                              + f"  \\{nextword}{{donnée 2}}"
+                )
+            )
+
+        latexcode = "\n".join(latexcode)
+
+
+    elif kind == "block":
+        nbexa     = 0
+
+        for onemacro in macros:
+            nbexa += 1
+
+            latexcode.append(
+                f"\\{onemacro}{{Instruction {nbexa}}}"
+            )
+
+    elif kind in ["for", "repeat"]:
+        nbexa     = 0
+
+        for onemacro in macros:
+            nbexa += 1
+
+            if kind == "repeat":
+                nbexa = ""
+
+            latexcode += [
+                f"\\{onemacro}{{$i \\in uneliste$}}{{",
+                " "*2 + f"Instruction {nbexa}",
+                "}"
+            ]
+
+    elif kind == "switch":
+        latexcode.append("\\Switch{$i$}{")
+
+        prefix = "u"
+
+        for i in range(1, 4):
+            if i == 3:
+                prefix = ""
+
+            latexcode.append(
+                " "*2 + f"\\{prefix}Case{{$i = {i-1}$}}{{Instruction {i}}}"
+            )
+
+        latexcode.append("}")
+
+    elif kind == "ifelif":
+         latexcode.append(
+"""\\uIf{$i = 0$}{
+    Instruction 1
+  }
+  \\uElseIf{$i = 1$}{
+    Instruction 2
+  }
+  \\Else{
+    Instruction 3
+  }""")
+
+    else:
+        prefix = ""
+
+        while macros:
+            word      = macros.pop(0)
+            wordlower = word.lower()
+
+            if wordlower == "and":
+                wordbis = macros.pop(0)
+                latexcode.append(f"{prefix}A \\{word} B \\{wordbis} C")
+
+            elif wordlower in ["ask", "print"]:
+                latexcode.append(f"{prefix}\\{word} \"Quelque chose\"")
+
+            elif wordlower == "return":
+                latexcode.append(f"{prefix}\\{word} RÉSULTAT")
+
+            elif wordlower.endswith("from"):
+                wordbis = macros.pop(0)
+                latexcode.append(f"{prefix}$k$ \\{word} $1$ \\{wordbis} $n$")
+
+            elif wordlower == "inlist":
+                latexcode.append(f"{prefix}$e$ \\{word} $L$")
+
+            else:
+                latexcode.append(f"{prefix}$L$ \\{word}")
+
+            if not prefix:
+                prefix = r"\\ "
+
+    if kind != "input":
+        latexcode = "\n  ".join(latexcode)
+        latexcode = "  " + latexcode
+        latexcode = LATEX_N_OUPUT_TEMP.format(latexcode = latexcode)
 
     texdoc.append(
-f"""\\subsubsection{{{title}}}
+f"""\\subsubsection{{{peuftitles[kind]}}}
 
-\\begin{{multicols}}{{2}}
-{macros}
-\\vfill\\null
-\\end{{multicols}}
+{explanations}
+
+{latexcode}
 """
     )
 

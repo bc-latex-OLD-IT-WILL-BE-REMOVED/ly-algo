@@ -13,7 +13,7 @@
 
 \section{Écriture \texttt{pseudo-verbatim}}
 
-En complément à l'environnement \verb+verbatim+ est proposé l'environnement \verb+pseudoverb+, pour \og pseudo verbatim \fg, qui permet d'écrire du contenu presque verbatim : ci-après, la macro \verb+\squaremacro+ définie par \verb+\newcommand\squaremacro{$x^2$}+ est interprétée mais pas la formule de mathématiques. 
+En complément à l'environnement \verb+verbatim+ est proposé l'environnement \verb+pseudoverb+, pour \og pseudo verbatim \fg, qui permet d'écrire du contenu presque verbatim : ci-après, la macro \verb+\squaremacro+ définie par \verb+\newcommand\squaremacro{$x^2$}+ est interprétée mais pas la formule mathématique. 
 
 \begin{frame-gene}[Code \LaTeX]
 	\small
@@ -80,7 +80,8 @@ Le contenu précédent s'obtient via le code suivant.
 \end{frame-gene}
 
 
-Finissons avec une version bien moins large et sans titre de la sortie console ci-dessus. Le principe est de donner un titre vide via \verb+{}+, c'est obligatoire, et en utilisant l'unique argument optionnel pour indiquer la largeur relativement à celle des lignes. En utilisant \verb+\begin{pseudoverb}[.275]{}+ au lieu \verb+\begin{pseudoverb}{Une sortie console}+, le code précédent nous donne ce qui suit.
+Finissons avec une version bien moins large et sans titre de la sortie console ci-dessus. Le principe est de donner un titre vide via \verb+{}+, \textbf{c'est obligatoire}, et en utilisant l'unique argument optionnel pour indiquer la largeur relativement à celle des lignes.
+En utilisant juste \verb+\begin{pseudoverb}[.275]{}+ au lieu de \verb+\begin{pseudoverb}{Une sortie console}+, le code précédent nous donne ce qui suit.
 
 
 \begin{pseudoverb}[.275]{}
@@ -91,6 +92,14 @@ Finissons avec une version bien moins large et sans titre de la sortie console c
 \end{pseudoverb} 
 
 
-\paragraph{A retenir.} C'est la version étoilée de \verb+pseudoverb+ qui en fait le moins. Ce principe sera aussi suivi pour les algorithmes.
+\bigskip
+
+
+\begin{frame-gene}[À RETENIR]
+	\centering\itshape
+	C'est la version étoilée de \verb+pseudoverb+ qui en fait le moins.
+	
+	Ce principe sera aussi suivi pour les algorithmes. 
+\end{frame-gene}
 
 \end{document}

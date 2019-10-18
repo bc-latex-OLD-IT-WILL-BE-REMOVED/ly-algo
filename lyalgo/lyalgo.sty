@@ -1,0 +1,228 @@
+% ----------------------- %
+% -- PACKAGES REQUIRED -- %
+% ----------------------- %
+
+\RequirePackage[french,vlined]{algorithm2e}
+\RequirePackage{alltt}
+\RequirePackage{amsmath}
+\RequirePackage{tcolorbox}
+\RequirePackage{xint}
+
+
+% ------------------ %
+% -- COMMON TOOLS -- %
+% ------------------ %
+
+\tcbuselibrary{breakable}
+
+
+% --------------------- %
+% -- PSEUDO VERBATIM -- %
+% --------------------- %
+
+\newenvironment{pseudoverb*}
+	{\small\alltt}
+	{\endalltt\normalsize}
+
+
+\newenvironment{pseudoverb}[2][1]{
+	\centering
+	\begin{tcolorbox}[
+		width        = #1\linewidth,
+		title        = #2,
+		fonttitle    = \bfseries\itshape\small,
+		coltitle     = black,
+		colbacktitle = black!10!white,
+		colback      = white,
+		breakable,
+		center title]
+	\begin{pseudoverb*}
+}{
+	\end{pseudoverb*}
+	\vspace{-1.25em}
+	\end{tcolorbox}
+}
+
+
+% ----------- %
+% -- FRAME -- %
+% ----------- %
+
+% Algo - Frames
+
+\newenvironment{algo*}
+	{\begin{algorithm}[H]}
+	{\end{algorithm}}
+
+
+\newenvironment{algo}[1][1]{
+	\centering
+	\begin{tcolorbox}[
+		colback = white,
+		width=#1\linewidth,
+		breakable
+	]
+	\begin{algo*}
+}{
+	\end{algo*}
+	\vspace{-0.5em}
+	\end{tcolorbox}
+}
+
+
+\newcommand\addalgoblank[1][]{
+   \ifthenelse{ \equal{#1}{} }
+      	{\vspace{.2em}}
+      	{\foreach \n in {0,...,#1}{\vspace{.2em}}}
+}
+
+
+% ------------- %
+% -- CAPTION -- %
+% ------------- %
+
+% Algo - Captions
+
+% Source
+%	* https://tex.stackovernet.com/fr/q/66875#214011
+%	* https://tex.stackexchange.com/a/510498/6880
+
+\renewcommand{\@algocf@capt@plain}{above}
+\renewcommand{\algocf@caption@plain}{\box\algocf@capbox\vskip\AlCapSkip}%
+
+\setlength{\AlCapSkip}{.1em}
+
+
+\newcommand\algovoidcaption{
+	\SetAlgoCaptionSeparator{}	% no separator, default colon
+	\SetAlCapNameSty{}			% no caption text
+	\caption{}
+}
+
+
+% -------------- %
+% -- KEYWORDS -- %
+% -------------- %
+
+\SetKwComment{Comment}{{\# }}{}
+
+\input{keywords/french.sty}
+\input{keywords/english.sty}
+%
+\@ifpackagewith{babel}{french}{
+   \uselangfrench{}
+}{
+%    \uselangenglish{}
+}
+
+
+% ----------------- %
+% -- AFFECTATION -- %
+% ----------------- %
+
+\newcommand\Store{\leftarrow}
+\newcommand\PutIn{\rightarrow}
+
+
+% ---------- %
+% -- LIST -- %
+% ---------- %
+
+% Algo - Additional semantic macros - Lists
+
+\newcommand\List[1]{\left[ \, #1 \, \right]}
+\newcommand\EmptyList{\List{}}
+
+\newcommand\ListElt[2]{#1\List{#2}}
+\newcommand\ListUntil[2]{#1\List{..\,#2}}
+\newcommand\ListFrom[2]{#1\List{#2\,..}}
+
+\DeclareMathOperator{\Len}{taille}
+\newcommand\POOpoint{\,\textbf{.}\,}
+
+
+\newcommand\AddList{\mathbin{\boxplus}}
+
+
+\newcommand\Append{\@ifstar{\@Append@star}{\@Append@no@star}}
+
+\newcommand\@Append@no@star[2]{Ajouter le nouvel élément #2 après la fin de la liste #1.}
+
+\newcommand\@Append@star{\@ifstar{\@Append@star@star}{\@Append@single@star}}
+
+\newcommand\@Append@single@star[2]{$#1$\POOpoint{}ajouter-droite($#2$)}
+\newcommand\@Append@star@star[2]{$#1 \Store #1 \AddList \List{#2}$}
+
+
+\newcommand\Prepend{\@ifstar{\@Prepend@star}{\@Prepend@no@star}}
+
+\newcommand\@Prepend@no@star[2]{Ajouter le nouvel élément #2 avant le début de la liste #1.}
+
+\newcommand\@Prepend@star{\@ifstar{\@Prepend@star@star}{\@Prepend@single@star}}
+
+\newcommand\@Prepend@single@star[2]{$#1$\POOpoint{}ajouter-gauche($#2$)}
+
+\newcommand\@Prepend@star@star[2]{$#1 \Store \List{#2} \AddList #1$}
+
+
+\newcommand\PopAt{\@ifstar{\@PopAt@star}{\@PopAt@no@star}}
+
+\newcommand\@PopAt@no@star[2]{Élément à la position #2 dans la liste #1, cet élément étant retiré de la liste.}
+
+\newcommand\@PopAt@star{\@ifstar{\@PopAt@star@star}{\@PopAt@single@star}}
+
+\newcommand\@PopAt@single@star[2]{$#1$\POOpoint{}extraire($#2$)}
+
+
+\newcommand\@add@one[2]{%
+	\setbox0=\hbox{#2\unskip}\ifdim\wd0=0pt%
+		\if\relax\detokenize\expandafter{\romannumeral-0#1}\relax%
+			\the\numexpr #1+1 \relax%
+		\else%
+			#1 + 1%
+		\fi%
+	\else%
+		#2%
+	\fi%
+}
+
+\newcommand\@minus@one[2]{%
+	\if\relax\detokenize\expandafter{\romannumeral-0#2}\relax%
+			\def\minusone{\the\numexpr #2-1 \relax}%
+			\xintiiifNotZero{\minusone}{%
+				 \ListUntil{#1}{\minusone} \AddList%
+			}{}%
+		\else%
+			\ListUntil{#1}{#2 - 1} \AddList%
+		\fi%
+}
+
+\newcommand\@PopAt@star@star[3][]{%
+	$#2%
+	\Store%
+	\@minus@one{#2}{#3}%	
+	\ListFrom{#2}{\@add@one{#3}{#1}}$%
+}
+
+
+\newcommand\KeepLR[3]{$#1 \Store \ListUntil{#1}{#2} \AddList \ListFrom{#1}{#3}$}
+\newcommand\KeepR[2]{$#1 \Store \ListFrom{#1}{#2}$}
+\newcommand\KeepL[2]{$#1 \Store \ListUntil{#1}{#2}$}
+
+
+% ---------- %
+% -- LOOP -- %
+% ---------- %
+
+% Algo - Additional semantic macros - General
+
+
+\newcommand\ForRange{\@ifstar{\@ForRange@star}{\@ForRange@no@star}}
+
+\newcommand\@ForRange@star[4]{
+	\For{\text{$#1$} \From \text{$#2$} \To \text{$#3$}}{#4}
+}
+
+\newcommand\@ForRange@no@star[4]{
+	\For{\text{$#1$} \ComingFrom \text{$#2$} \GoingTo \text{$#3$}}{#4}
+}
