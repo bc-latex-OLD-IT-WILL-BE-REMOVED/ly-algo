@@ -1,0 +1,39 @@
+    \begin{algochart}
+      % Placement des noeuds.
+      \node[acio]
+           (input) {$a x^2 + b$ avec $a \neq 0$};
+
+      \node[acinstr, below of = input, text width =  6em]
+           (square) {$q \Store \dfrac{-b}{a}$};
+
+      \node[acif, below of = square]
+           (is-square-neg) {$q < 0$ ?};
+
+      \node[acinstr,left] at ($(is-square-neg) + (-3,0)$)
+           (no-sol) {$rep \Store \EmptyList$};
+
+      \node[acinstr,right] at ($(is-square-neg) + (3,0)$)
+           (pos-sol) {$psol \Store \sqrt{q}$};
+
+      \node[acinstr, below of = pos-sol, text width = 9em]
+           (all-sol) {$rep \Store \List{psol , - psol}$};
+
+      \node[acio, below of = is-square-neg] at ($(is-square-neg) + (0,-1.75)$)
+           (output) {$rep$};
+
+      % Ajout des connexions.
+      \path[aclink] (input) -- (square);
+      \path[aclink] (square) -- (is-square-neg);
+
+      \path[aclink] (is-square-neg) -- (no-sol) \aclabelabove{oui};
+      \path[aclink] (is-square-neg) -- (pos-sol) \aclabelabove{non};
+
+      \path[aclink] (pos-sol) -- (all-sol);
+      \path[aclink] (all-sol)
+                 |- ([xshift = 2mm, yshift = 5mm] output.north)
+                 -- ([xshift = 2mm]output.north);
+
+      \path[aclink] (no-sol)
+                 |- ([xshift = -2mm, yshift = 5mm] output.north)
+                 -- ([xshift = -2mm]output.north);
+    \end{algochart}

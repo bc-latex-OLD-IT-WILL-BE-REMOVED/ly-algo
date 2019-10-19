@@ -2,10 +2,12 @@
 % -- PACKAGES REQUIRED -- %
 % ----------------------- %
 
-\RequirePackage[vlined,french]{algorithm2e}
+\RequirePackage[french,vlined]{algorithm2e}
 \RequirePackage{alltt}
 \RequirePackage{amsmath}
+\RequirePackage{ifthen}
 \RequirePackage{tcolorbox}
+\RequirePackage{tikz}
 \RequirePackage{xint}
 
 
@@ -236,4 +238,95 @@
 
 \newcommand\@ForRange@no@star[4]{
 	\For{\text{$#1$} \ComingFrom \text{$#2$} \GoingTo \text{$#3$}}{#4}
+}
+
+
+% --------------- %
+% -- FLOWCHART -- %
+% --------------- %
+
+% TiKz - Flow charts - Colors
+
+\newcommand\aciocolor{red!20}
+\newcommand\acinstrcolor{blue!20}
+\newcommand\acifcolor{green!20}
+\newcommand\aclinkcolor{black}
+
+\newcommand\acusecolor{
+	\renewcommand\aciocolor{red!20}
+	\renewcommand\acinstrcolor{blue!20}
+	\renewcommand\acifcolor{green!20}
+}
+
+\newcommand\acusebw{
+	\renewcommand\aciocolor{white}
+	\renewcommand\acinstrcolor{white}
+	\renewcommand\acifcolor{white}
+}
+
+
+
+% TiKz - Flow charts - Styles
+
+\usetikzlibrary{shapes, arrows, calc, positioning}
+
+\newcommand\aclabelabove[1]{node[near start, above]{#1}}
+\newcommand\aclabelbelow[1]{node[near start, below]{#1}}
+\newcommand\aclabelright[1]{node[near start, right]{#1}}
+\newcommand\aclabelleft[1]{node[near start, left]{#1}}
+
+\newenvironment{algochart}{
+	\begin{tikzpicture}
+}{
+	\end{tikzpicture}
+}
+
+\tikzset{
+    % Input / Output
+    acio/.style = {
+        draw,
+        ellipse,
+        fill           = \aciocolor,
+        node distance  = 2.5cm,
+        text width     = 6.5em,
+        text centered,
+        minimum height = 2em
+    },
+    % Instruction
+    acinstr/.style = {
+        rectangle,
+        draw,
+        fill           = \acinstrcolor,
+        text width     = 5.5em,
+        text centered,
+        node distance  = 2.5cm,
+        rounded corners,
+        minimum height = 2em
+    },
+    % Conditional node
+    acif/.style = {
+        diamond,
+        draw,
+        fill          = \acifcolor,
+        text width    = 5.5em,
+        text badly centered,
+        node distance = 2.5cm,
+        inner sep     = 0pt
+    },
+    acifinstr/.style = {
+        rectangle,
+        draw,
+        fill           = \acifcolor,
+        text width     = 5.5em,
+        text centered,
+        node distance  = 2.5cm,
+        rounded corners,
+        minimum height = 2em
+    },
+    % Connection
+    aclink/.style = {
+        draw,
+        -triangle 60,
+        color = \aclinkcolor,
+    },
 }

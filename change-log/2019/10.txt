@@ -1,4 +1,14 @@
 ==========
+2019-10-19
+==========
+
+**New version version::``0.1.0-beta``:** see above and before this date for all the changes.
+
+
+**"Algorithmic flowcharts":** this uses the ¨tikz machinery.
+
+
+==========
 2019-10-18
 ==========
 

@@ -1,0 +1,413 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+
+    \usepackage{01-flowchart}
+\makeatother
+
+
+\newcommand\Store{\leftarrow}
+\newcommand\List[1]{[\,#1\,]}
+\newcommand\EmptyList{\List{}}
+
+
+\begin{document}
+
+\section{Ordinogrammes}
+
+\subsection{C'est quoi un ordinogramme} \label{section:flowchart-firstexa}
+
+Les ordinogrammes
+\footnote{
+    Le mot \myquote{ordinogramme} vient des mots \myquote{ordinateur}, du latin \myquote{ordinare} soit \myquote{mettre en ordre}, et du grec ancien \myquote{gramma} soit \myquote{lettre, écriture}.
+}
+sont des diagrammes que l'on peut utiliser pour expliquer des algorithmes très simples
+\footnote{
+    Cet outil pédagogique montre très vite ses limites. Essayez par exemple de tracer un ordinogramme pour expliquer comment résoudre une équation du 2\ieme{} degré.
+}.
+Voici un exemple expliquant comment résoudre $a x^2 + b = 0$, une équation en $x$, lorsque $a \neq 0$ : le code utilisé est donné plus tard dans la section \ref{section:flowchart-firstexa-code} \emph{(ce code sera très aisé à comprendre une fois lues les sections à venir)}.
+
+\begin{center}
+    \small
+    \input{examples/ax**2+b=0.tkz}
+\end{center}
+
+
+% -------------- %
+
+
+\subsection{L'environnement \texttt{algochart}}
+
+Tous les codes seront placés dans l'environnement \verb+algochart+ qui fait appel à \verb+TiKz+ qui fait le principal du travail
+\footnote{
+	\texttt{algochart} vient de la contraction de \myquote{algotithmic} et \myquote{flowchart} soit \myquote{algotithmique} et \myquote{diagramme} en anglais.
+}.
+\verb+lyalgo+ définit juste quelques styles et quelques macros pour faciliter la saisie des ordinogrammes.
+Il faut alors travailler avec les macros \verb+\node+ et \verb+\path+ proposées par \verb+TiKz+.
+
+
+% -------------- %
+
+
+\subsection{Convention pour les noms des styles et des macros}
+
+Toutes les fonctionnalités proposés par \verb+lyalgo+ seront nommées en utilisant le préfixe \verb+ac+ pour \verb+algochart+.
+
+
+% -------------- %
+
+
+\subsection{Les styles proposés}
+
+\begin{frame-gene}[AVERTISSEMENT -- Normes adaptées]
+	\centering\itshape
+	A la norme officielle, nous avons préféré un style plus percutant
+
+	où les formes des cadres sont bien différenciées.
+\end{frame-gene}
+
+
+
+\subsubsection{Entrée et sortie}
+
+L'entrée et la sortie de l'algorithme sont représentés par des ovales comme dans l'exemple ci-après. Par convention, l'entrée se situe tout en haut de l'ordinogramme, et la sortie tout en bas.
+Indiquons que \verb+io+ dans \verb+acio+ fait référence à \myquote{input / output} soit \myquote{entrée / sortie} en anglais.
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algochart}
+  \node[acio] {Entrée ou sortie};
+\end{algochart}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\medskip
+
+\small
+\begin{algochart}
+  \node[acio] {Entrée ou sortie};
+\end{algochart}
+\vfill\null
+\end{multicols}
+
+
+\vspace{-1em}
+
+Dans le code ci-dessus, nous utilisons le style \verb+acio+ en l'indiquant entre des crochets.
+La machinerie \verb+TiKz+ permet de changer localement un réglage. Dans le code suivant, on modifie la largeur de l'ellipse pour n'avoir qu'une seule ligne de texte.
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algochart}
+  \node[acio, text width = 8em]
+       {Entrée ou sortie};
+\end{algochart}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\medskip
+
+\small
+\begin{algochart}
+  \node[acio, text width = 8em]
+       {Entrée ou sortie};
+\end{algochart}
+\vfill\null
+\end{multicols}
+
+
+
+\subsubsection{Les instructions}
+
+Dans l'exemple suivant, qui ne nécessite aucun commentaire
+\footnote{
+	Chercher l'erreur\dots
+},
+nous avons dû régler à la main la largeur du cadre.
+
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algochart}
+  \node[acinstr, text width = 8em]
+       {Une instruction};
+\end{algochart}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\medskip
+
+\small
+\begin{algochart}
+  \node[acinstr, text width = 8em]
+       {Une instruction};
+\end{algochart}
+\vfill\null
+\end{multicols}
+
+
+
+\subsubsection{Les tests conditionnels via un exemple complet}
+
+Nous allons voir comment obtenir le résult suivant. Ceci sera l'occasion d'expliquer comment placer les noeuds les uns par rapport aux autres, et aussi comment ajouter des connexions via la macro \verb+\path+ proposée par \verb+TiKz+.
+
+
+\begin{center}
+    \small
+    \input{examples/if-absolute.tkz}
+\end{center}
+
+
+Voici le code utilisé pour obtenir l'ordinogramme ci-dessus. Nous donnons des explications après.
+
+\medskip
+
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algochart}
+  % Placement des noeuds.
+  \node[acio]
+       (input) {$n \in \NN$};
+  \node[acif, below of = input]
+       (is-neg) {$n < 0$ ?};
+
+  \node[acinstr, right] at ($(is-neg) + (2.5,0)$)
+       (neg) {$res \Store (-n)$};
+  \node[acinstr, below of = is-neg]
+       (not-neg) {$res \Store n$};
+
+  \node[acio, below of = not-neg]
+       (output) {$res$};
+
+  % Ajout des connexions.
+  \path[aclink] (input) -- (is-neg);
+
+  \path[aclink] (is-neg) -- (neg) \aclabelabove{oui};
+  \path[aclink] (is-neg) -- (not-neg) \aclabelright{non};
+
+  \path[aclink] (not-neg) -- (output);
+  \path[aclink] (neg)
+             |- ([xshift = 3mm, yshift = 5mm] output.north)
+             -- ([xshift = 3mm] output.north);
+\end{algochart}
+\end{verbatim}
+\end{frame-gene}
+
+
+Donnons des explications sur les points délicats du code précédent.
+
+\begin{enumerate}
+	\item \verb+\node[acio] (input) {$n \in \NN$}+
+	      
+	      \smallskip
+	      Ici on définit \verb+input+ comme alias du noeud via \verb+(input)+, un alias utilisable ensuite pour différentes actions graphiques. 
+
+	\medskip
+	\item \verb+\node[acif, below of = input] (is-neg) {$n < 0$ ?}+
+
+	      \smallskip
+	      Ici on demande de placer le noeud nommé \verb+is-neg+ sous celui nommé \verb+input+ via \verb+below of = input+ où \myquote{below of} se traduit par \myquote{en dessous de} en anglais. Attention au signe égal dans \verb+below of = input+.
+	
+	\medskip
+	\item \verb|\node[acinstr, right] at ($(is-neg) + (2.5,0)$) (neg) {$res \Store (-n)$}|
+	      
+	      \smallskip
+	      Dans cette commande un peu plus mystique, l'emploi de \verb+right+ indique de se placer à gauche du dernier noeud.
+	      Vient ensuite la cabalistique instruction \verb|at ($(is-neg) + (2.5,0)$)|.
+	      Comme \myquote{at} signifie \myquote{à (tel endroit)} en anglais, on comprend que l'on demande de placer le noeud à une certaine position.
+	       Il faut alors savoir que pour \verb+TiKz+ l'usage de \verb|($...$)| indique de faire un calcul qui ici est celui de coordonnées via \verb|(is-neg) + (2.5,0)|. 
+	
+	\medskip
+	\item \verb+\path[aclink] (input) -- (is-neg)+
+	      
+	      \smallskip
+	      Cette instruction plus simple demande de tracer, avec le style \verb+aclink+, un trait entre les noeuds \verb+input+ et \verb+is-neg+.
+	
+	\medskip
+	\item \verb+\path[aclink] (is-neg) -- (neg) \aclabelabove{oui}+
+	      
+	      \smallskip
+	      La nouveauté ici est l'utilisation de la macro \verb+\aclabelabove{oui}+ proposée par \verb+lyalgo+ pour placer ici du texte au début et au dessus de la connexion car \myquote{above} signifie \myquote{au-dessus} en anglais. 
+
+	\medskip
+	\item \verb+(neg) |- ([xshift = 3mm, yshift = 5mm] output.north)+
+	      
+	      \smallskip
+	      Dans le dernier chemin, il y a deux astuces bien utiles. La première est \verb+([xshift = 3mm, yshift+
+	      \verb+= 5mm] output.north)+ qui permet de se décaler relativement à un noeud.
+	      La seconde chose utilisée est \verb+... |- ...+ qui demande de tracer une ligne formée de deux segments orthogonaux. Si l'on souhaite \myquote{échanger} segment vertical et segment horizontal, il suffit de passer par \verb+... -| ...+.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\subsubsection{Les boucles}
+
+L'exemple très farfelu qui suit montre comment dessiner une petite boucle en faisant ressortir les instructions liées au fonctionnement de la boucle \emph{(cet effet est impossible à obtenir en mode noir et blanc : voir la section \ref{section:bw-mode} à ce sujet)}.
+On voit au passage la limite d'utilisabilité des ordinogrammes car ces derniers ne proposent pas de mise en forme efficace pour les boucles.
+
+
+\begin{center}
+    \small
+    \input{examples/strange-loop.tkz}
+\end{center}
+
+
+Voici le code que nous avons utilisé. La seule vraie nouveauté est l'utilisation du style \verb+acifinstr+ pour mieux visualiser les instructions liées à la boucle.
+
+\medskip
+
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algochart}
+  % Placement des noeuds.
+  \node[acifinstr]
+       (loop-init) {$i \Store 0$};
+  \node[acif, below of = loop-init]
+       (loop-test) {$i \leq 10$ ?};
+
+  \node[acifinstr, below of = loop-test]
+       (loop-next) {$i \Store i+1$};
+
+  \node[acinstr, right] at ($(loop-test) + (2.5,0)$)
+       (loop-out) {\dots};
+
+  % Ajout des connexions.
+  \path[aclink] (loop-init) -- (loop-test);
+
+  \path[aclink] (loop-test) -- (loop-out) \aclabelabove{non};
+
+  \path[aclink] (loop-test) -- (loop-next) \aclabelright{oui};
+  \path[aclink] (loop-next.west)
+             -- ([xshift = -4em] loop-next.west)
+             |- (loop-test.west);
+\end{algochart}
+\end{verbatim}
+\end{frame-gene}
+
+
+% -------------- %
+
+
+\subsection{Passer de la couleur au noir et blanc, et vice versa} \label{section:bw-mode}
+
+Pour l'impression papier, n'avoir que du noir et blanc peut rende service. Les commandes \verb+\acusebw+ et \verb+\acusecolor+ permettent d'avoir du noir et blanc ou de la couleur pour les ordinagrammes qui suivent l'utilisation de ces macros.
+
+\newpage
+
+\begin{multicols}{2}
+\centering
+\begin{frame-gene}[Code \LaTeX]
+\begin{verbatim}
+\begin{algochart}
+  \node[acinstr] {Instruction};
+\end{algochart}
+
+\bigskip \acusebw
+
+\begin{algochart}
+  \node[acinstr] {Instruction};
+\end{algochart}
+\end{verbatim}
+\end{frame-gene}
+\vfill\null
+\columnbreak
+\textit{Mise en forme correspondante.}
+\medskip
+
+\small
+\begin{algochart}
+  \node[acinstr] {Instruction};
+\end{algochart}
+
+\bigskip \acusebw
+
+\begin{algochart}
+  \node[acinstr] {Instruction};
+\end{algochart}
+\vfill\null
+\end{multicols}
+
+\acusecolor
+
+
+% -------------- %
+
+
+\subsection{Code du tout premier exemple} \label{section:flowchart-firstexa-code}
+
+Nous (re)donnons la version noir et blanc de l'ordinogramme présenté au début de la section \ref{section:flowchart-firstexa}.
+
+\acusebw
+\begin{center}
+    \small
+    \input{examples/ax**2+b=0.tkz}
+\end{center}
+\acusecolor
+
+Ce diagramme s'obtient via le code suivant.
+
+\begin{frame-gene}[Code \LaTeX{} utilisé]
+\begin{verbatim}
+\begin{algochart}
+  % Placement des noeuds.
+  \node[acio]
+       (input) {$a x^2 + b$ avec $a \neq 0$};
+
+  \node[acinstr, below of = input, text width =  6em]
+       (square) {$q \Store \dfrac{-b}{a}$};
+
+  \node[acif, below of = square]
+       (is-square-neg) {$q < 0$ ?};
+
+  \node[acinstr,left] at ($(is-square-neg) + (-3,0)$)
+       (no-sol) {$rep \Store \EmptyList$};
+
+  \node[acinstr,right] at ($(is-square-neg) + (3,0)$)
+       (pos-sol) {$psol \Store \sqrt{q}$};
+
+  \node[acinstr, below of = pos-sol, text width = 9em]
+       (all-sol) {$rep \Store \List{psol , - psol}$};
+
+  \node[acio, below of = is-square-neg] at ($(is-square-neg) + (0,-1.75)$)
+       (output) {$rep$};
+
+  % Ajout des connexions.
+  \path[aclink] (input) -- (square);
+  \path[aclink] (square) -- (is-square-neg);
+
+  \path[aclink] (is-square-neg) -- (no-sol) \aclabelabove{oui};
+  \path[aclink] (is-square-neg) -- (pos-sol) \aclabelabove{non};
+
+  \path[aclink] (pos-sol) -- (all-sol);
+  \path[aclink] (all-sol)
+             |- ([xshift = 2mm, yshift = 5mm] output.north)
+             -- ([xshift = 2mm]output.north);
+
+  \path[aclink] (no-sol)
+             |- ([xshift = -2mm, yshift = 5mm] output.north)
+             -- ([xshift = -2mm] output.north);
+\end{algochart}
+\end{verbatim}
+\end{frame-gene}
+
+\end{document}
