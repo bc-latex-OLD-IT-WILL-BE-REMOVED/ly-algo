@@ -254,7 +254,11 @@ for lang in ALL_TRANS:
                 for e in extras
             ]
 
-            macrotxt = "-".join(macrotxt)
+            if control == "If":
+                macrotxt = "\\,--\\,".join(macrotxt)
+
+            else:
+                macrotxt = " ".join(macrotxt)
 
             if prefix == "TT":
                 formatter = "texttt"

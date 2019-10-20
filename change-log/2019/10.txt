@@ -2,6 +2,9 @@
 2019-10-20
 ==========
 
+**Textual versions of main block instructions:** unuseful hyphens will not be printed again.
+
+
 **"Algorithmic flowcharts":** the ``if`` frames use a soft yellow rather than an aggressive green and all the frames have the same default text width.
 
 
