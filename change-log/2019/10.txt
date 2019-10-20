@@ -2,6 +2,9 @@
 2019-10-20
 ==========
 
+**New additional macros:** multi-parallel affectations can be indicated by using ``\MStore`` or ``\MPutIn``.
+
+
 **Textual versions of main block instructions:** unuseful hyphens will not be printed again.
 
 
