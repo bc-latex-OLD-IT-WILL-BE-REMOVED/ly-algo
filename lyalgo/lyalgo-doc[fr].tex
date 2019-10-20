@@ -834,7 +834,7 @@ Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre s
   \\ \Print "Quelque chose"
   \\ $k$ \From $1$ \To $n$
   \\ $k$ \ComingFrom $1$ \GoingTo $n$
-  \\ $L$ \InThis
+  \\ $e$ \InThis $\{ 1 , 4 , 16 \}$
   \\ $L$ \LToR
   \\ $L$ \LToRm
   \\ $L$ \RToL
@@ -852,7 +852,7 @@ Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre s
   \\ \Print "Quelque chose"
   \\ $k$ \From $1$ \To $n$
   \\ $k$ \ComingFrom $1$ \GoingTo $n$
-  \\ $L$ \InThis
+  \\ $e$ \InThis $\{ 1 , 4 , 16 \}$
   \\ $L$ \LToR
   \\ $L$ \LToRm
   \\ $L$ \RToL
@@ -927,7 +927,7 @@ Les affectations simples classiques $x \Store 3$ et $3 \PutIn x$ se tapent \verb
 \medskip
 
 Il existe aussi les macros \verb+\MStore+ et \verb+\MPutIn+ pour des affectations multiples en parallèle comme dans $a, b, c \MStore x, y, z$ ou $x, y, z \MPutIn a, b, c$ pour indiquer que les dernières valeurs de $x$, $y$ et $z$ sont affectées aux variables $a$, $b$ et $c$.
-La multi-affectation se faisant en parallèle, le résultat de $a, b, c \MStore 2, a + b, c - b$ ne sera pas semblable à celui de $a \Store 2$ suivi de $b \Store a + b$ puis $c \Store c - b$ car dans le second cas les variables $a$ et $b$ évoluent avant de nouvelles affectations simples.
+La multi-affectation se faisant en parallèle, le résultat de $a, b, c \MStore 2, a + b, c - b$ ne sera pas semblable à celui de $a \Store 2$ suivi de $b \Store a + b$, puis de $c \Store c - b$ car dans le second cas les variables $a$ et $b$ évoluent avant de nouvelles affectations simples.
 
 
 

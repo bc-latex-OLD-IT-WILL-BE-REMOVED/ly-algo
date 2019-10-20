@@ -521,8 +521,8 @@ for kind in peuftitles:
                 wordbis = macros.pop(0)
                 latexcode.append(f"{prefix}$k$ \\{word} $1$ \\{wordbis} $n$")
 
-            elif wordlower == "inlist":
-                latexcode.append(f"{prefix}$e$ \\{word} $L$")
+            elif wordlower == "inthis":
+                latexcode.append(f"{prefix}$e$ \\{word}" + " $\{ 1 , 4 , 16 \}$")
 
             else:
                 latexcode.append(f"{prefix}$L$ \\{word}")
