@@ -11,11 +11,11 @@
 \newcommand\ForRange{\@ifstar{\@ForRange@star}{\@ForRange@no@star}}
 
 \newcommand\@ForRange@star[4]{
-	\For{\text{$#1$} \From \text{$#2$} \To \text{$#3$}}{#4}
+	\For{\text{#1} \From \text{#2} \To \text{#3}}{#4}
 }
 
 \newcommand\@ForRange@no@star[4]{
-	\For{\text{$#1$} \ComingFrom \text{$#2$} \GoingTo \text{$#3$}}{#4}
+	\For{\text{#1} \ComingFrom \text{#2} \GoingTo \text{#3}}{#4}
 }
 
 

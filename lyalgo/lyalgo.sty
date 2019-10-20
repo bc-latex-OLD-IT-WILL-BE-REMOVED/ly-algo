@@ -2,7 +2,8 @@
 % -- PACKAGES REQUIRED -- %
 % ----------------------- %
 
-\RequirePackage[french,vlined]{algorithm2e}
+\PassOptionsToPackage{vlined,french}{algorithm2e}
+\RequirePackage{algorithm2e}
 \RequirePackage{alltt}
 \RequirePackage{amsmath}
 \RequirePackage{ifthen}
@@ -233,11 +234,11 @@
 \newcommand\ForRange{\@ifstar{\@ForRange@star}{\@ForRange@no@star}}
 
 \newcommand\@ForRange@star[4]{
-	\For{\text{$#1$} \From \text{$#2$} \To \text{$#3$}}{#4}
+	\For{\text{#1} \From \text{#2} \To \text{#3}}{#4}
 }
 
 \newcommand\@ForRange@no@star[4]{
-	\For{\text{$#1$} \ComingFrom \text{$#2$} \GoingTo \text{$#3$}}{#4}
+	\For{\text{#1} \ComingFrom \text{#2} \GoingTo \text{#3}}{#4}
 }
 
 
@@ -249,13 +250,13 @@
 
 \newcommand\aciocolor{red!20}
 \newcommand\acinstrcolor{blue!20}
-\newcommand\acifcolor{green!20}
+\newcommand\acifcolor{yellow!20}
 \newcommand\aclinkcolor{black}
 
 \newcommand\acusecolor{
 	\renewcommand\aciocolor{red!20}
 	\renewcommand\acinstrcolor{blue!20}
-	\renewcommand\acifcolor{green!20}
+	\renewcommand\acifcolor{yellow!20}
 }
 
 \newcommand\acusebw{
@@ -288,7 +289,7 @@
         ellipse,
         fill           = \aciocolor,
         node distance  = 2.5cm,
-        text width     = 6.5em,
+        text width     = 5.5em,
         text centered,
         minimum height = 2em
     },

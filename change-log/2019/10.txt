@@ -1,4 +1,11 @@
 ==========
+2019-10-20
+==========
+
+**"Algorithmic flowcharts":** the ``if`` frames use a soft yellow rather than an aggressive green and all the frames have the same default text width.
+
+
+==========
 2019-10-19
 ==========
 

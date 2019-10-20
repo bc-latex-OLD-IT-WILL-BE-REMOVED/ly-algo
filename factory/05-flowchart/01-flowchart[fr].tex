@@ -27,11 +27,11 @@ sont des diagrammes que l'on peut utiliser pour expliquer des algorithmes très 
 \footnote{
     Cet outil pédagogique montre très vite ses limites. Essayez par exemple de tracer un ordinogramme pour expliquer comment résoudre une équation du 2\ieme{} degré.
 }.
-Voici un exemple expliquant comment résoudre $a x^2 + b = 0$, une équation en $x$, lorsque $a \neq 0$ : le code utilisé est donné plus tard dans la section \ref{section:flowchart-firstexa-code} \emph{(ce code sera très aisé à comprendre une fois lues les sections à venir)}.
+Voici un exemple expliquant comment résoudre $a x^2 + b = 0$, une équation en $x$, lorsque $a \neq 0$ et $b \neq 0$ : le code utilisé est donné plus tard dans la section \ref{section:flowchart-firstexa-code} \emph{(ce code sera très aisé à comprendre une fois lues les sections à venir)}.
 
 \begin{center}
     \small
-    \input{examples/ax**2+b=0.tkz}
+    \input{examples/merly-2nd-degree.tkz}
 \end{center}
 
 
@@ -360,7 +360,7 @@ Nous (re)donnons la version noir et blanc de l'ordinogramme présenté au début
 \acusebw
 \begin{center}
     \small
-    \input{examples/ax**2+b=0.tkz}
+    \input{examples/merly-2nd-degree.tkz}
 \end{center}
 \acusecolor
 
@@ -371,7 +371,7 @@ Ce diagramme s'obtient via le code suivant.
 \begin{algochart}
   % Placement des noeuds.
   \node[acio]
-       (input) {$a x^2 + b$ avec $a \neq 0$};
+       (input) {$a x^2 + b$ avec $a \neq 0$ et $b \neq 0$};
 
   \node[acinstr, below of = input, text width =  6em]
        (square) {$q \Store \dfrac{-b}{a}$};

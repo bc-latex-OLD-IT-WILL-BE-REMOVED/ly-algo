@@ -1,7 +1,7 @@
     \begin{algochart}
       % Placement des noeuds.
       \node[acio]
-           (input) {$a x^2 + b$ avec $a \neq 0$};
+           (input) {$a x^2 + b$ avec $a \neq 0$ et $b \neq 0$};
 
       \node[acinstr, below of = input, text width =  6em]
            (square) {$q \Store \dfrac{-b}{a}$};
