@@ -5,7 +5,7 @@
 **New additional macros:** multi-parallel affectations can be indicated by using ``\MStore`` or ``\MPutIn``.
 
 
-**Textual versions of main block instructions:** unuseful hyphens will not be printed again.
+**Textual versions of main block instructions:** unuseful hyphens will not be printed anymore.
 
 
 **"Algorithmic flowcharts":** the ``if`` frames use a soft yellow rather than an aggressive green and all the frames have the same default text width.
