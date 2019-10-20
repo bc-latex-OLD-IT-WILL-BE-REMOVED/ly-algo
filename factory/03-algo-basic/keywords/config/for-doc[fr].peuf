@@ -2,11 +2,11 @@ titles::
     input = Entrée / Sortie
     block = Bloc principal
 
-    for    = Boucles \texttt{POUR} et \texttt{TANT QUE}
-    repeat = Boucles \texttt{RÉPÉTER JUSQU'À}
+    for    = Boucles \TTfor{} et \TTwhile{}
+    repeat = Boucles \TTrepeat{}
 
-    switch = Disjonction de cas \texttt{SELON QUE}
-    ifelif = Tests conditionnelles \texttt{SI / SINON SI / SINON}
+    switch = Disjonction de cas \TTswitch{}
+    ifelif = Disjonction conditionnelle \TTif{}
 
     word = Diverses commandes
 
@@ -22,21 +22,21 @@ block::
 
 
 for::
-    Voici les boucles de type \verb+POUR+ et \verb+TANT QUE+ proposées par le package.
+    Voici les boucles de type \TTfor{} et \TTwhile{} proposées par le package.
 
     \newpage
 
 
 repeat::
-    Voici comment rédiger une boucle du type \verb+RÉPÉTER JUSQU'À+.
+    Voici comment rédiger une boucle du type \TTrepeat{}.
 
 
 ifelif::
-    Les blocs conditionnels \verb+SI / SINON SI / SINON+ se rédigent très naturellement.
+    Les blocs conditionnels \TTif{} se rédigent très naturellement.
 
 
 switch::
-    La syntaxe pour les blocs conditionnels du type \verb+SELON QUE+ ne pose pas de difficultés de rédaction.
+    La syntaxe pour les blocs conditionnels du type \TTswitch{} ne pose pas de difficultés de rédaction.
 
 
 word::
