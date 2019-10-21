@@ -1,11 +1,18 @@
 % == PACKAGES USED == %
 
+\RequirePackage{mathtools}
+
 
 % == DEFINITIONS == %
-
-\newcommand\Store{\leftarrow}
-\newcommand\MStore{\leftleftarrows}
 
 \newcommand\PutIn{\rightarrow}
 \newcommand\MPutIn{\rightrightarrows}
 
+\newcommand\MStore{\leftleftarrows}
+
+\newcommand\Store{\@ifstar{\@Store@pre@star}{\@Store@no@star}}
+\newcommand\@Store@pre@star{\@ifstar{\@Store@star@star}{\@Store@star}}
+
+\newcommand\@Store@no@star{\leftarrow}
+\newcommand\@Store@star{\mathrel{\mathpalette\my@hat@eq\relax}}
+\newcommand\@Store@star@star{\triangleq}

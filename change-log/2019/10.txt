@@ -1,4 +1,17 @@
 ==========
+2019-10-21
+==========
+
+**New subminor version version::``0.1.1-beta``:** see before this date for all the changes.
+
+
+**Affectation:** two new macros ``\Store*`` and ``\Store**`` give decorated equal signs.
+
+
+**Interval:** the macro ``\CSinterval`` allows to write discrete intervals like ``1..4``.
+
+
+==========
 2019-10-20
 ==========
 
@@ -15,7 +28,7 @@
 2019-10-19
 ==========
 
-**New version version::``0.1.0-beta``:** see above and before this date for all the changes.
+**New version version::``0.1.0-beta``:** see below and before this date for all the changes.
 
 
 **"Algorithmic flowcharts":** this uses the ¨tikz machinery.

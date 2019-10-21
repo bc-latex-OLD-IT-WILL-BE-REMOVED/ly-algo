@@ -2,11 +2,12 @@
 % -- PACKAGES REQUIRED -- %
 % ----------------------- %
 
-\PassOptionsToPackage{french,vlined}{algorithm2e}
+\PassOptionsToPackage{vlined,french}{algorithm2e}
 \RequirePackage{algorithm2e}
 \RequirePackage{alltt}
 \RequirePackage{amsmath}
 \RequirePackage{ifthen}
+\RequirePackage{mathtools}
 \RequirePackage{tcolorbox}
 \RequirePackage{tikz}
 \RequirePackage{xint}
@@ -123,11 +124,24 @@
 % -- AFFECTATION -- %
 % ----------------- %
 
-\newcommand\Store{\leftarrow}
-\newcommand\MStore{\leftleftarrows}
-
 \newcommand\PutIn{\rightarrow}
 \newcommand\MPutIn{\rightrightarrows}
+
+\newcommand\MStore{\leftleftarrows}
+
+\newcommand\Store{\@ifstar{\@Store@pre@star}{\@Store@no@star}}
+\newcommand\@Store@pre@star{\@ifstar{\@Store@star@star}{\@Store@star}}
+
+\newcommand\@Store@no@star{\leftarrow}
+\newcommand\@Store@star{\mathrel{\mathpalette\my@hat@eq\relax}}
+\newcommand\@Store@star@star{\triangleq}
+
+
+% -------------- %
+% -- INTERVAL -- %
+% -------------- %
+
+\newcommand\CSinterval[2]{\ensuremath{#1\,.\mkern0.2mu.\,#2}}
 
 
 % ---------- %

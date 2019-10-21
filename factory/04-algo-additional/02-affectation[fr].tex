@@ -3,6 +3,7 @@
 \makeatletter
 	\input{../config/header[fr].sty}
 	\input{../01-misc/00-common-tools.sty}
+	\input{../03-algo-basic/02-frame.sty}
 	
 	\usepackage{02-affectation}
 \makeatother
@@ -12,14 +13,43 @@
 
 %\section{Des outils pour les algorithmes} \label{algo-extra}
 
-\subsection{Affectations}
+\subsection{Affectations simples ou multiples}
+
+\subsubsection{Affectation simple avec une flèche}
 
 Les affectations simples classiques $x \Store 3$ et $3 \PutIn x$ se tapent \verb+$x \Store 3$+ et \verb+$3 \PutIn x$+ respectivement où les macros \verb+\Store+ et \verb+\PutIn+ sont des opérateurs mathématiques.
 
+
+\subsubsection{Affectation simple avec un signe égal décoré}
+
+On peut aussi préférer la notation $x \Store* 3$ ou $x \Store** 3$. Ceci se tape via \verb+$x \Store* 3$+ et \verb+$x \Store** 3$+ respectivement.
+
+
+\subsubsection{Affectation multiple}
+
+Pour finir, les macros \verb+\MStore+ et \verb+\MPutIn+ servent pour les affectations multiples en parallèle comme dans $a, b, c \MStore x, y, z$ ou $x, y, z \MPutIn a, b, c$ pour indiquer que les dernières valeurs de $x$, $y$ et $z$ sont affectées aux variables $a$, $b$ et $c$.
+
 \medskip
 
-Il existe aussi les macros \verb+\MStore+ et \verb+\MPutIn+ pour des affectations multiples en parallèle comme dans $a, b, c \MStore x, y, z$ ou $x, y, z \MPutIn a, b, c$ pour indiquer que les dernières valeurs de $x$, $y$ et $z$ sont affectées aux variables $a$, $b$ et $c$.
-La multi-affectation se faisant en parallèle, le résultat de $a, b, c \MStore 2, a + b, c - b$ ne sera pas semblable à celui de $a \Store 2$ suivi de $b \Store a + b$, puis de $c \Store c - b$ car dans le second cas les variables $a$ et $b$ évoluent avant de nouvelles affectations simples.
+{\itshape \textbf{ATTENTION !} La multi-affectation se faisant en parallèle, le résultat de $a, b, c \MStore 2, a + b, c - b$ ne sera pas semblable à celui de $a \Store 2$ suivi de $b \Store a + b$ puis de $c \Store c - b$ car dans le second cas les variables $a$ et $b$ évoluent avant de nouvelles affectations simples. En fait la multi-affectation précédente correspond aux actions suivantes.}
+
+\medskip
+
+\begin{algo}
+	\caption{Comment $a, b, c \MStore 2, a + b, c - b$ fonctionne-t-il ?}
+
+	$a_{memo} \Store a$ ;
+	$b_{memo} \Store b$ ;
+	$c_{memo} \Store c$
+	\\
+	\addalgoblank
+	$a \Store 2$
+	\\
+	$b \Store a_{memo} + b_{memo}$
+	\\
+	$c \Store c_{memo} - b_{memo}$
+\end{algo}
+
 
 \end{document}
 
