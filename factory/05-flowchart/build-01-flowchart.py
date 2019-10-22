@@ -11,8 +11,8 @@ EXA_DIR_DEST = THIS_DIR.parent.parent / "lyalgo" / "examples"
 # -- COPYING FILES FOR EXAMPLES -- #
 # -------------------------------- #
 
-for peufpath in THIS_EXA_DIR.walk("file::*.tkz"):
+for peufpath in THIS_EXA_DIR.walk("file::**.tkz"):
     peufpath.copy_to(
-        dest     = EXA_DIR_DEST / peufpath.name,
+        dest     = EXA_DIR_DEST / (peufpath - THIS_EXA_DIR),
         safemode = False
     )

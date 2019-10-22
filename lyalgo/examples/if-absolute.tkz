@@ -1,17 +1,19 @@
 \begin{algochart}
   % Placement des noeuds.
   \node[acio]
-       (input) {$n \in \NN$};
+  (input) {$n \in \NN$};
+
   \node[acif, below of = input]
-       (is-neg) {$n < 0$ ?};
+  (is-neg) {$n < 0$ ?};
 
   \node[acinstr, right] at ($(is-neg) + (2.5,0)$)
-       (neg) {$res \Store (-n)$};
+  (neg) {$res \Store (-n)$};
+
   \node[acinstr, below of = is-neg]
-       (not-neg) {$res \Store n$};
+  (not-neg) {$res \Store n$};
 
   \node[acio, below of = not-neg]
-       (output) {$res$};
+  (output) {$res$};
 
   % Ajout des connexions.
   \path[aclink] (input) -- (is-neg);
@@ -20,7 +22,5 @@
   \path[aclink] (is-neg) -- (not-neg) \aclabelright{non};
 
   \path[aclink] (not-neg) -- (output);
-  \path[aclink] (neg)
-             |- ([xshift = 3mm, yshift = 5mm] output.north)
-             -- ([xshift = 3mm] output.north);
+  \path[aclink] (neg) to[aczigzag] (output);
 \end{algochart}

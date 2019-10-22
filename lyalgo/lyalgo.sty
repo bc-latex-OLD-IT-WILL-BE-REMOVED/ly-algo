@@ -6,7 +6,6 @@
 \RequirePackage{algorithm2e}
 \RequirePackage{alltt}
 \RequirePackage{amsmath}
-\RequirePackage{ifthen}
 \RequirePackage{mathtools}
 \RequirePackage{tcolorbox}
 \RequirePackage{tikz}
@@ -271,15 +270,15 @@
 \newcommand\aclinkcolor{black}
 
 \newcommand\acusecolor{
-	\renewcommand\aciocolor{red!20}
-	\renewcommand\acinstrcolor{blue!20}
-	\renewcommand\acifcolor{yellow!20}
+    \renewcommand\aciocolor{red!20}
+    \renewcommand\acinstrcolor{blue!20}
+    \renewcommand\acifcolor{yellow!20}
 }
 
 \newcommand\acusebw{
-	\renewcommand\aciocolor{white}
-	\renewcommand\acinstrcolor{white}
-	\renewcommand\acifcolor{white}
+    \renewcommand\aciocolor{white}
+    \renewcommand\acinstrcolor{white}
+    \renewcommand\acifcolor{white}
 }
 
 
@@ -288,63 +287,104 @@
 
 \usetikzlibrary{shapes, arrows, calc, positioning}
 
-\newcommand\aclabelabove[1]{node[near start, above]{#1}}
-\newcommand\aclabelbelow[1]{node[near start, below]{#1}}
-\newcommand\aclabelright[1]{node[near start, right]{#1}}
-\newcommand\aclabelleft[1]{node[near start, left]{#1}}
+% Source
+%     * https://tex.stackexchange.com/a/513231/6880
+\@for\next:={above,below,right,left}\do{%
+\expandafter\edef\csname aclabel\next\endcsname#1{node[near start, \next]{#1}}}
 
-\newenvironment{algochart}{
-	\begin{tikzpicture}
+
+
+\newenvironment{algochart}[1][]{
+    \begin{tikzpicture}[#1]
 }{
-	\end{tikzpicture}
+    \end{tikzpicture}
 }
+
+% Source for zigzags and backloop.
+%	* https://tex.stackexchange.com/a/513236/6880
 
 \tikzset{
     % Input / Output
     acio/.style = {
-        draw,
-        ellipse,
+        draw, ellipse,
         fill           = \aciocolor,
         node distance  = 2.5cm,
+        minimum height = 2em,
         text width     = 5.5em,
         text centered,
-        minimum height = 2em
     },
     % Instruction
     acinstr/.style = {
-        rectangle,
-        draw,
+        draw, rectangle, rounded corners,
         fill           = \acinstrcolor,
+        node distance  = 2.5cm,
+        minimum height = 2em,
         text width     = 5.5em,
         text centered,
-        node distance  = 2.5cm,
-        rounded corners,
-        minimum height = 2em
     },
     % Conditional node
     acif/.style = {
-        diamond,
-        draw,
+        draw, diamond,
         fill          = \acifcolor,
+        node distance = 2.5cm,
+        inner sep     = 0pt,
         text width    = 5.5em,
         text badly centered,
-        node distance = 2.5cm,
-        inner sep     = 0pt
     },
     acifinstr/.style = {
-        rectangle,
-        draw,
+        draw, rectangle, rounded corners,
         fill           = \acifcolor,
+        node distance  = 2.5cm,
+        minimum height = 2em,
         text width     = 5.5em,
         text centered,
-        node distance  = 2.5cm,
-        rounded corners,
-        minimum height = 2em
     },
     % Connection
     aclink/.style = {
-        draw,
-        -triangle 60,
+        draw, -triangle 60,
         color = \aclinkcolor,
     },
+}
+
+
+% WARNING ! We need to separate the settings !
+
+\tikzset{
+    % Zigzag
+    aczigzag/.style = {
+    	/utils/exec = \tikzset{aczigzag/.cd,#1},
+        to path     = {
+            ([xshift = \pgfkeysvalueof{/tikz/aczigzag/xstart}] \tikztostart)
+         |- ([xshift = \pgfkeysvalueof{/tikz/aczigzag/x}, 
+              yshift = \pgfkeysvalueof{/tikz/aczigzag/y}] \tikztotarget.north)
+         -- ([xshift = \pgfkeysvalueof{/tikz/aczigzag/x}] \tikztotarget.north)
+        }
+    },
+    aczigzag/.cd,xstart/.initial=0mm,x/.initial=3mm,y/.initial=5mm,
+}
+
+\tikzset{
+ 	% Left back loop
+    acbackloopleft/.style = {
+    	/utils/exec = \tikzset{acbackloopleft/.cd,#1},
+        to path     = {
+            (\tikztostart.west)
+         -- ([xshift = \pgfkeysvalueof{/tikz/acbackloopleft/x}] \tikztostart.west)
+         |- (\tikztotarget.west)
+        }
+    },
+    acbackloopleft/.cd,x/.initial=-5em,
+}
+
+\tikzset{
+ 	% Right back loop
+    acbackloopright/.style = {
+    	/utils/exec = \tikzset{acbackloopright/.cd,#1},
+        to path     = {
+            (\tikztostart.east)
+         -- ([xshift = \pgfkeysvalueof{/tikz/acbackloopright/x}] \tikztostart.east)
+         |- (\tikztotarget.east)
+        }
+    },
+    acbackloopright/.cd,x/.initial=5em,
 }

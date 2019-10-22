@@ -1,0 +1,4 @@
+\begin{algochart}
+  \node[acinstr, text width = 8em]
+  {Une instruction};
+\end{algochart}

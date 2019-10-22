@@ -1,0 +1,4 @@
+\begin{algochart}
+  \node[acio, text width = 8em]
+  {Entrée ou sortie};
+\end{algochart}

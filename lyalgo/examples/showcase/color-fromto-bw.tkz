@@ -1,0 +1,7 @@
+\begin{algochart}
+  % Passons au noir et blanc.
+  \acusebw
+  \node[acinstr] {Instruction};
+  % Retour à la couleur pour la suite.
+  \acusecolor
+\end{algochart}

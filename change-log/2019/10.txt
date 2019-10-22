@@ -1,8 +1,18 @@
 ==========
+2019-10-22
+==========
+
+**"Algorithmic flowcharts":** ``to[zigzag]``, ``to[acbackloopleft]`` and ``to[acbackloopright]`` simplifies the drawing of "orthopolylines" specific to algorithmic flowcharts.
+
+
+**¨Doc:** there is a better organization of the ¨tikz examples
+
+
+==========
 2019-10-21
 ==========
 
-**New subminor version version::``0.1.1-beta``:** see before this date for all the changes.
+**New subminor version version::``0.1.1-beta``:** see below and before this date for all the changes.
 
 
 **Affectation:** two new macros ``\Store*`` and ``\Store**`` give decorated equal signs.

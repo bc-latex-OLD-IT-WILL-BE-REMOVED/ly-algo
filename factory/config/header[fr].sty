@@ -29,6 +29,8 @@
 
 \usepackage{ifplatform}
 
+\usepackage{fancyvrb}
+
 \usepackage{cbdevtool}
 \usepackage{lymath}
 
@@ -65,3 +67,34 @@
 \newcommand\myquote[1]{{\itshape \og #1 \fg}}
 
 \newcommand\squaremacro{$x^2$}
+
+
+\newenvironment{latex-frame}{
+	\begin{frame-gene}[Code \LaTeX{}]
+}{
+	\end{frame-gene}
+}
+
+
+\newcommand\justcode[1]{
+	\begin{latex-frame}
+		\VerbatimInput{#1}
+	\end{latex-frame}
+}
+
+
+\newcommand\codeasideoutput[1]{
+    \begin{multicols}{2}
+    	\centering
+    	\justcode{#1}
+    	\vfill\null
+    	\columnbreak
+    	\textit{Mise en forme correspondante.}
+
+    	\vspace{1em}
+    
+ 	    \small
+    	\input{#1}
+	    \vfill\null
+    \end{multicols}
+ }
