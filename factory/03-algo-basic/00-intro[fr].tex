@@ -17,6 +17,8 @@
 
 \begin{document}
 
+\newpage
+
 \section{Algorithmes en langage naturel}
 
 \subsection{Comment taper les algorithmes}
@@ -30,94 +32,14 @@ Dans la section suivante, nous verrons comment encadrer les algorithmes. Pour l'
 
 
 \bigskip
-
-
-\begin{algo*}
-    \caption{Suite de Collatz $(u_k)$ -- Conjecture de Syracuse}
-
-    \Data{$n \in \NN$}
-    \Result{le premier indice $i \in \ZintervalC{0}{10^5}$ tel que $u_i = 1$ ou $(-1)$ en cas d'échec}
-
-    \addalgoblank    % Pour aérer un peu la mise en forme.
-
-    \Actions{
-        $i, imax \Store 0, 10^5$
-        \\
-        $u \Store n$
-        \\
-        $continuer \Store \top$
-        \\
-        \While{$continuer = \top \And i \leq imax$}{
-            \uIf{$u = 1$}{
-                \Comment{C'est gagné !}
-                $continuer \Store \bot$
-            } \Else {
-                \Comment{Calcul du terme suivant}
-                \uIf{$u \equiv 0 \,\, [2]$}{
-                    $u \Store u / 2$
-                    \Comment*{Quotient de la division euclidienne.}
-                } \Else {
-                    $u \Store 3u + 1$
-                }
-                $i \Store i + 1$
-            }
-        }
-        \If{$i > imax$}{
-            $i \Store (-1)$
-        }
-        \Return{$i$}
-    }
-\end{algo*}
-
-
+\input{examples/algo-basic/syracuse.tex}
 \bigskip
 
 
 La rédaction d'un tel algorithme est facile car il suffit de taper le code suivant proche de ce que pourrait proposer un langage classique de programmation. Le code utilise certaines des macros additionnelles proposées par \verb+lyalgo+ \emph{(voir la section \ref{algo-extra})} ainsi que la macro \verb+\ZintervalC+ du package \verb+lymath+. Nous donnons juste après le squelette de la syntaxe propre à \verb+algorithm2e+.
 
 
-\begin{frame-gene}[Code \LaTeX]
-    \small
-\begin{verbatim}
-\begin{algo*}
-    \caption{Suite de Collatz $(u_k)$ -- Conjecture de Syracuse}
-
-    \Data{$n \in \NN$}
-    \Result{le premier indice $i \in \ZintervalC{0}{10^5}$ tel que $u_i = 1$ ou $(-1)$
-            en cas d'échec}
-
-    \addalgoblank    % Pour aérer un peu la mise en forme.
-
-    \Actions{
-        $i, imax \Store 0, 10^5$
-        \\
-        $u \Store n$
-        \\
-        $continuer \Store \top$
-        \\
-        \While{$continuer = \top$ \And $i \leq imax$}{
-            \uIf{$u = 1$}{
-                \Comment{C'est gagné !}
-                $continuer \Store \bot$
-            } \Else {
-                \Comment{Calcul du terme suivant}
-                \uIf{$u \equiv 0 \,\, [2]$}{
-                    $u \Store u / 2$
-                    \Comment*{Quotient de la division euclidienne.}
-                } \Else {
-                    $u \Store 3u + 1$
-                }
-                $i \Store i + 1$
-            }
-        }
-        \If{$i > imax$}{
-            $i \Store (-1)$
-        }
-        \Return{$i$}
-    }
-\end{algo*}
-\end{verbatim}
-\end{frame-gene}
+\justcode{examples/algo-basic/syracuse.tex}
 
 
 Le squelette du code précédent est le suivant. 

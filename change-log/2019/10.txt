@@ -1,11 +1,21 @@
 ==========
+2019-10-23
+==========
+
+**Additional macros:** the macro ``ForRange**`` as an easy way to have a symbolic notation of a ``FOR`` loop.
+
+
+**¨Doc:** all the ¨latex examples are now organized like the ¨tikz ones.
+
+
+==========
 2019-10-22
 ==========
 
-**"Algorithmic flowcharts":** ``to[zigzag]``, ``to[acbackloopleft]`` and ``to[acbackloopright]`` simplifies the drawing of "orthopolylines" specific to algorithmic flowcharts.
+**"Algorithmic flowcharts":** ``to[zigzag]``, ``to[acbackloopleft]`` and ``to[acbackloopright]`` simplify a lot the drawing of "orthopolylines" specific to algorithmic flowcharts.
 
 
-**¨Doc:** there is a better organization of the ¨tikz examples
+**¨Doc:** there is a better organization of the ¨tikz examples.
 
 
 ==========
@@ -90,13 +100,13 @@
 
     1) The macro ``\List`` is for writing lists by giving their content.
 
-    2) `\ListElt` prints symbolically the k-th elements of a named list.
+    2) ``\ListElt`` prints symbolically the k-th elements of a named list.
 
     3) ``\ListUntil`` and ``\ListFrom`` are to indicated some special sub lists extracted from a list.
 
-    4) The macro `\AddList` is a math binary operator for the concatenation of lists.
+    4) The macro ``\AddList`` is a math binary operator for the concatenation of lists.
 
-    5) The macro `\Len` is a math function to use to indicate the length of  a list.
+    5) The macro ``\Len`` is a math function to use to indicate the length of  a list.
 
     6) ``\Append``, ``\Append*`` and ``\Append**`` can be used to indicate that an element is appended to a list.
 

@@ -24,7 +24,11 @@
 \end{frame-gene}
 
 
-% == All extra words - START == %
+% ---------------- %
+
+
+% == Block and words tools - START == %
+
 \subsubsection{Entrée / Sortie}
 
 Nous donnons ci-dessous les versions au singulier de tous les mots disponibles de type \myquote{entrée / sortie}.
@@ -32,309 +36,59 @@ Excepté pour \verb+\InState+ et \verb+\OutState+, toutes les autres macros ont 
 Par exemple, le pluriel de \verb+\In+ s'obtient via \verb+\Ins+.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \In{donnée 1}
-  \Out{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \In{donnée 1}
-  \Out{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Data{donnée 1}
-  \Result{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Data{donnée 1}
-  \Result{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \InState{donnée 1}
-  \OutState{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \InState{donnée 1}
-  \OutState{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \PreCond{donnée 1}
-  \PostCond{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \PreCond{donnée 1}
-  \PostCond{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
+\codeasideoutput{examples/algo-basic/additional-macros/in-out.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/data-result.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/instate-outstate.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/precond-postcond.tex}
 
 \subsubsection{Bloc principal}
 
 Voici comment indiquer le bloc principal d'instructions avec deux textes au choix pour le moment.
 
+\newpage
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Actions{Instruction 1}
-  \Begin{Instruction 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Actions{Instruction 1}
-  \Begin{Instruction 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
 
+\codeasideoutput{examples/algo-basic/additional-macros/main-block.tex}
 
 \subsubsection{Boucles \TTfor{} et \TTwhile{}}
 
 Voici les boucles de type \TTfor{} et \TTwhile{} proposées par le package.
 
-\newpage
 
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \For{$i \in uneliste$}{
-    Instruction 1
-  }
-  \ForAll{$i \in uneliste$}{
-    Instruction 2
-  }
-  \ForEach{$i \in uneliste$}{
-    Instruction 3
-  }
-  \While{$i \in uneliste$}{
-    Instruction 4
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \For{$i \in uneliste$}{
-    Instruction 1
-  }
-  \ForAll{$i \in uneliste$}{
-    Instruction 2
-  }
-  \ForEach{$i \in uneliste$}{
-    Instruction 3
-  }
-  \While{$i \in uneliste$}{
-    Instruction 4
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
-
+\codeasideoutput{examples/algo-basic/additional-macros/for-loop.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/forall-loop.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/foreach-loop.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/while-loop.tex}
 
 \subsubsection{Boucles \TTrepeat{}}
 
 Voici comment rédiger une boucle du type \TTrepeat{}.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Repeat{$i \in uneliste$}{
-    Instruction 
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Repeat{$i \in uneliste$}{
-    Instruction 
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\subsubsection{Disjonction de cas \TTswitch{}}
-
-La syntaxe pour les blocs conditionnels du type \TTswitch{} ne pose pas de difficultés de rédaction.
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Switch{$i$}{
-    \uCase{$i = 0$}{Instruction 1}
-    \uCase{$i = 1$}{Instruction 2}
-    \Case{$i = 2$}{Instruction 3}
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Switch{$i$}{
-    \uCase{$i = 0$}{Instruction 1}
-    \uCase{$i = 1$}{Instruction 2}
-    \Case{$i = 2$}{Instruction 3}
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
-
+\codeasideoutput{examples/algo-basic/additional-macros/repeat-loop.tex}
 
 \subsubsection{Disjonction conditionnelle \TTif{}}
 
 Les blocs conditionnels \TTif{} se rédigent très naturellement.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \uIf{$i = 0$}{
-    Instruction 1
-  }
-  \uElseIf{$i = 1$}{
-    Instruction 2
-  }
-  \Else{
-    Instruction 3
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \uIf{$i = 0$}{
-    Instruction 1
-  }
-  \uElseIf{$i = 1$}{
-    Instruction 2
-  }
-  \Else{
-    Instruction 3
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-basic/additional-macros/ifelif.tex}
 
+\subsubsection{Disjonction de cas \TTswitch{}}
+
+La syntaxe pour les blocs conditionnels du type \TTswitch{} ne pose pas de difficulté de rédaction.
+
+
+\codeasideoutput{examples/algo-basic/additional-macros/switch.tex}
 
 \subsubsection{Diverses commandes}
 
-Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions maculines des textes proposés.
+Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions \myquote{masculinisées} des textes proposés.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  A \And B \Or C
-  \\ \Return RÉSULTAT
-  \\ \Ask "Quelque chose"
-  \\ \Print "Quelque chose"
-  \\ $k$ \From $1$ \To $n$
-  \\ $k$ \ComingFrom $1$ \GoingTo $n$
-  \\ $e$ \InThis $\{ 1 , 4 , 16 \}$
-  \\ $L$ \LToR
-  \\ $L$ \LToRm
-  \\ $L$ \RToL
-  \\ $L$ \RToLm
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  A \And B \Or C
-  \\ \Return RÉSULTAT
-  \\ \Ask "Quelque chose"
-  \\ \Print "Quelque chose"
-  \\ $k$ \From $1$ \To $n$
-  \\ $k$ \ComingFrom $1$ \GoingTo $n$
-  \\ $e$ \InThis $\{ 1 , 4 , 16 \}$
-  \\ $L$ \LToR
-  \\ $L$ \LToRm
-  \\ $L$ \RToL
-  \\ $L$ \RToLm
-\end{algo}
-    \vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-basic/additional-macros/word.tex}
 
-
-% == All extra words - END == %
+% == Block and words tools - END == %
 
 
 % ---------------- %
@@ -346,7 +100,7 @@ Pour faciliter la rédaction de textes sur les algorithmes, des macros standardi
 Dans les exemples qui suivent, les préfixes \verb+TT+ et \verb+AL+ font référence à \myquote{True Type} pour une police à chasse fixe, et à \myquote{AL-gorithme} pour une écriture similaire à celle utilisée dans les algorithmes.
 
 
-% == Main tools - START == %
+% == Text tools - START == %
 
 \begin{center}
 	Liste des commandes de type \myquote{True Type}.
@@ -371,6 +125,7 @@ Dans les exemples qui suivent, les préfixes \verb+TT+ et \verb+AL+ font référ
     \item \verb+\ALrepeat+ donne \ALrepeat.
     \item \verb+\ALswitch+ donne \ALswitch.
 \end{enumerate}
-% == Main tools - END == %
+
+% == Text tools - END == %
 
 \end{document}

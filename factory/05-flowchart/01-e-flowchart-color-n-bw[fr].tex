@@ -1,0 +1,26 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+
+    \usepackage{01-a-flowchart}
+\makeatother
+
+
+\newcommand\Store{\leftarrow}
+\newcommand\List[1]{[\,#1\,]}
+\newcommand\EmptyList{\List{}}
+
+
+\begin{document}
+
+%\section{Ordinogrammes}
+
+\subsection{Passer de la couleur au noir et blanc, et vice versa} \label{section:bw-mode}
+
+Pour l'impression papier, n'avoir que du noir et blanc peut rende service. Les commandes \verb+\acusebw+ et \verb+\acusecolor+ permettent d'avoir du noir et blanc ou de la couleur pour tous les ordinogrammes qui suivent l'utilisation de ces macros.
+
+\codeasideoutput{examples/flowchart/showcase/color-fromto-bw.tkz}
+
+\end{document}

@@ -11,11 +11,11 @@
 
 **Additional macros:** here are the new commands.
 
-    1) For affectations, there are `\Store` and `\PutIn$`.
+    1) For affectations, there are ``\Store`` and ``\PutIn$``.
 
-    2) For loop, a funny play on words, there are `ForRange` and `ForRange*`.
+    2) For loop, a funny play on words, there are ``ForRange`` and ``ForRange*``.
 
-    3) For lists, there is `\EmptyList`.
+    3) For lists, there is ``\EmptyList``.
 
 
 

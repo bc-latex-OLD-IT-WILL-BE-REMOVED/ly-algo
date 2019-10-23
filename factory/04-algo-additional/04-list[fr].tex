@@ -179,51 +179,11 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 
 Les macros \verb+\ForInList+ et \verb+\ForInListRev+ facilitent la rédaction de boucle sur une liste parcourue de façon déterministe.
 
+\codeasideoutput{examples/algo-additional/forinlist.tex}
 
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForInList{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForInList{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\newpage
 
-
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForInListRev{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForInListRev{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-additional/forinlist-rev.tex}
 
 \end{document}
 

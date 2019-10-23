@@ -1,0 +1,28 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+
+    \usepackage{01-a-flowchart}
+\makeatother
+
+
+\newcommand\Store{\leftarrow}
+\newcommand\List[1]{[\,#1\,]}
+\newcommand\EmptyList{\List{}}
+
+
+\begin{document}
+
+%\section{Ordinogrammes}
+
+\subsection{L'environnement \texttt{algochart}}
+
+Tous les codes seront placés dans l'environnement \verb+algochart+ qui pour le moment est juste un alias de l'environnement \verb+tikzpicture+ proposé par \verb+TikZ+ qui fait le principal du travail
+\footnote{
+	\texttt{algochart} vient de la contraction de \myquote{algorithmic} et \myquote{flowchart} soit \myquote{algotithmique} et \myquote{diagramme} en anglais.
+}.
+\verb+lyalgo+ définit juste quelques styles et quelques macros pour faciliter la saisie des ordinogrammes pour travailler efficacement avec les macros \verb+\node+ et \verb+\path+ proposées par \verb+TikZ+.
+
+\end{document}

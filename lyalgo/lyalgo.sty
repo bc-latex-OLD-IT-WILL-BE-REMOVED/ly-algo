@@ -2,7 +2,7 @@
 % -- PACKAGES REQUIRED -- %
 % ----------------------- %
 
-\PassOptionsToPackage{vlined,french}{algorithm2e}
+\PassOptionsToPackage{french,vlined}{algorithm2e}
 \RequirePackage{algorithm2e}
 \RequirePackage{alltt}
 \RequirePackage{amsmath}
@@ -247,20 +247,25 @@
 % Algo - Additional semantic macros - General
 
 
-\newcommand\ForRange{\@ifstar{\@ForRange@star}{\@ForRange@no@star}}
-
-\newcommand\@ForRange@star[4]{
-	\For{\text{#1} \From \text{#2} \To \text{#3}}{#4}
-}
+\newcommand\ForRange{\@ifstar{\@ForRange@pre@star}{\@ForRange@no@star}}
+\newcommand\@ForRange@pre@star{\@ifstar{\@ForRange@star@star}{\@ForRange@star}}
 
 \newcommand\@ForRange@no@star[4]{
 	\For{\text{#1} \ComingFrom \text{#2} \GoingTo \text{#3}}{#4}
 }
 
+\newcommand\@ForRange@star[4]{
+	\For{\text{#1} \From \text{#2} \To \text{#3}}{#4}
+}
 
-% --------------- %
-% -- FLOWCHART -- %
-% --------------- %
+\newcommand\@ForRange@star@star[4]{
+	\For{$#1 \in \CSinterval{#2}{#3}$}{#4}
+}
+
+
+% ----------------- %
+% -- A FLOWCHART -- %
+% ----------------- %
 
 % TiKz - Flow charts - Colors
 

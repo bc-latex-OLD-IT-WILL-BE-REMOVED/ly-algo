@@ -13,6 +13,7 @@ THIS_DIR = PPath( __file__ ).parent
 TEMPLATE_PATH = THIS_DIR / "config" / "doc[fr].tex"
 DIR_DOC_PATH  = THIS_DIR.parent / "lyalgo"
 DOC_PATH      = DIR_DOC_PATH / "lyalgo-doc[fr].tex"
+EXA_DIR_DEST  = DIR_DOC_PATH / "examples"
 
 DOUBLE_BRACES = MultiReplace({
     '{': '{{',
@@ -52,8 +53,9 @@ with open(
 # -- LOOKING FOR DOCS -- #
 # ---------------------- #
 
-CONTENTS   = []
-LATEXFILES = []
+CONTENTS      = []
+EXAMPLE_FILES = []
+LATEXFILES    = []
 
 for subdir in THIS_DIR.walk("dir::"):
     subdir_name = str(subdir.name)
@@ -68,6 +70,11 @@ for subdir in THIS_DIR.walk("dir::"):
         if not l.stem.endswith("-nodoc[fr]")
     ]
 
+    subdir_exa = subdir / "examples"
+
+    EXAMPLE_FILES += [
+        (l, subdir_exa) for l in subdir.walk("file::examples/**")
+    ]
 
 LATEXFILES.sort()
 
@@ -85,6 +92,13 @@ for latexfile in LATEXFILES:
         )
 
         CONTENTS.append(content)
+
+
+for peufpath, subdir_exa in EXAMPLE_FILES:
+    peufpath.copy_to(
+        dest     = EXA_DIR_DEST / (peufpath - subdir_exa),
+        safemode = False
+    )
 
 
 # ------------------------- #

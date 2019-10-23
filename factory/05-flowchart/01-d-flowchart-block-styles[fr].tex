@@ -4,7 +4,7 @@
     \input{../config/header[fr].sty}
     \input{../01-misc/00-common-tools.sty}
 
-    \usepackage{01-flowchart}
+    \usepackage{01-a-flowchart}
 \makeatother
 
 
@@ -15,52 +15,7 @@
 
 \begin{document}
 
-\section{Ordinogrammes}
-
-\subsection{C'est quoi un ordinogramme} \label{section:flowchart-firstexa}
-
-Les ordinogrammes
-\footnote{
-    Le mot \myquote{ordinogramme} vient des mots \myquote{ordinateur}, du latin \myquote{ordinare} soit \myquote{mettre en ordre}, et du grec ancien \myquote{gramma} soit \myquote{lettre, écriture}.
-}
-sont des diagrammes que l'on peut utiliser pour expliquer des algorithmes très simples
-\footnote{
-    Cet outil pédagogique montre très vite ses limites. Essayez par exemple de tracer un ordinogramme pour expliquer comment résoudre une équation du 2\ieme{} degré.
-}.
-
-\medskip
-
-
-Voici un exemple expliquant comment résoudre $a x^2 + b = 0$, une équation en $x$, lorsque $a \neq 0$ et $b \neq 0$ : le code utilisé est donné plus tard dans la section \ref{section:flowchart-firstexa-code} \emph{(ce code sera très aisé à comprendre une fois lues les sections à venir)}.
-
-\begin{center}
-    \small
-    \input{examples/merly-2nd-degree.tkz}
-\end{center}
-
-
-% -------------- %
-
-
-\subsection{L'environnement \texttt{algochart}}
-
-Tous les codes seront placés dans l'environnement \verb+algochart+ qui pour le moment est juste un alias de l'environnement \verb+tikzpicture+ proposé par \verb+TikZ+ qui fait le principal du travail
-\footnote{
-	\texttt{algochart} vient de la contraction de \myquote{algorithmic} et \myquote{flowchart} soit \myquote{algotithmique} et \myquote{diagramme} en anglais.
-}.
-\verb+lyalgo+ définit juste quelques styles et quelques macros pour faciliter la saisie des ordinogrammes pour travailler efficacement avec les macros \verb+\node+ et \verb+\path+ proposées par \verb+TikZ+.
-
-
-% -------------- %
-
-
-\subsection{Convention pour les noms des styles et des macros}
-
-Toutes les fonctionnalités proposées par \verb+lyalgo+ seront nommées en minuscule en utilisant toujours le préfixe \verb+ac+ pour \verb+algochart+.
-
-
-% -------------- %
-
+%\section{Ordinogrammes}
 
 \subsection{Les styles proposés}
 
@@ -80,14 +35,14 @@ Toutes les fonctionnalités proposées par \verb+lyalgo+ seront nommées en minu
 L'entrée et la sortie de l'algorithme sont représentés par des ovales comme dans l'exemple ci-après. Par convention, l'entrée se situe tout en haut de l'ordinogramme, et la sortie tout en bas.
 Indiquons que \verb+io+ dans \verb+acio+ fait référence à \myquote{input / output} soit \myquote{entrée / sortie} en anglais.
 
-\codeasideoutput{examples/showcase/io.tkz}
+\codeasideoutput{examples/flowchart/showcase/io.tkz}
 
 \vspace{-1em}
 
 Dans le code ci-dessus, nous utilisons le style \verb+acio+ en l'indiquant entre des crochets.
 La machinerie \verb+TikZ+ permet de changer localement un réglage comme ci-après où l'on modifie la largeur de l'ellipse pour n'avoir qu'une seule ligne de texte.
 
-\codeasideoutput{examples/showcase/io-flatten.tkz}
+\codeasideoutput{examples/flowchart/showcase/io-flatten.tkz}
 
 
 % -------------- %
@@ -102,7 +57,7 @@ Dans l'exemple suivant, qui ne nécessite aucun commentaire
 nous avons dû régler à la main la largeur du cadre pour ne pas avoir un retour à la ligne.
 
 
-\codeasideoutput{examples/showcase/instruction.tkz}
+\codeasideoutput{examples/flowchart/showcase/instruction.tkz}
 
 
 % -------------- %
@@ -115,7 +70,7 @@ Nous allons voir comment obtenir le résultat suivant qui contient une structure
 
 \begin{center}
     \small
-    \input{examples/if-absolute.tkz}
+    \input{examples/flowchart/if-absolute.tkz}
 \end{center}
 
 
@@ -123,7 +78,7 @@ Voici le code utilisé pour obtenir l'ordinogramme ci-dessus.
 
 \medskip
 
-\justcode{examples/if-absolute.tkz}
+\justcode{examples/flowchart/if-absolute.tkz}
 
 
 Donnons des explications sur les points délicats du code précédent.
@@ -186,7 +141,7 @@ On voit au passage la limite d'utilisabilité des ordinogrammes car ces derniers
 
 \begin{center}
     \small
-    \input{examples/strange-loop.tkz}
+    \input{examples/flowchart/strange-loop.tkz}
 \end{center}
 
 
@@ -194,35 +149,6 @@ Voici le code que nous avons utilisé. Les seules vraies nouveautés sont l'util
 
 \medskip
 
-\justcode{examples/strange-loop.tkz}
-
-
-% -------------- %
-
-
-\subsection{Passer de la couleur au noir et blanc, et vice versa} \label{section:bw-mode}
-
-Pour l'impression papier, n'avoir que du noir et blanc peut rende service. Les commandes \verb+\acusebw+ et \verb+\acusecolor+ permettent d'avoir du noir et blanc ou de la couleur pour tous les ordinagrammes qui suivent l'utilisation de ces macros.
-
-\codeasideoutput{examples/showcase/color-fromto-bw.tkz}
-
-
-% -------------- %
-
-
-\subsection{Code du tout premier exemple} \label{section:flowchart-firstexa-code}
-
-Nous (re)donnons la version noir et blanc de l'ordinogramme présenté au début de la section \ref{section:flowchart-firstexa}.
-
-\acusebw
-\begin{center}
-    \small
-    \input{examples/merly-2nd-degree.tkz}
-\end{center}
-\acusecolor
-
-Ce diagramme s'obtient via le code suivant.
-
-\justcode{examples/merly-2nd-degree.tkz}
+\justcode{examples/flowchart/strange-loop.tkz}
 
 \end{document}

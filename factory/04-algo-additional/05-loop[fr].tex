@@ -4,6 +4,7 @@
 	\input{../config/header[fr].sty}
 	\input{../01-misc/00-common-tools.sty}
 	\input{../03-algo-basic/02-frame.sty}
+	\input{03-interval.sty}
 
 	\usepackage{05-loop}
 \makeatother
@@ -23,80 +24,23 @@
 
 \subsection{Boucles sur des entiers consécutifs}
 
-Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*+, ou bien de façon non ambigüe via \verb+\ForRange+ non étoilée. Voici ce que cela donne.
+Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*+ comme dans l'exemple suivant.
 
-
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForRange*{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForRange*{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForRange{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForRange{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-additional/forrange-star.tex}
 
 
 \vspace{-1em}
 
-Pour en finir avec les boucles, l'exemple suivant montre comment obtenir une écriture symbolique.
+Une boucle \verb+POUR+ peut aussi s'écrire de façon non ambigüe via \verb+\ForRange+ non étoilée comme ci-après.
 
 
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \For{$a \in \CSinterval{0}{12}$}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \For{$a \in \CSinterval{0}{12}$}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-additional/forrange-no-star.tex}
+
+
+\vspace{-1em}
+
+Pour en finir avec les boucles, l'exemple suivant montre que \verb+\ForRange**{a}{debut}{fin}+ est un alias de \verb+\For{$a \in \CSinterval{debut}{fin}$}+.
+
+\codeasideoutput{examples/algo-additional/forrange-star-star.tex}
 
 \end{document}

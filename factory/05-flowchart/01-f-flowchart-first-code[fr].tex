@@ -1,0 +1,35 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+
+    \usepackage{01-a-flowchart}
+\makeatother
+
+
+\newcommand\Store{\leftarrow}
+\newcommand\List[1]{[\,#1\,]}
+\newcommand\EmptyList{\List{}}
+
+
+\begin{document}
+
+%\section{Ordinogrammes}
+
+\subsection{Code du tout premier exemple} \label{section:flowchart-firstexa-code}
+
+Nous (re)donnons la version noir et blanc de l'ordinogramme présenté au début de la section \ref{section:flowchart-firstexa}.
+
+\acusebw
+\begin{center}
+    \small
+    \input{examples/flowchart/merly-2nd-degree.tkz}
+\end{center}
+\acusecolor
+
+Ce diagramme s'obtient via le code suivant.
+
+\justcode{examples/flowchart/merly-2nd-degree.tkz}
+
+\end{document}

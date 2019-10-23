@@ -83,6 +83,7 @@
 
 \newcommand\justcode[1]{
 	\begin{latex-frame}
+		\small
 		\VerbatimInput{#1}
 	\end{latex-frame}
 }
@@ -132,7 +133,7 @@
 }
 
 \author{Christophe BAL}
-\date{2019-10-22}
+\date{2019-10-23}
 
 \maketitle
 
@@ -178,85 +179,27 @@ Il est utilisé par cette documentation pour simplifier la saisie des formules.
 
 En complément à l'environnement \verb+verbatim+ est proposé l'environnement \verb+pseudoverb+, pour \og pseudo verbatim \fg, qui permet d'écrire du contenu presque verbatim : ci-après, la macro \verb+\squaremacro+ définie par \verb+\newcommand\squaremacro{$x^2$}+ est interprétée mais pas la formule mathématique. 
 
-\begin{frame-gene}[Code \LaTeX]
-	\small
-	\begin{verbatim}
-\begin{pseudoverb*}
-  Prix1 = 14 euros 
-+ Prix2 = 30 euros
--------------------
-  Total = 44 euros
 
-========
-Remarque
-========
-Attention car les macros comme \squaremacro{} sont interprétées mais pas les formules
-de maths comme $x^2$ !
-\end{pseudoverb*} 
-	\end{verbatim}
-\end{frame-gene}
+\codeasideoutput{examples/pseudo-verb/with-remark.tex}
 
 
-La mise en forme correspondante est la suivante sans cadre autour.
-
-\begin{frame-gene}[Rendu réel\\ATTENTION ! Le cadre ne fait pas partie de la mise en forme.]
-	\begin{pseudoverb*}
-  Prix1 = 14 euros
-+ Prix2 = 30 euros
--------------------
-  Total = 44 euros
-
-========
-Remarque
-========
-Attention car les macros comme \squaremacro{} sont interprétées mais pas les formules
-de maths comme $x^2$ !
-	\end{pseudoverb*} 
-\end{frame-gene}
-
-
-\medskip
-
+\vspace{-1em}
 
 Il est en fait plus pratique de pouvoir taper quelque chose comme ci-dessous avec un cadre autour où le titre est un argument obligatoire \emph{(voir plus bas comment ne pas avoir de titre)}.
 
-\begin{pseudoverb}{Une sortie console}
-  Prix1 = 14 euros
-+ Prix2 = 30 euros
--------------------
-  Total = 44 euros
-\end{pseudoverb} 
+
+\codeasideoutput{examples/pseudo-verb/console.tex}
 
 
-Le contenu précédent s'obtient via le code suivant.
+\vspace{-1em}
 
-\begin{frame-gene}[Code \LaTeX]
-	\small
-	\begin{verbatim}
-\begin{pseudoverb}{Une sortie console}
-  Prix1 = 14 euros
-+ Prix2 = 30 euros
--------------------
-  Total = 44 euros
-\end{pseudoverb} 
-	\end{verbatim} 
-\end{frame-gene}
+Finissons avec une version bien moins large et sans titre de la sortie console ci-dessus. Le principe est de donner un titre vide via \verb+{}+, \textbf{c'est obligatoire}, et en utilisant l'unique argument optionnel pour indiquer la largeur relativement à celle des lignes \emph{(attention aux environnements multi-colonne qui ont des lignes moins larges que celles du corps principal du document)}.
 
 
-Finissons avec une version bien moins large et sans titre de la sortie console ci-dessus. Le principe est de donner un titre vide via \verb+{}+, \textbf{c'est obligatoire}, et en utilisant l'unique argument optionnel pour indiquer la largeur relativement à celle des lignes.
-En utilisant juste \verb+\begin{pseudoverb}[.275]{}+ au lieu de \verb+\begin{pseudoverb}{Une sortie console}+, le code précédent nous donne ce qui suit.
+\codeasideoutput{examples/pseudo-verb/scaled.tex}
 
 
-\begin{pseudoverb}[.275]{}
-  Prix1 = 14 euros
-+ Prix2 = 30 euros
--------------------
-  Total = 44 euros
-\end{pseudoverb} 
-
-
-\bigskip
-
+\vspace{-1em}
 
 \begin{frame-gene}[À RETENIR]
 	\centering\itshape
@@ -267,6 +210,8 @@ En utilisant juste \verb+\begin{pseudoverb}[.275]{}+ au lieu de \verb+\begin{pse
 
 
 
+
+\newpage
 
 \section{Algorithmes en langage naturel}
 
@@ -281,94 +226,14 @@ Dans la section suivante, nous verrons comment encadrer les algorithmes. Pour l'
 
 
 \bigskip
-
-
-\begin{algo*}
-    \caption{Suite de Collatz $(u_k)$ -- Conjecture de Syracuse}
-
-    \Data{$n \in \NN$}
-    \Result{le premier indice $i \in \ZintervalC{0}{10^5}$ tel que $u_i = 1$ ou $(-1)$ en cas d'échec}
-
-    \addalgoblank    % Pour aérer un peu la mise en forme.
-
-    \Actions{
-        $i, imax \Store 0, 10^5$
-        \\
-        $u \Store n$
-        \\
-        $continuer \Store \top$
-        \\
-        \While{$continuer = \top \And i \leq imax$}{
-            \uIf{$u = 1$}{
-                \Comment{C'est gagné !}
-                $continuer \Store \bot$
-            } \Else {
-                \Comment{Calcul du terme suivant}
-                \uIf{$u \equiv 0 \,\, [2]$}{
-                    $u \Store u / 2$
-                    \Comment*{Quotient de la division euclidienne.}
-                } \Else {
-                    $u \Store 3u + 1$
-                }
-                $i \Store i + 1$
-            }
-        }
-        \If{$i > imax$}{
-            $i \Store (-1)$
-        }
-        \Return{$i$}
-    }
-\end{algo*}
-
-
+\input{examples/algo-basic/syracuse.tex}
 \bigskip
 
 
 La rédaction d'un tel algorithme est facile car il suffit de taper le code suivant proche de ce que pourrait proposer un langage classique de programmation. Le code utilise certaines des macros additionnelles proposées par \verb+lyalgo+ \emph{(voir la section \ref{algo-extra})} ainsi que la macro \verb+\ZintervalC+ du package \verb+lymath+. Nous donnons juste après le squelette de la syntaxe propre à \verb+algorithm2e+.
 
 
-\begin{frame-gene}[Code \LaTeX]
-    \small
-\begin{verbatim}
-\begin{algo*}
-    \caption{Suite de Collatz $(u_k)$ -- Conjecture de Syracuse}
-
-    \Data{$n \in \NN$}
-    \Result{le premier indice $i \in \ZintervalC{0}{10^5}$ tel que $u_i = 1$ ou $(-1)$
-            en cas d'échec}
-
-    \addalgoblank    % Pour aérer un peu la mise en forme.
-
-    \Actions{
-        $i, imax \Store 0, 10^5$
-        \\
-        $u \Store n$
-        \\
-        $continuer \Store \top$
-        \\
-        \While{$continuer = \top$ \And $i \leq imax$}{
-            \uIf{$u = 1$}{
-                \Comment{C'est gagné !}
-                $continuer \Store \bot$
-            } \Else {
-                \Comment{Calcul du terme suivant}
-                \uIf{$u \equiv 0 \,\, [2]$}{
-                    $u \Store u / 2$
-                    \Comment*{Quotient de la division euclidienne.}
-                } \Else {
-                    $u \Store 3u + 1$
-                }
-                $i \Store i + 1$
-            }
-        }
-        \If{$i > imax$}{
-            $i \Store (-1)$
-        }
-        \Return{$i$}
-    }
-\end{algo*}
-\end{verbatim}
-\end{frame-gene}
+\justcode{examples/algo-basic/syracuse.tex}
 
 
 Le squelette du code précédent est le suivant. 
@@ -422,74 +287,19 @@ Avant de continuer les présentations, il faut savoir que les algorithmes sont n
 
 \subsection{Des algorithmes encadrés}
 
-La version non étoilée de l'environnement \verb+algo+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes.
+La version non étoilée de l'environnement \verb+algo+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes. Indiquons au passage que nous avons utilisé la macro \verb+\dsum+ fournie par le package \verb+lymath+.
 
-\begin{algo}
-    \caption{Un truc bidon}
-
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo} 
+\codeasideoutput{examples/algo-basic/stupid.tex}
 
 
-\medskip
-
-
-Le code utilisé pour obtenir le rendu précédent est le suivant où sont utilisées certaines des macros additionnelles proposées par \verb+lyalgo+ \emph{(voir la section \ref{algo-extra})} où les macros \verb+\NNs+ et \verb+\dsum+ viennent du package \verb+lymath+.
-
-\begin{frame-gene}[Code \LaTeX]
-    \small
-    \begin{verbatim}
-\begin{algo}
-    \caption{Un truc bidon}
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo}
-	\end{verbatim}
-\end{frame-gene}
-
-
-\medskip
+\vspace{-1em}
 
 
 L'environnement \verb+algo+ propose un argument optionnel pour indiquer la largeur relativement à celle des lignes.
-Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivante bien moins large de l'algorithme précédent.
+Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivante dont le cadre ne couvre pas toute la largeur de la ligne.
 
-\begin{algo}[.45]
-    \caption{Un truc bidon}
+\input{examples/algo-basic/stupid-scaled.tex}
 
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange*{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo} 
 
 
 \medskip
@@ -497,39 +307,11 @@ Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivan
 
 On peut utiliser un environnement \verb+multicols+ pour un effet sympa.
 
-\begin{multicols}{2}    
-\begin{algo}
-    \caption{Un truc bidon}
-
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange*{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo}
+\begin{multicols}{2}
+\input{examples/algo-basic/stupid.tex}
 
 
-\begin{algo}
-    \caption{Un truc bidon}
-
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo}
+\input{examples/algo-basic/stupid.tex}
 \end{multicols}
 
 
@@ -544,30 +326,10 @@ Si vous avec besoin juste de numéroter votre algorithme comme ci-dessous à dro
 
 
 \begin{multicols}{2}    
-\begin{algo}
-    \caption{}
-
-    \Datas{Un titre vide ci-dessus !}
-    \Result{\dots}
-    \Actions{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
+\input{examples/algo-basic/void-caption-bad.tex}
 
 
-\begin{algo}
-    \algovoidcaption
-
-    \Datas{\dots}
-    \Result{\dots}
-    \Actions{
-        \dots\phantom{X}
-        \\
-        \phantom{\dots}\vspace{-.75em}
-    }
-\end{algo}
+\input{examples/algo-basic/void-caption-good.tex}
 \end{multicols}
 
 
@@ -585,7 +347,11 @@ Si vous avec besoin juste de numéroter votre algorithme comme ci-dessous à dro
 \end{frame-gene}
 
 
-% == All extra words - START == %
+% ---------------- %
+
+
+% == Block and words tools - START == %
+
 \subsubsection{Entrée / Sortie}
 
 Nous donnons ci-dessous les versions au singulier de tous les mots disponibles de type \myquote{entrée / sortie}.
@@ -593,309 +359,59 @@ Excepté pour \verb+\InState+ et \verb+\OutState+, toutes les autres macros ont 
 Par exemple, le pluriel de \verb+\In+ s'obtient via \verb+\Ins+.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \In{donnée 1}
-  \Out{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \In{donnée 1}
-  \Out{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Data{donnée 1}
-  \Result{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Data{donnée 1}
-  \Result{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \InState{donnée 1}
-  \OutState{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \InState{donnée 1}
-  \OutState{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \PreCond{donnée 1}
-  \PostCond{donnée 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \PreCond{donnée 1}
-  \PostCond{donnée 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
-
+\codeasideoutput{examples/algo-basic/additional-macros/in-out.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/data-result.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/instate-outstate.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/precond-postcond.tex}
 
 \subsubsection{Bloc principal}
 
 Voici comment indiquer le bloc principal d'instructions avec deux textes au choix pour le moment.
 
+\newpage
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Actions{Instruction 1}
-  \Begin{Instruction 2}
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Actions{Instruction 1}
-  \Begin{Instruction 2}
-\end{algo}
-    \vfill\null
-\end{multicols}
 
+\codeasideoutput{examples/algo-basic/additional-macros/main-block.tex}
 
 \subsubsection{Boucles \TTfor{} et \TTwhile{}}
 
 Voici les boucles de type \TTfor{} et \TTwhile{} proposées par le package.
 
-\newpage
 
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \For{$i \in uneliste$}{
-    Instruction 1
-  }
-  \ForAll{$i \in uneliste$}{
-    Instruction 2
-  }
-  \ForEach{$i \in uneliste$}{
-    Instruction 3
-  }
-  \While{$i \in uneliste$}{
-    Instruction 4
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \For{$i \in uneliste$}{
-    Instruction 1
-  }
-  \ForAll{$i \in uneliste$}{
-    Instruction 2
-  }
-  \ForEach{$i \in uneliste$}{
-    Instruction 3
-  }
-  \While{$i \in uneliste$}{
-    Instruction 4
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
-
+\codeasideoutput{examples/algo-basic/additional-macros/for-loop.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/forall-loop.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/foreach-loop.tex}
+\codeasideoutput{examples/algo-basic/additional-macros/while-loop.tex}
 
 \subsubsection{Boucles \TTrepeat{}}
 
 Voici comment rédiger une boucle du type \TTrepeat{}.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Repeat{$i \in uneliste$}{
-    Instruction 
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Repeat{$i \in uneliste$}{
-    Instruction 
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
-
-
-\subsubsection{Disjonction de cas \TTswitch{}}
-
-La syntaxe pour les blocs conditionnels du type \TTswitch{} ne pose pas de difficultés de rédaction.
-
-
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \Switch{$i$}{
-    \uCase{$i = 0$}{Instruction 1}
-    \uCase{$i = 1$}{Instruction 2}
-    \Case{$i = 2$}{Instruction 3}
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \Switch{$i$}{
-    \uCase{$i = 0$}{Instruction 1}
-    \uCase{$i = 1$}{Instruction 2}
-    \Case{$i = 2$}{Instruction 3}
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
-
+\codeasideoutput{examples/algo-basic/additional-macros/repeat-loop.tex}
 
 \subsubsection{Disjonction conditionnelle \TTif{}}
 
 Les blocs conditionnels \TTif{} se rédigent très naturellement.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \uIf{$i = 0$}{
-    Instruction 1
-  }
-  \uElseIf{$i = 1$}{
-    Instruction 2
-  }
-  \Else{
-    Instruction 3
-  }
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  \uIf{$i = 0$}{
-    Instruction 1
-  }
-  \uElseIf{$i = 1$}{
-    Instruction 2
-  }
-  \Else{
-    Instruction 3
-  }
-\end{algo}
-    \vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-basic/additional-macros/ifelif.tex}
 
+\subsubsection{Disjonction de cas \TTswitch{}}
+
+La syntaxe pour les blocs conditionnels du type \TTswitch{} ne pose pas de difficulté de rédaction.
+
+
+\codeasideoutput{examples/algo-basic/additional-macros/switch.tex}
 
 \subsubsection{Diverses commandes}
 
-Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions maculines des textes proposés.
+Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions \myquote{masculinisées} des textes proposés.
 
 
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  A \And B \Or C
-  \\ \Return RÉSULTAT
-  \\ \Ask "Quelque chose"
-  \\ \Print "Quelque chose"
-  \\ $k$ \From $1$ \To $n$
-  \\ $k$ \ComingFrom $1$ \GoingTo $n$
-  \\ $e$ \InThis $\{ 1 , 4 , 16 \}$
-  \\ $L$ \LToR
-  \\ $L$ \LToRm
-  \\ $L$ \RToL
-  \\ $L$ \RToLm
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-  A \And B \Or C
-  \\ \Return RÉSULTAT
-  \\ \Ask "Quelque chose"
-  \\ \Print "Quelque chose"
-  \\ $k$ \From $1$ \To $n$
-  \\ $k$ \ComingFrom $1$ \GoingTo $n$
-  \\ $e$ \InThis $\{ 1 , 4 , 16 \}$
-  \\ $L$ \LToR
-  \\ $L$ \LToRm
-  \\ $L$ \RToL
-  \\ $L$ \RToLm
-\end{algo}
-    \vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-basic/additional-macros/word.tex}
 
-
-% == All extra words - END == %
+% == Block and words tools - END == %
 
 
 % ---------------- %
@@ -907,7 +423,7 @@ Pour faciliter la rédaction de textes sur les algorithmes, des macros standardi
 Dans les exemples qui suivent, les préfixes \verb+TT+ et \verb+AL+ font référence à \myquote{True Type} pour une police à chasse fixe, et à \myquote{AL-gorithme} pour une écriture similaire à celle utilisée dans les algorithmes.
 
 
-% == Main tools - START == %
+% == Text tools - START == %
 
 \begin{center}
 	Liste des commandes de type \myquote{True Type}.
@@ -932,11 +448,13 @@ Dans les exemples qui suivent, les préfixes \verb+TT+ et \verb+AL+ font référ
     \item \verb+\ALrepeat+ donne \ALrepeat.
     \item \verb+\ALswitch+ donne \ALswitch.
 \end{enumerate}
-% == Main tools - END == %
+
+% == Text tools - END == %
 
 
 
 
+\newpage
 \section{Des outils additionnels pour les algorithmes} \label{algo-extra}
 
 \subsection{Convention en bosses de chameau}
@@ -1165,51 +683,11 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 
 Les macros \verb+\ForInList+ et \verb+\ForInListRev+ facilitent la rédaction de boucle sur une liste parcourue de façon déterministe.
 
+\codeasideoutput{examples/algo-additional/forinlist.tex}
 
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForInList{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForInList{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\newpage
 
-
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForInListRev{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForInListRev{e}{L}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-additional/forinlist-rev.tex}
 
 
 
@@ -1218,85 +696,29 @@ Les macros \verb+\ForInList+ et \verb+\ForInListRev+ facilitent la rédaction de
 
 \subsection{Boucles sur des entiers consécutifs}
 
-Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*+, ou bien de façon non ambigüe via \verb+\ForRange+ non étoilée. Voici ce que cela donne.
+Une boucle \verb+POUR+ peut s'écrire de façon succincte via \verb+\ForRange*+ comme dans l'exemple suivant.
 
-
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForRange*{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForRange*{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
-
-
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \ForRange{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \ForRange{a}{0}{12}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-additional/forrange-star.tex}
 
 
 \vspace{-1em}
 
-Pour en finir avec les boucles, l'exemple suivant montre comment obtenir une écriture symbolique.
+Une boucle \verb+POUR+ peut aussi s'écrire de façon non ambigüe via \verb+\ForRange+ non étoilée comme ci-après.
 
 
-\begin{multicols}{2}
-\centering
-\begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-  \For{$a \in \CSinterval{0}{12}$}{
-    Instruction 1
-  }
-\end{algo}
-\end{verbatim}
-\end{frame-gene}
-\vfill\null
-\columnbreak
-\textit{Mise en forme correspondante.}
-\begin{algo}
-  \For{$a \in \CSinterval{0}{12}$}{
-    Instruction 1
-  }
-\end{algo}
-\vfill\null
-\end{multicols}
+\codeasideoutput{examples/algo-additional/forrange-no-star.tex}
+
+
+\vspace{-1em}
+
+Pour en finir avec les boucles, l'exemple suivant montre que \verb+\ForRange**{a}{debut}{fin}+ est un alias de \verb+\For{$a \in \CSinterval{debut}{fin}$}+.
+
+\codeasideoutput{examples/algo-additional/forrange-star-star.tex}
 
 
 
 
+\newpage
 \section{Ordinogrammes}
 
 \subsection{C'est quoi un ordinogramme} \label{section:flowchart-firstexa}
@@ -1317,12 +739,14 @@ Voici un exemple expliquant comment résoudre $a x^2 + b = 0$, une équation en 
 
 \begin{center}
     \small
-    \input{examples/merly-2nd-degree.tkz}
+    \input{examples/flowchart/merly-2nd-degree.tkz}
 \end{center}
 
 
-% -------------- %
 
+
+
+%\section{Ordinogrammes}
 
 \subsection{L'environnement \texttt{algochart}}
 
@@ -1333,16 +757,18 @@ Tous les codes seront placés dans l'environnement \verb+algochart+ qui pour le 
 \verb+lyalgo+ définit juste quelques styles et quelques macros pour faciliter la saisie des ordinogrammes pour travailler efficacement avec les macros \verb+\node+ et \verb+\path+ proposées par \verb+TikZ+.
 
 
-% -------------- %
 
+
+%\section{Ordinogrammes}
 
 \subsection{Convention pour les noms des styles et des macros}
 
 Toutes les fonctionnalités proposées par \verb+lyalgo+ seront nommées en minuscule en utilisant toujours le préfixe \verb+ac+ pour \verb+algochart+.
 
 
-% -------------- %
 
+
+%\section{Ordinogrammes}
 
 \subsection{Les styles proposés}
 
@@ -1362,14 +788,14 @@ Toutes les fonctionnalités proposées par \verb+lyalgo+ seront nommées en minu
 L'entrée et la sortie de l'algorithme sont représentés par des ovales comme dans l'exemple ci-après. Par convention, l'entrée se situe tout en haut de l'ordinogramme, et la sortie tout en bas.
 Indiquons que \verb+io+ dans \verb+acio+ fait référence à \myquote{input / output} soit \myquote{entrée / sortie} en anglais.
 
-\codeasideoutput{examples/showcase/io.tkz}
+\codeasideoutput{examples/flowchart/showcase/io.tkz}
 
 \vspace{-1em}
 
 Dans le code ci-dessus, nous utilisons le style \verb+acio+ en l'indiquant entre des crochets.
 La machinerie \verb+TikZ+ permet de changer localement un réglage comme ci-après où l'on modifie la largeur de l'ellipse pour n'avoir qu'une seule ligne de texte.
 
-\codeasideoutput{examples/showcase/io-flatten.tkz}
+\codeasideoutput{examples/flowchart/showcase/io-flatten.tkz}
 
 
 % -------------- %
@@ -1384,7 +810,7 @@ Dans l'exemple suivant, qui ne nécessite aucun commentaire
 nous avons dû régler à la main la largeur du cadre pour ne pas avoir un retour à la ligne.
 
 
-\codeasideoutput{examples/showcase/instruction.tkz}
+\codeasideoutput{examples/flowchart/showcase/instruction.tkz}
 
 
 % -------------- %
@@ -1397,7 +823,7 @@ Nous allons voir comment obtenir le résultat suivant qui contient une structure
 
 \begin{center}
     \small
-    \input{examples/if-absolute.tkz}
+    \input{examples/flowchart/if-absolute.tkz}
 \end{center}
 
 
@@ -1405,7 +831,7 @@ Voici le code utilisé pour obtenir l'ordinogramme ci-dessus.
 
 \medskip
 
-\justcode{examples/if-absolute.tkz}
+\justcode{examples/flowchart/if-absolute.tkz}
 
 
 Donnons des explications sur les points délicats du code précédent.
@@ -1468,7 +894,7 @@ On voit au passage la limite d'utilisabilité des ordinogrammes car ces derniers
 
 \begin{center}
     \small
-    \input{examples/strange-loop.tkz}
+    \input{examples/flowchart/strange-loop.tkz}
 \end{center}
 
 
@@ -1476,21 +902,23 @@ Voici le code que nous avons utilisé. Les seules vraies nouveautés sont l'util
 
 \medskip
 
-\justcode{examples/strange-loop.tkz}
+\justcode{examples/flowchart/strange-loop.tkz}
 
 
-% -------------- %
 
+
+%\section{Ordinogrammes}
 
 \subsection{Passer de la couleur au noir et blanc, et vice versa} \label{section:bw-mode}
 
-Pour l'impression papier, n'avoir que du noir et blanc peut rende service. Les commandes \verb+\acusebw+ et \verb+\acusecolor+ permettent d'avoir du noir et blanc ou de la couleur pour tous les ordinagrammes qui suivent l'utilisation de ces macros.
+Pour l'impression papier, n'avoir que du noir et blanc peut rende service. Les commandes \verb+\acusebw+ et \verb+\acusecolor+ permettent d'avoir du noir et blanc ou de la couleur pour tous les ordinogrammes qui suivent l'utilisation de ces macros.
 
-\codeasideoutput{examples/showcase/color-fromto-bw.tkz}
+\codeasideoutput{examples/flowchart/showcase/color-fromto-bw.tkz}
 
 
-% -------------- %
 
+
+%\section{Ordinogrammes}
 
 \subsection{Code du tout premier exemple} \label{section:flowchart-firstexa-code}
 
@@ -1499,17 +927,18 @@ Nous (re)donnons la version noir et blanc de l'ordinogramme présenté au début
 \acusebw
 \begin{center}
     \small
-    \input{examples/merly-2nd-degree.tkz}
+    \input{examples/flowchart/merly-2nd-degree.tkz}
 \end{center}
 \acusecolor
 
 Ce diagramme s'obtient via le code suivant.
 
-\justcode{examples/merly-2nd-degree.tkz}
+\justcode{examples/flowchart/merly-2nd-degree.tkz}
 
 
 
 
+\newpage
 \section{Historique}
 
 Nous ne donnons ici qu'un très bref historique de \verb+lyalgo+ côté utilisateur principalement.

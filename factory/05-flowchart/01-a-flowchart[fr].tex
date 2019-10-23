@@ -1,0 +1,43 @@
+\documentclass[12pt,a4paper]{article}
+
+\makeatletter
+    \input{../config/header[fr].sty}
+    \input{../01-misc/00-common-tools.sty}
+
+    \usepackage{01-a-flowchart}
+\makeatother
+
+
+\newcommand\Store{\leftarrow}
+\newcommand\List[1]{[\,#1\,]}
+\newcommand\EmptyList{\List{}}
+
+
+\begin{document}
+
+\newpage
+\section{Ordinogrammes}
+
+\subsection{C'est quoi un ordinogramme} \label{section:flowchart-firstexa}
+
+Les ordinogrammes
+\footnote{
+    Le mot \myquote{ordinogramme} vient des mots \myquote{ordinateur}, du latin \myquote{ordinare} soit \myquote{mettre en ordre}, et du grec ancien \myquote{gramma} soit \myquote{lettre, écriture}.
+}
+sont des diagrammes que l'on peut utiliser pour expliquer des algorithmes très simples
+\footnote{
+    Cet outil pédagogique montre très vite ses limites. Essayez par exemple de tracer un ordinogramme pour expliquer comment résoudre une équation du 2\ieme{} degré.
+}.
+
+\medskip
+
+
+Voici un exemple expliquant comment résoudre $a x^2 + b = 0$, une équation en $x$, lorsque $a \neq 0$ et $b \neq 0$ : le code utilisé est donné plus tard dans la section \ref{section:flowchart-firstexa-code} \emph{(ce code sera très aisé à comprendre une fois lues les sections à venir)}.
+
+\begin{center}
+    \small
+    \input{examples/flowchart/merly-2nd-degree.tkz}
+\end{center}
+
+
+\end{document}

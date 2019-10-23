@@ -1,0 +1,22 @@
+\begin{algochart}
+  % Placement des noeuds.
+  \node[acifinstr]
+  (loop-init) {$i \Store 0$};
+
+  \node[acif, below of = loop-init]
+  (loop-test) {$i \leq 10$ ?};
+
+  \node[acifinstr, below of = loop-test]
+  (loop-next) {$i \Store i+1$};
+
+  \node[acinstr, right] at ($(loop-test) + (2.5,0)$)
+  (loop-out) {\dots};
+
+  % Ajout des connexions.
+  \path[aclink] (loop-init) -- (loop-test);
+
+  \path[aclink] (loop-test) -- (loop-out) \aclabelabove{non};
+
+  \path[aclink] (loop-test) -- (loop-next) \aclabelright{oui};
+  \path[aclink] (loop-next) to[acbackloopleft] (loop-test);
+\end{algochart}

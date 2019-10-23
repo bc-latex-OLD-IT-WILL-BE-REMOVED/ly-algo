@@ -17,6 +17,13 @@ KEYWORDS_FINAL_DIR = THIS_DIR.parent.parent / "lyalgo" / "keywords"
 KEYWORDS_DIR       = THIS_DIR / "keywords"
 LANG_PEUF_DIR      = KEYWORDS_DIR / "config"
 
+THIS_EXA_DIR       = THIS_DIR / "examples" / "algo-basic" / "additional-macros"
+LATEX_N_OUPUT_TEMP = """
+\\begin{{algo}}
+{latexcode}
+\\end{{algo}}
+""".lstrip()
+
 DECO   = " "*4
 DECO_2 = DECO*2
 
@@ -31,39 +38,6 @@ DEFAULT_LANG = "english"
 ALL_MACROS = set()
 
 ALL_TRANS = defaultdict(dict)
-
-
-# --------------- #
-# -- CONSTANTS -- #
-# --------------- #
-
-LATEX_N_OUPUT_TEMP = r"""
-\begin{multicols}{2}
-    \centering
-    \begin{frame-gene}[Code \LaTeX]
-\begin{verbatim}
-\begin{algo}
-<latexcode>
-\end{algo}
-\end{verbatim}
-    \end{frame-gene}
-    \vfill\null
-    \columnbreak
-    \textit{Mise en forme correspondante.}
-\begin{algo}
-<latexcode>
-\end{algo}
-    \vfill\null
-\end{multicols}
-"""
-
-for old, new in {
-    "{": '{{',
-    "}": '}}',
-    "<": '{',
-    ">": '}',
-}.items():
-    LATEX_N_OUPUT_TEMP = LATEX_N_OUPUT_TEMP.replace(old, new)
 
 
 # ----------- #
@@ -208,10 +182,6 @@ def build_tex_trans(lang):
     return tex_trans
 
 
-
-
-
-
 # ------------------------- #
 # -- LANG SPECIFICATIONS -- #
 # ------------------------- #
@@ -340,19 +310,201 @@ with open(
     lang_sty = docfile.read()
 
 
-# ------------------------------------ #
-# -- TEXT USEFUL MACROS - STY + DOC -- #
-# ------------------------------------ #
+# --------------------------------------- #
+# -- PREPARING THE UPDATING OF THE DOC -- #
+# --------------------------------------- #
+
+allmacros = {}
+
+pattern_kwmacro = re.compile("\\SetKw(.*?)\{(.*?)\}")
+
+for oneline in lang_sty.split("\n"):
+    match = re.search(pattern_kwmacro, oneline)
+
+    if match:
+        allmacros[kind].append(match.group(2))
+
+    elif oneline.startswith("%"):
+        kind = oneline[1:].strip().lower()
+
+        if kind not in allmacros:
+            allmacros[kind] = []
+
+
+latexcodes = defaultdict(list)
+
+for kind in peuftitles:
+    macros = allmacros[kind]
+
+    if kind == "input":
+        lastmacro = ""
+        noplurial = []
+
+# No need to show the plurial forms.
+        for onemacro in macros:
+            if noplurial \
+            and onemacro.startswith(noplurial[-1]):
+                continue
+
+            noplurial.append(onemacro)
+
+        for i, word in enumerate(noplurial[::2]):
+            nextword = noplurial[2*i+1]
+
+            exafilename = f"{word}-{nextword}"
+            texcodes = [
+                f"\\{word}{{donnée 1}}",
+                f"\\{nextword}{{donnée 2}}"
+            ]
+
+            latexcodes[kind].append((exafilename, texcodes))
+
+# Other kind of keywords use the same behavior contrary to the input ones.
+        continue
+
+
+    elif kind == "block":
+        nbexa    = 0
+        texcodes = []
+
+        for onemacro in macros:
+            nbexa += 1
+
+            texcodes += [
+                "",
+                f"% Possibilité {nbexa}",
+                f"\\{onemacro}{{Instruction {nbexa}}}"
+            ]
+
+        exafilename = f"main-{kind}"
+        texcodes = texcodes[1:]
+
+
+    elif kind in ["for", "repeat"]:
+        nbexa     = 0
+
+        for onemacro in macros:
+            nbexa   += 1
+            texcodes = []
+
+            if kind == "repeat":
+                nbexa = ""
+
+            texcodes += [
+                f"\\{onemacro}{{$i \\in uneliste$}}{{",
+                " "*2 + f"Instruction {nbexa}",
+                "}"
+            ]
+
+            exafilename = f"{onemacro}-loop"
+
+            latexcodes[kind].append((exafilename, texcodes))
+
+# Other kind of keywords use the same behavior contrary to the input ones.
+        continue
+
+
+    elif kind == "switch":
+        texcodes = ["\\Switch{$i$}{"]
+
+        prefix = "u"
+
+        for i in range(1, 4):
+            if i == 3:
+                prefix = ""
+
+            texcodes.append(
+                " "*2 + f"\\{prefix}Case{{$i = {i-1}$}}{{Instruction {i}}}"
+            )
+
+        texcodes.append("}")
+
+        exafilename = kind
+
+
+    elif kind == "ifelif":
+        exafilename = kind
+
+        texcodes = [
+            "\\uIf{$i = 0$}{",
+            "  Instruction 1",
+            "}",
+            "\\uElseIf{$i = 1$}{",
+            "  Instruction 2",
+            "}",
+            "\\Else{",
+            "  Instruction 3",
+            "}"
+        ]
+
+    else:
+        prefix   = ""
+
+        texcodes = []
+
+        while macros:
+            word      = macros.pop(0)
+            wordlower = word.lower()
+
+            if wordlower == "and":
+                wordbis = macros.pop(0)
+                texcodes.append(f"{prefix}A \\{word} B \\{wordbis} C")
+
+            elif wordlower in ["ask", "print"]:
+                texcodes.append(f"{prefix}\\{word} \"Quelque chose\"")
+
+            elif wordlower == "return":
+                texcodes.append(f"{prefix}\\{word} RÉSULTAT")
+
+            elif wordlower.endswith("from"):
+                wordbis = macros.pop(0)
+                texcodes.append(f"{prefix}$k$ \\{word} $1$ \\{wordbis} $n$")
+
+            elif wordlower == "inthis":
+                texcodes.append(f"{prefix}$e$ \\{word}" + " $\{ 1 , 4 , 16 \}$")
+
+            else:
+                texcodes.append(f"{prefix}$L$ \\{word}")
+
+            if not prefix:
+                prefix = r"\\ "
+
+        exafilename = kind
+
+# We can store...
+    latexcodes[kind].append((exafilename, texcodes))
+
+for kind in latexcodes:
+    print()
+    print(kind)
+    for l in latexcodes[kind]:
+        print(l)
+
+# Just normalisze all.
+for kind, metas in latexcodes.items():
+    for i, (exafilename, onetexcode) in enumerate(metas):
+        exafilename = exafilename.lower()
+        onetexcode  = LATEX_N_OUPUT_TEMP.format(
+            latexcode = " "*2 + "\n  ".join(onetexcode)
+        )
+
+        metas[i] = (exafilename, onetexcode)
+
+    latexcodes[kind] = metas
+
+
+# ------------------------------ #
+# -- USEFUL TEXT MACROS - DOC -- #
+# ------------------------------ #
 
 text_start, _, text_end = between(
     text = template_tex,
     seps = [
-        "% == Main tools - START == %\n",
-        "\n% == Main tools - END == %"
+        "% == Text tools - START == %\n",
+        "\n% == Text tools - END == %"
     ],
     keepseps = True
 )
-
 
 texcode = []
 
@@ -380,174 +532,64 @@ for prefix, kind in [
         "\\end{enumerate}"
     )
 
-texcode = "\n".join(texcode)
+texcode = "\n".join(texcode + [""])
 
 template_tex = text_start + texcode + text_end
 
 
-# ------------------ #
-# -- UPDATING DOC -- #
-# ------------------ #
+# ------------------------ #
+# -- THE EXAMPLES - DOC -- #
+# ------------------------ #
 
 text_start, _, text_end = between(
     text = template_tex,
     seps = [
-        "% == All extra words - START == %\n",
-        "\n% == All extra words - END == %"
+        "% == Block and words tools - START == %\n",
+        "\n% == Block and words tools - END == %"
     ],
     keepseps = True
 )
 
-allmacros = {}
-
-pattern_kwmacro = re.compile("\\SetKw(.*?)\{(.*?)\}")
-
-for oneline in lang_sty.split("\n"):
-    match = re.search(pattern_kwmacro, oneline)
-
-    if match:
-        allmacros[kind].append(match.group(2))
-
-    elif oneline.startswith("%"):
-        kind = oneline[1:].strip().lower()
-
-        if kind not in allmacros:
-            allmacros[kind] = []
-
-
 texdoc = []
 
-for kind in peuftitles:
-    macros = allmacros[kind]
 
+for kind, metas in latexcodes.items():
     explanations = "\n".join(docinfos[kind])
 
-    latexcode = []
-
-    if kind == "input":
-        lastmacro = ""
-        noplurial = []
-
-        for onemacro in macros:
-            if noplurial \
-            and onemacro.startswith(noplurial[-1]):
-                continue
-
-            noplurial.append(onemacro)
-
-        for i, word in enumerate(noplurial[::2]):
-            nextword = noplurial[2*i+1]
-
-            latexcode.append(
-                LATEX_N_OUPUT_TEMP.format(
-                    latexcode = f"  \\{word}{{donnée 1}}\n" \
-                              + f"  \\{nextword}{{donnée 2}}"
-                )
-            )
-
-        latexcode = "\n".join(latexcode)
-
-
-    elif kind == "block":
-        nbexa     = 0
-
-        for onemacro in macros:
-            nbexa += 1
-
-            latexcode.append(
-                f"\\{onemacro}{{Instruction {nbexa}}}"
-            )
-
-    elif kind in ["for", "repeat"]:
-        nbexa     = 0
-
-        for onemacro in macros:
-            nbexa += 1
-
-            if kind == "repeat":
-                nbexa = ""
-
-            latexcode += [
-                f"\\{onemacro}{{$i \\in uneliste$}}{{",
-                " "*2 + f"Instruction {nbexa}",
-                "}"
-            ]
-
-    elif kind == "switch":
-        latexcode.append("\\Switch{$i$}{")
-
-        prefix = "u"
-
-        for i in range(1, 4):
-            if i == 3:
-                prefix = ""
-
-            latexcode.append(
-                " "*2 + f"\\{prefix}Case{{$i = {i-1}$}}{{Instruction {i}}}"
-            )
-
-        latexcode.append("}")
-
-    elif kind == "ifelif":
-         latexcode.append(
-"""\\uIf{$i = 0$}{
-    Instruction 1
-  }
-  \\uElseIf{$i = 1$}{
-    Instruction 2
-  }
-  \\Else{
-    Instruction 3
-  }""")
-
-    else:
-        prefix = ""
-
-        while macros:
-            word      = macros.pop(0)
-            wordlower = word.lower()
-
-            if wordlower == "and":
-                wordbis = macros.pop(0)
-                latexcode.append(f"{prefix}A \\{word} B \\{wordbis} C")
-
-            elif wordlower in ["ask", "print"]:
-                latexcode.append(f"{prefix}\\{word} \"Quelque chose\"")
-
-            elif wordlower == "return":
-                latexcode.append(f"{prefix}\\{word} RÉSULTAT")
-
-            elif wordlower.endswith("from"):
-                wordbis = macros.pop(0)
-                latexcode.append(f"{prefix}$k$ \\{word} $1$ \\{wordbis} $n$")
-
-            elif wordlower == "inthis":
-                latexcode.append(f"{prefix}$e$ \\{word}" + " $\{ 1 , 4 , 16 \}$")
-
-            else:
-                latexcode.append(f"{prefix}$L$ \\{word}")
-
-            if not prefix:
-                prefix = r"\\ "
-
-    if kind != "input":
-        latexcode = "\n  ".join(latexcode)
-        latexcode = "  " + latexcode
-        latexcode = LATEX_N_OUPUT_TEMP.format(latexcode = latexcode)
-
     texdoc.append(
-f"""\\subsubsection{{{peuftitles[kind]}}}
+f"""
+\\subsubsection{{{peuftitles[kind]}}}
 
 {explanations}
 
-{latexcode}
 """
     )
 
-texdoc = "\n".join(texdoc)
+    for (exafilename, onetexcode) in metas:
+        texdoc.append(
+f"\\codeasideoutput{{examples/algo-basic/additional-macros/{exafilename}.tex}}"
+        )
+
+        pathfile = THIS_EXA_DIR / f"{exafilename}.tex"
+        pathfile.create(
+            kind = 'file',
+        )
+
+        with open(
+            file     = pathfile,
+            mode     = 'w',
+            encoding = 'utf-8'
+        ) as texfile:
+            texfile.write(onetexcode)
+
+texdoc = "\n".join(texdoc + [""])
 
 template_tex = text_start + texdoc + text_end
 
+
+# ----------------------------- #
+# -- UPDATING THE LATEX FILE -- #
+# ----------------------------- #
 
 with open(
     file     = TEX_FILE,

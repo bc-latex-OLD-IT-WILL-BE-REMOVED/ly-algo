@@ -31,74 +31,19 @@
 
 \subsection{Des algorithmes encadrés}
 
-La version non étoilée de l'environnement \verb+algo+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes.
+La version non étoilée de l'environnement \verb+algo+ ajoute un cadre, comme ci-dessous, afin de rendre plus visibles les algorithmes. Indiquons au passage que nous avons utilisé la macro \verb+\dsum+ fournie par le package \verb+lymath+.
 
-\begin{algo}
-    \caption{Un truc bidon}
-
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo} 
+\codeasideoutput{examples/algo-basic/stupid.tex}
 
 
-\medskip
-
-
-Le code utilisé pour obtenir le rendu précédent est le suivant où sont utilisées certaines des macros additionnelles proposées par \verb+lyalgo+ \emph{(voir la section \ref{algo-extra})} où les macros \verb+\NNs+ et \verb+\dsum+ viennent du package \verb+lymath+.
-
-\begin{frame-gene}[Code \LaTeX]
-    \small
-    \begin{verbatim}
-\begin{algo}
-    \caption{Un truc bidon}
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo}
-	\end{verbatim}
-\end{frame-gene}
-
-
-\medskip
+\vspace{-1em}
 
 
 L'environnement \verb+algo+ propose un argument optionnel pour indiquer la largeur relativement à celle des lignes.
-Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivante bien moins large de l'algorithme précédent.
+Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivante dont le cadre ne couvre pas toute la largeur de la ligne.
 
-\begin{algo}[.45]
-    \caption{Un truc bidon}
+\input{examples/algo-basic/stupid-scaled.tex}
 
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange*{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo} 
 
 
 \medskip
@@ -106,39 +51,11 @@ Ainsi  via \verb+\begin{algo}[.45] ... \end{algo}+, on obtient la version suivan
 
 On peut utiliser un environnement \verb+multicols+ pour un effet sympa.
 
-\begin{multicols}{2}    
-\begin{algo}
-    \caption{Un truc bidon}
-
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange*{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo}
+\begin{multicols}{2}
+\input{examples/algo-basic/stupid.tex}
 
 
-\begin{algo}
-    \caption{Un truc bidon}
-
-    \Data{$n \in \NNs$}
-    \addalgoblank
-    \Result{$\dsum_{i = 1}^{n} i$}
-    \Actions{
-        $s \Store 0$
-        \\
-        \ForRange{$i$}{$1$}{$n$}{
-            $s \Store s + i$
-        }
-        \Return{$s$}
-    }
-\end{algo}
+\input{examples/algo-basic/stupid.tex}
 \end{multicols}
 
 \end{document}
