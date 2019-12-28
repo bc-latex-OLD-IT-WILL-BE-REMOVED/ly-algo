@@ -1,0 +1,17 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdftex 2019.5.24)  21 OCT 2019 12:31
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**03-interval.sty
+(./03-interval.sty
+./03-interval.sty:3: Undefined control sequence.
+l.3 \RequirePackage
+                   {mathtools}
+? 
+./03-interval.sty:3: Emergency stop.
+l.3 \RequirePackage
+                   {mathtools}
+End of file on the terminal!
+
+./03-interval.sty:3:  ==> Fatal error occurred, no output PDF file produced!

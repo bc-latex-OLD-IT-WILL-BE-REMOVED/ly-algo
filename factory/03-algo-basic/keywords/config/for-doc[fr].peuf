@@ -20,11 +20,11 @@ input::
 block::
     Voici comment indiquer le bloc principal d'instructions avec deux textes au choix pour le moment.
 
-    \newpage
-
 
 for::
     Voici les boucles de type \TTfor{} et \TTwhile{} proposées par le package.
+
+    \newpage
 
 
 repeat::
@@ -41,3 +41,5 @@ switch::
 
 word::
     Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions \myquote{masculinisées} des textes proposés.
+
+    \newpage

@@ -125,7 +125,7 @@ Donnons des explications sur les points délicats du code précédent.
 	          Un néologisme ?
 	      }
 	      de \fbox{$res \Store (-n)$} vers \fbox{$res\vphantom{(-n)}$} .
-	      Vous pouvez utiliser \verb+to[aczigzag = {xstart = ... , x = ... , y = ....}]+  pour des réglages personnalisés.
+	      Vous pouvez utiliser \verb+to[aczigzag = {xstart = ... , x = ... , y = ....}]+ pour des réglages personnalisés.
 	      Par défaut les clés optionnelles suivent le réglage \verb+xstart = 0mm+ , un décalage au début de la connexion , \verb+x = 3mm+ , un décalage à la fin de la connexion, et \verb+y = 5mm+, un autre décalage à la fin de la connexion.
 \end{enumerate}
 
@@ -145,7 +145,10 @@ On voit au passage la limite d'utilisabilité des ordinogrammes car ces derniers
 \end{center}
 
 
-Voici le code que nous avons utilisé. Les seules vraies nouveautés sont l'utilisation du style \verb+acifinstr+ pour mieux visualiser les instructions liées à la boucle, et l'usage de \verb+to[acbackloopleft]+ pour la connexion en retour arrière par la gauche. On peut aussi utiliser \verb+to[acbackloopright]+ pour un retour arrière par la droite.
+Voici le code que nous avons utilisé. Les seules vraies nouveautés sont l'utilisation du style \verb+acifinstr+ pour mieux visualiser les instructions liées à la boucle, et l'usage de \verb+to[acbackloopleft]+ pour la connexion en retour arrière par la gauche.
+Vous pouvez utiliser \verb+to[acbackloopleft = {x = ... }]+  pour régler le décalage vers la gauche.
+Par défaut, \verb+x = 5em+.
+De façon analogue, on peut utiliser \verb+to[acbackloopright]+ pour un retour arrière par la droite. 
 
 \medskip
 

@@ -99,7 +99,8 @@ Voici les premières macros pour travailler avec des listes c'est à dire des ta
 
 Les versions étoilées des macros précédentes fournissent une autre mise en forme à la fois concise et aisée à comprendre
 \footnote{
-	L'opérateur point \POOpoint{} est défini dans la macro \texttt{\textbackslash{}POOpoint}.
+	L'opérateur point \POOpoint{} est défini dans la macro \texttt{\textbackslash{}POOpoint}. 
+	Ceci permet de personnaliser facilement cet opérateur.
 }
 avec une syntaxe de type POO
 \footnote{
@@ -145,26 +146,28 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 
 	\item \textit{Extraction d'un élément -- Version pseudo-automatique.}
 
-	      \verb+\PopAt**{L}{3}+ donne \PopAt**{L}{3} avec un calcul fait automatiquement par la macro.
-	      Bien entendu \verb+\PopAt**{L}{1}+ produit \PopAt**{L}{1} au lieu de $L \Store \ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à un.
+	      \verb+\PopAt**{e}{L}{3}+ donne \PopAt**{e}{L}{3} avec un calcul fait automatiquement par la macro. Notez qu'ici on doit indiquer où stoker l'élément extrait.
 	      
-	      Il est autorisé de taper \verb+\PopAt**{L}{k}+ pour obtenir \PopAt**{L}{k}. Par contre, \verb+\PopAt**{L}{k-1}+ aboutit au truc très moche \PopAt**{L}{k-1}. 
-	      Les items suivants expliquent comment gérer à la main les cas problématiques via des macros plus généralistes.
+	      Bien entendu \verb+\PopAt**{e}{L}{1}+ produit \PopAt**{e}{L}{1} sans écrire $\ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à $1$.
+	      
+	      Il est autorisé de taper \verb+\PopAt**{e}{L}{k}+ pour obtenir \PopAt**{e}{L}{k}.
+	      Par contre, \verb+\PopAt**{e}{L}{k-1}+ aboutit à \PopAt**{e}{L}{k-1} ce qui est très moche ! 
+	      Dans ce cas, tapez \verb+\PopAt**{e}{L}{k-2 | k-1 | k}+ afin d'aider la macro à produire \PopAt**{e}{L}{k-2 | k-1 | k}.
+\end{enumerate}
 
-	      \smallskip
-
-	      \emph{\textbf{Attention !} On notera que contrairement aux versions \emph{\texttt{\textbackslash{}PopAt}} et \emph{\texttt{\textbackslash{}PopAt*}}, l'écriture symbolique agit juste sur la liste d'un point de vue algorithmique. Si besoin, avec \emph{\texttt{\textbackslash{}PopAt**}} il faudra donc indiquer au préalable où stocker l'élément extrait via $\dots \Store \ListElt{L}{k}$.}
 
 
+\subsubsection{Extraction d'une sous-liste}
+
+\begin{enumerate}
 	\item \textit{Extraction d'éléments consécutifs.}
 
 	      Lorsque les calculs automatiques ne sont pas faisables, on devra tout indiquer comme dans \verb+\KeepLR{L}{k - 2}{k}+
 	      \footnote{
 	      	Le nom de la macro vient de \myquote{keep left and right} soit \myquote{garder à droite et à gauche}.
 		  }
-		  afin d'avoir \KeepLR{L}{k - 2}{k} qui est bien mieux que ce que nous avions obtenu ci-dessus : \PopAt**{L}{k-1}.
-
-
+		  afin d'avoir \KeepLR{L}{k - 2}{k}.
+		  
 	\item \textit{Extractions juste à droite, ou juste à gauche.}
 
 	      \verb+\KeepL{L}{k}+ permet d'afficher \KeepL{L}{k} et \verb+\KeepR{L}{k}+ permet quant à lui d'écrire \KeepR{L}{k}

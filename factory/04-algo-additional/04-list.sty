@@ -33,6 +33,8 @@
 \newcommand\AddList{\mathbin{\boxplus}}
 
 
+% Algo - Lists - Append and prepend
+
 \newcommand\Append{\@ifstar{\@Append@star}{\@Append@no@star}}
 
 \newcommand\@Append@no@star[2]{Ajouter le nouvel élément #2 après la fin de la liste #1.}
@@ -54,28 +56,17 @@
 \newcommand\@Prepend@star@star[2]{$#1 \Store \List{#2} \AddList #1$}
 
 
-\newcommand\PopAt{\@ifstar{\@PopAt@star}{\@PopAt@no@star}}
-
-\newcommand\@PopAt@no@star[2]{Élément à la position #2 dans la liste #1, cet élément étant retiré de la liste.}
-
-\newcommand\@PopAt@star{\@ifstar{\@PopAt@star@star}{\@PopAt@single@star}}
-
-\newcommand\@PopAt@single@star[2]{$#1$\POOpoint{}extraire($#2$)}
-
+% Algo - Lists - Pop at
 
 \newcommand\@add@one[2]{%
-	\setbox0=\hbox{#2\unskip}\ifdim\wd0=0pt%
 		\if\relax\detokenize\expandafter{\romannumeral-0#1}\relax%
 			\the\numexpr #1+1 \relax%
 		\else%
 			#1 + 1%
 		\fi%
-	\else%
-		#2%
-	\fi%
 }
 
-\newcommand\@minus@one[2]{%
+\newcommand\@list@until@minus@one[2]{%
 	\if\relax\detokenize\expandafter{\romannumeral-0#2}\relax%
 			\def\minusone{\the\numexpr #2-1 \relax}%
 			\xintiiifNotZero{\minusone}{%
@@ -86,13 +77,43 @@
 		\fi%
 }
 
-\newcommand\@PopAt@star@star[3][]{%
-	$#2%
-	\Store%
-	\@minus@one{#2}{#3}%	
-	\ListFrom{#2}{\@add@one{#3}{#1}}$%
+\def\@list@before@at@after#1{\@split@before@at@after#1\relax}
+\def\@split@before@at@after#1|#2|#3|#4\relax{%
+	\ListElt{#1}{#3} ,%
+	\ListUntil{#1}{#2}%
+	\AddList%
+	\ListFrom{#1}{#4}%
 }
 
+\newcommand\PopAt{\@ifstar{\@PopAt@star}{\@PopAt@no@star}}
+
+\newcommand\@PopAt@no@star[2]{Élément à la position #2 dans la liste #1, cet élément étant retiré de la liste.}
+
+\newcommand\@PopAt@star{\@ifstar{\@PopAt@star@star}{\@PopAt@single@star}}
+
+\newcommand\@PopAt@single@star[2]{$#1$\POOpoint{}extraire($#2$)}
+
+\newcommand\@PopAt@star@star[3]{%
+	$%
+		#1 , #2%
+		\MStore%
+		\instringTF{|}{#3}{%
+			\@list@before@at@after{#2|#3}%
+		}{%
+			\ListElt{L}{#3} ,%
+			\@list@until@minus@one{#2}{#3}%	
+			\ListFrom{#2}{\@add@one{#3}}%
+		}%
+	$%
+}
+
+
+
+
+
+
+
+% Algo - Lists - Keep
 
 \newcommand\KeepLR[3]{$#1 \Store \ListUntil{#1}{#2} \AddList \ListFrom{#1}{#3}$}
 \newcommand\KeepR[2]{$#1 \Store \ListFrom{#1}{#2}$}

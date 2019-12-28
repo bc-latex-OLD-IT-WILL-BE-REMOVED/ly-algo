@@ -23,7 +23,6 @@
     urlcolor=black
 }
 
-\usepackage{ifplatform}
 \usepackage{import}
 
 \usepackage{multicol}
@@ -368,14 +367,14 @@ Par exemple, le pluriel de \verb+\In+ s'obtient via \verb+\Ins+.
 
 Voici comment indiquer le bloc principal d'instructions avec deux textes au choix pour le moment.
 
-\newpage
-
 
 \codeasideoutput{examples/algo-basic/additional-macros/main-block.tex}
 
 \subsubsection{Boucles \TTfor{} et \TTwhile{}}
 
 Voici les boucles de type \TTfor{} et \TTwhile{} proposées par le package.
+
+\newpage
 
 
 \codeasideoutput{examples/algo-basic/additional-macros/for-loop.tex}
@@ -407,6 +406,8 @@ La syntaxe pour les blocs conditionnels du type \TTswitch{} ne pose pas de diffi
 \subsubsection{Diverses commandes}
 
 Pour finir voici un ensemble de mots supplémentaires qui pourront vous rendre service. Le préfixe \verb+m+ permet d'utiliser des versions \myquote{masculinisées} des textes proposés.
+
+\newpage
 
 
 \codeasideoutput{examples/algo-basic/additional-macros/word.tex}
@@ -603,7 +604,8 @@ Voici les premières macros pour travailler avec des listes c'est à dire des ta
 
 Les versions étoilées des macros précédentes fournissent une autre mise en forme à la fois concise et aisée à comprendre
 \footnote{
-	L'opérateur point \POOpoint{} est défini dans la macro \texttt{\textbackslash{}POOpoint}.
+	L'opérateur point \POOpoint{} est défini dans la macro \texttt{\textbackslash{}POOpoint}. 
+	Ceci permet de personnaliser facilement cet opérateur.
 }
 avec une syntaxe de type POO
 \footnote{
@@ -649,26 +651,28 @@ Des versions doublement étoilées permettent d'obtenir des notations symbolique
 
 	\item \textit{Extraction d'un élément -- Version pseudo-automatique.}
 
-	      \verb+\PopAt**{L}{3}+ donne \PopAt**{L}{3} avec un calcul fait automatiquement par la macro.
-	      Bien entendu \verb+\PopAt**{L}{1}+ produit \PopAt**{L}{1} au lieu de $L \Store \ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à un.
+	      \verb+\PopAt**{e}{L}{3}+ donne \PopAt**{e}{L}{3} avec un calcul fait automatiquement par la macro. Notez qu'ici on doit indiquer où stoker l'élément extrait.
 	      
-	      Il est autorisé de taper \verb+\PopAt**{L}{k}+ pour obtenir \PopAt**{L}{k}. Par contre, \verb+\PopAt**{L}{k-1}+ aboutit au truc très moche \PopAt**{L}{k-1}. 
-	      Les items suivants expliquent comment gérer à la main les cas problématiques via des macros plus généralistes.
+	      Bien entendu \verb+\PopAt**{e}{L}{1}+ produit \PopAt**{e}{L}{1} sans écrire $\ListUntil{L}{0} \AddList \ListFrom{L}{2}$ puisque pour le package les indices des listes commencent toujours à $1$.
+	      
+	      Il est autorisé de taper \verb+\PopAt**{e}{L}{k}+ pour obtenir \PopAt**{e}{L}{k}.
+	      Par contre, \verb+\PopAt**{e}{L}{k-1}+ aboutit à \PopAt**{e}{L}{k-1} ce qui est très moche ! 
+	      Dans ce cas, tapez \verb+\PopAt**{e}{L}{k-2 | k-1 | k}+ afin d'aider la macro à produire \PopAt**{e}{L}{k-2 | k-1 | k}.
+\end{enumerate}
 
-	      \smallskip
-
-	      \emph{\textbf{Attention !} On notera que contrairement aux versions \emph{\texttt{\textbackslash{}PopAt}} et \emph{\texttt{\textbackslash{}PopAt*}}, l'écriture symbolique agit juste sur la liste d'un point de vue algorithmique. Si besoin, avec \emph{\texttt{\textbackslash{}PopAt**}} il faudra donc indiquer au préalable où stocker l'élément extrait via $\dots \Store \ListElt{L}{k}$.}
 
 
+\subsubsection{Extraction d'une sous-liste}
+
+\begin{enumerate}
 	\item \textit{Extraction d'éléments consécutifs.}
 
 	      Lorsque les calculs automatiques ne sont pas faisables, on devra tout indiquer comme dans \verb+\KeepLR{L}{k - 2}{k}+
 	      \footnote{
 	      	Le nom de la macro vient de \myquote{keep left and right} soit \myquote{garder à droite et à gauche}.
 		  }
-		  afin d'avoir \KeepLR{L}{k - 2}{k} qui est bien mieux que ce que nous avions obtenu ci-dessus : \PopAt**{L}{k-1}.
-
-
+		  afin d'avoir \KeepLR{L}{k - 2}{k}.
+		  
 	\item \textit{Extractions juste à droite, ou juste à gauche.}
 
 	      \verb+\KeepL{L}{k}+ permet d'afficher \KeepL{L}{k} et \verb+\KeepR{L}{k}+ permet quant à lui d'écrire \KeepR{L}{k}
@@ -878,7 +882,7 @@ Donnons des explications sur les points délicats du code précédent.
 	          Un néologisme ?
 	      }
 	      de \fbox{$res \Store (-n)$} vers \fbox{$res\vphantom{(-n)}$} .
-	      Vous pouvez utiliser \verb+to[aczigzag = {xstart = ... , x = ... , y = ....}]+  pour des réglages personnalisés.
+	      Vous pouvez utiliser \verb+to[aczigzag = {xstart = ... , x = ... , y = ....}]+ pour des réglages personnalisés.
 	      Par défaut les clés optionnelles suivent le réglage \verb+xstart = 0mm+ , un décalage au début de la connexion , \verb+x = 3mm+ , un décalage à la fin de la connexion, et \verb+y = 5mm+, un autre décalage à la fin de la connexion.
 \end{enumerate}
 
@@ -898,7 +902,10 @@ On voit au passage la limite d'utilisabilité des ordinogrammes car ces derniers
 \end{center}
 
 
-Voici le code que nous avons utilisé. Les seules vraies nouveautés sont l'utilisation du style \verb+acifinstr+ pour mieux visualiser les instructions liées à la boucle, et l'usage de \verb+to[acbackloopleft]+ pour la connexion en retour arrière par la gauche. On peut aussi utiliser \verb+to[acbackloopright]+ pour un retour arrière par la droite.
+Voici le code que nous avons utilisé. Les seules vraies nouveautés sont l'utilisation du style \verb+acifinstr+ pour mieux visualiser les instructions liées à la boucle, et l'usage de \verb+to[acbackloopleft]+ pour la connexion en retour arrière par la gauche.
+Vous pouvez utiliser \verb+to[acbackloopleft = {x = ... }]+  pour régler le décalage vers la gauche.
+Par défaut, \verb+x = 5em+.
+De façon analogue, on peut utiliser \verb+to[acbackloopright]+ pour un retour arrière par la droite. 
 
 \medskip
 
@@ -950,6 +957,29 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
 
 % --------------- %
 
+%    \item[2019-12-28] Nouvelle version mineure \verb+0.2.0-beta+.
+%    \begin{itemize}
+%        \item La macro ``\PopAt**`` a cahnég de comportement has changed. %ulti-affectation is used so as to have a coherent behavior.
+%
+%
+%
+%
+%        **Additional macros:** the macro ``ForRange**`` as an easy way to have a symbolic notation of a ``FOR`` loop.
+%
+%
+%        **¨Doc:** all the ¨latex examples are now organized like the ¨tikz ones.
+%
+%
+%        ==========
+%        2019-10-22
+%        ==========
+%
+%        **"Algorithmic flowcharts":** ``to[zigzag]``, ``to[acbackloopleft]`` and ``to[acbackloopright]`` simplify a lot the drawing of "orthopolylines" specific to algorithmic flowcharts.
+%    \end{itemize}
+
+
+% --------------- %
+
     \item[2019-10-21] Nouvelle version sous mineure \verb+0.1.1-beta+.
     \begin{itemize}
         \item Des nouvelles macros pour les affectations.
@@ -960,7 +990,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
         \end{itemize}
 
         \item \verb+\CSinterval+ sert à rédiger des intervalles à la sauce informatique.
-    \end{itemize} 
+    \end{itemize}
 
 
 % --------------- %
@@ -968,7 +998,7 @@ Tous les changements sont disponibles uniquement en anglais dans le dossier \ver
     \item[2019-10-19] Nouvelle version mineure \verb+0.1.0-beta+.
     \begin{itemize}
         \item Ajout d'outils pour faciliter le dessin d'ordinogrammes via \verb+TiKz+.
-    \end{itemize} 
+    \end{itemize}
 
 
 % --------------- %

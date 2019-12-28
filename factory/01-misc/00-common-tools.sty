@@ -1,8 +1,30 @@
 % == PACKAGES USED == %
 
 \usepackage{tcolorbox}
+\usepackage{xparse}
 
 
 % == DEFINITIONS == %
 
 \tcbuselibrary{breakable}
+
+
+% Source used : 
+%	* https://tex.stackexchange.com/a/26873/6880
+
+\ExplSyntaxOn
+
+\NewDocumentCommand{\instringTF}{mmmm}
+ {
+  \oleks_instring:nnnn { #1 } { #2 } { #3 } { #4 }
+ }
+
+\tl_new:N \l__oleks_instring_test_tl
+
+\cs_new_protected:Nn \oleks_instring:nnnn
+ {
+  \tl_set:Nn \l__oleks_instring_test_tl { #1 }
+  \regex_match:nnTF { \u{l__oleks_instring_test_tl} } { #2 } { #3 } { #4 }
+ }
+
+\ExplSyntaxOff
